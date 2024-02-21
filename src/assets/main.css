@@ -5,10 +5,12 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
+  list-style: none;
 }
 
 body {
-  background: var(--background-gray-600);
+  background: var(--background-gray-400);
+  height: 1000vh;
 }
 
 #app {
@@ -23,15 +25,23 @@ a {
   text-decoration: none;
 }
 
-button, a, input{
+button,
+a,
+input {
   cursor: pointer;
   background: transparent;
   outline: none;
   border: none;
   padding: 6px 16px;
+  display: flex;
+  align-items: center;
 }
 
-input{
+input {
   width: 100%;
   height: 46px;
+}
+
+ul {
+  display: flex;
 }

@@ -1,3 +1,24 @@
 {
-    
+    "categoria": [
+      {
+        "label": "sumplementos",
+        "path": "/teste"
+      },
+      {
+        "label": "aulas",
+        "path": "/teste"
+      },
+      {
+        "label": "camisetas",
+        "path": "/teste"
+      },
+      {
+        "label": "acessórios",
+        "path": "/teste"
+      },
+      {
+        "label": "assinaturas",
+        "path": "/teste"
+      }
+    ]
 }
