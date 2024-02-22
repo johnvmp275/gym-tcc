@@ -1,46 +1,56 @@
+<script setup>
+import pitchbar from './widgets/pitchbar.vue'
+</script>
+
 <template>
   <header>
+    <pitchbar>
+      Entre em contato pelo tel: <a href="/teste">(18) {{ telWhatsapp }}</a>
+    </pitchbar>
     <nav class="navbar-mobile">
       <section class="middle-top">
         <RouterLink to="/">
           <img src="https://livedemo00.template-help.com/wt_58939/images/logo.png" alt="Logo" />
         </RouterLink>
 
-        <div class="search-route">
-          <div class="popup-search" v-show="teste">
-            <button class="fake-button" @click="click">
-              <span> x </span>
-            </button>
-
-            <div>
-              <input type="search" id="search" name="search" placeholder="busca" />
-            </div>
+        <div class="nav">
+          <div class="header-container-categorias">
+            <ul>
+              <li v-for="(categoria, index) in categories" :key="index">
+                <RouterLink :to="categoria.path">
+                  {{ categoria.label }}
+                </RouterLink>
+              </li>
+            </ul>
           </div>
 
-          <button class="fake-button" @click="click">
-            <span class="material-symbols-outlined"> search </span>
-          </button>
+          <div class="search-container">
+            <input type="text" id="search" name="search" placeholder="busca" />
+            <button class="fake-button">
+              <span class="material-symbols-outlined"> search </span>
+            </button>
+          </div>
 
           <div class="user-container">
-            <div>user</div>
-            <div>user</div>
+            <template v-if="userLogged"> logado </template>
+
+            <template v-else>
+              <p>Olá, Visitante!</p>
+              <a href="">Entre</a>
+              ou
+              <a href="">Cadastre-se</a>
+            </template>
           </div>
 
-          <button type="button" class="button-cart">
+          <button type="button" class="button-cart" @click="click">
             <span class="material-symbols-outlined"> shopping_cart </span>
           </button>
         </div>
       </section>
-      <div class="footer-top">
-        <ul>
-          <li v-for="(categoria, index) in categories" :key="index">
-            <RouterLink :to="categoria.path">
-              {{ categoria.label }}
-            </RouterLink>
-          </li>
-        </ul>
-      </div>
     </nav>
+
+    <section :class="{ 'cart-container': true, open: teste }"></section>
+    <div class="box-shadow" v-show="teste"></div>
   </header>
 </template>
 
@@ -48,19 +58,26 @@
 export default {
   data() {
     return {
-      categories: {},
+      rotes: [],
+      categories: [],
       teste: false
+    }
+  },
+  computed: {
+    telWhatsapp() {
+      // this.rotes.find((item) => item.social)
+      // this.telWhatsapp = this.rotes.social.map(social => social.whatsapp)
+      return '99999-9999'
     }
   },
   methods: {
     async getDadosOfCategories() {
       try {
-        const req = await fetch('http://localhost:3000/categoria')
+        const req = await fetch('http://localhost:3000/rotes')
         const data = await req.json()
 
-        this.categories = data
-
-        console.log(this.categories)
+        this.rotes = data
+        this.categories = data.find((item) => item.categories)
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }
@@ -95,6 +112,10 @@ nav {
 
 a {
   color: var(--background-white);
+}
+
+li a {
+  color: var(--background-white);
   transition: 0.5s;
   text-transform: uppercase;
   font-size: 14px;
@@ -105,7 +126,7 @@ nav a.router-link-active {
 }
 
 nav a:hover {
-  background: var(--background-red);
+  color: var(--background-red);
 }
 
 .middle-top {
@@ -118,26 +139,28 @@ nav a:hover {
   padding: 12px 16px;
 }
 
-.search-route{
+.nav {
   display: flex;
+  width: 100%;
   height: 100%;
   align-items: center;
+  gap: 8px;
 }
-.search-route a {
+.nav a {
   color: var(--background-gray-700);
 }
 
 input {
-  border: 1px solid var(--background-gray-400);
-  color: var(--background-white);
+  color: var(--background-gray-700);
   border-radius: 5px;
+  padding: 10px 0 10px 10px;
 }
 
 span {
   cursor: pointer;
 }
 
-.popup-search {
+.popup {
   background: var(--background-white);
   position: absolute;
   display: flex;
@@ -145,24 +168,71 @@ span {
   flex-direction: column;
   border-radius: 8px;
   top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 500px;
   height: 200px;
   box-shadow: 0 0 10px 5px var(--background-gray-700);
+  padding: 16px;
 }
 
 .footer-top {
   display: flex;
-  background: #a51416;
   height: 100%;
   width: 100%;
   justify-content: center;
   align-items: center;
 }
 
-.user-container{
-  max-width: 300px;
+.header-container-categorias {
   display: flex;
-  gap: 15px;
+}
+
+.user-container {
+  max-width: 167px;
+  width: 100%;
+  margin-left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   align-items: center;
+}
+
+.user-container a {
+  padding: 0;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.search-container {
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--background-gray-700);
+  border-radius: 8px;
+}
+
+.cart-container {
+  height: 100vh;
+  width: 300px;
+  position: fixed;
+  transform: translateX(300px);
+  top: 0;
+  right: 0;
+  background: var(--background-white);
+  z-index: 20;
+}
+
+.cart-container.open {
+  transform: translateX(0px);
+}
+
+.box-shadow {
+  background: var(--background-gray-400);
+  opacity: 0.6;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
 </style>

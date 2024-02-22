@@ -1,24 +1,35 @@
 {
-    "categoria": [
-      {
-        "label": "sumplementos",
-        "path": "/teste"
-      },
-      {
-        "label": "aulas",
-        "path": "/teste"
-      },
-      {
-        "label": "camisetas",
-        "path": "/teste"
-      },
-      {
-        "label": "acessórios",
-        "path": "/teste"
-      },
-      {
-        "label": "assinaturas",
-        "path": "/teste"
-      }
-    ]
+  "rotes": [
+    {
+      "categories": [
+        {
+          "label": "sumplementos",
+          "path": "/suplementos"
+        },
+        {
+          "label": "aulas",
+          "path": "/aulas"
+        },
+        {
+          "label": "camisetas",
+          "path": "/camisetas"
+        },
+        {
+          "label": "acessórios",
+          "path": "/acessorios"
+        },
+        {
+          "label": "assinaturas",
+          "path": "/assinaturas"
+        }
+      ]
+    },
+    {
+      "social": [
+        {
+          "whatsapp": "99999-9999"
+        }
+      ]
+    }
+  ]
 }
