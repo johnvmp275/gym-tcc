@@ -2,19 +2,19 @@
 import sliderVue from '@/components/widgets/SliderComponent.vue'
 import apiService from '@/js/fetchData'
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import pitchbarVue from '@/components/widgets/pitchbar.vue'
 </script>
 
 <template>
-  <sliderVue 
-    :navigation="true" 
-    :loop="true" 
+  <sliderVue
+    :loop="true"
     :pagination="{
       clickable: true
-    }" 
+    }"
     :autoplay="{
-    delay: 4000,
-    disableOnInteraction: false,
-    }" 
+      delay: 4000,
+      disableOnInteraction: false
+    }"
     v-if="principalBanner.length"
   >
     <swiper-slide v-for="banner in principalBanner" :key="banner.id">
@@ -22,88 +22,123 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
     </swiper-slide>
   </sliderVue>
 
-  <section class="pitchbar-home">
-    <div>
-    <img src="https://www.usealphaco.com.br/upload/banner/324fdf135cc972fd34066bb8ac6a2280.webp" alt="logo">
-    <p>
-      <strong>FRETE GRÁTIS</strong>
-      A partir de R$ 165 para todo o Brasil
-    </p>
+  <pitchbarVue class="pitchbar-home">
+    <div class="pitchbar-container">
+      <div class="pitchbar-box" v-for="pitchbar in pitchbarHome" :key="pitchbar.id">
+        <img :src="pitchbar.icone" :alt="pitchbar.titulo" />
+        <p>
+          <strong>{{ pitchbar.titulo }}</strong>
+          {{ pitchbar.texto }}
+        </p>
+      </div>
     </div>
-    <div>
-    <img src="https://www.usealphaco.com.br/upload/banner/324fdf135cc972fd34066bb8ac6a2280.webp" alt="logo">
-    <p>
-      <strong>FRETE GRÁTIS</strong>
-      A partir de R$ 165 para todo o Brasil
-    </p>
-    </div>
-    <div>
-    <img src="https://www.usealphaco.com.br/upload/banner/324fdf135cc972fd34066bb8ac6a2280.webp" alt="logo">
-    <p>
-      <strong>FRETE GRÁTIS</strong>
-      A partir de R$ 165 para todo o Brasil
-    </p>
-    </div>
-    <div>
-    <img src="https://www.usealphaco.com.br/upload/banner/324fdf135cc972fd34066bb8ac6a2280.webp" alt="logo">
-    <p>
-      <strong>FRETE GRÁTIS</strong>
-      A partir de R$ 165 para todo o Brasil
-    </p>
-    </div>
+  </pitchbarVue>
+
+  <section class="vitrine-home">
+    <h1>Mais Vendidos</h1>
+
+    <sliderVue :slidesPerView="4" :spaceBetween="10" v-if="principalBanner.length">
+      <swiper-slide v-for="produto in vitrine_home01" :key="produto.id" class="card-product">
+        <img class="image-product" :src="produto.image" alt="" />
+        <Strong>{{ produto.titulo }}</Strong>
+        <p class="produto-descricao">{{ produto.descricoes.curta }}</p>
+        <strong>{{ produto.price }}</strong>
+      </swiper-slide>
+    </sliderVue>
   </section>
-  
 </template>
 
 <script>
 export default {
   data() {
     return {
-      principalBanner: []
+      principalBanner: [],
+      pitchbarHome: [],
+      vitrine_home01: []
     }
   },
   methods: {
-    async getDadosOfCategories() {
+    async fetchData() {
       try {
         const banners = await apiService.getDadosOfBanner()
-        this.principalBanner = banners[0].bannerPrincipal
+        this.principalBanner = banners.find((item) => item.bannerPrincipal).bannerPrincipal
 
+        const menus = await apiService.getDadosOfMenus()
+        this.pitchbarHome = menus.find((item) => item.pitchbar_home).pitchbar_home
+
+        const vitrines = await apiService.getDadosOfVitrines()
+        this.vitrine_home01 = vitrines.vitrine_home01.produtos
+
+        console.log(this.vitrine_home01)
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }
-    },
+    }
   },
   mounted() {
-    this.getDadosOfCategories();
+    this.fetchData()
   }
 }
 </script>
 
 <style scoped>
-.pitchbar-home{
-  display: flex;
+.pitchbar-home {
   justify-content: space-around;
   padding: 32px 80px;
-  width: 100%;
-  height: auto;
-  background: var(--background-wine);
-  color: var(--background-white);
 }
 
-.pitchbar-home div{
+.pitchbar-container {
+  max-width: 1330px;
+}
+
+.pitchbar-home div {
   display: flex;
-  /* border-left: 2px solid var(--background-white); */
   gap: 16px;
 }
 
-.pitchbar-home p{
+.pitchbar-home p {
   display: flex;
   font-size: 12px;
   height: 40px;
   flex-direction: column;
 }
 
-.pitchbar-home p strong{
+.pitchbar-home p strong {
   font-size: 16px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.card-product {
+  border: 2px solid var(--background-gray);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.image-product {
+  width: 100%;
+  max-width: 290px;
+}
+
+.vitrine-home {
+  padding: 16px;
+  max-width: 1330px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.produto-descricao {
+  max-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

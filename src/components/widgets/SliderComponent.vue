@@ -16,7 +16,6 @@ import '@/assets/main.css'
     class="mySwiper"
     :modules="[Navigation, Pagination, Autoplay]" 
     :grab-cursor="true"
-    :centeredSlides="true" 
    >
    <slot/>
    

@@ -54,7 +54,7 @@ import pitchbar from './widgets/pitchbar.vue'
     <section :class="{ 'cart-container': true, 'open': cartWasOpen }">
       <button type="button" class="button-cart" @click="cartToggleFunction">x</button>
     </section>
-    <div class="box-shadow" v-show="boxShadowWasOpen"></div>
+    <div class="box-shadow" v-show="boxShadowWasOpen" @click="cartToggleFunction"></div>
   </header>
 </template>
 
@@ -64,6 +64,7 @@ export default {
   data() {
     return {
       categoriesData: [],
+      pitchbarHome:[],
       telWhatsapp: '',
       userLogged: false,
       boxShadowWasOpen: false,
@@ -73,17 +74,28 @@ export default {
   methods: {
     async fetchData() {
       try {
-        this.categoriesData = await apiService.getDadosOfCategories()
+        const menus = await apiService.getDadosOfMenus()
+        this.categoriesData = menus.find((item) => item.menu_home).menu_home
+        this.pitchbarHome = menus.find((item) => item.pitchbar_home).pitchbar_home
+       
         const description = await apiService.getDadosOfDescription()
-        this.telWhatsapp = description.find(item => item.social).social[0].whatsapp
+        this.telWhatsapp = description.find((item) => item.social).social[0].whatsapp
 
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }
     },
     cartToggleFunction() {
+      const body = document.querySelector('body')
+
       this.boxShadowWasOpen = !this.boxShadowWasOpen
       this.cartWasOpen = !this.cartWasOpen
+
+      if(this.cartWasOpen === true){
+        body.style.overflowY = 'hidden'
+      }else{
+        body.style.overflowY = 'scroll'
+      }
     }
   },
   mounted() {
@@ -244,7 +256,7 @@ span {
 
 .box-shadow {
   background: var(--background-black);
-  opacity: 0.9;
+  opacity: 0.7;
   width: 100%;
   height: 100vh;
   position: fixed;
