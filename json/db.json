@@ -1,40 +1,49 @@
 {
-  "rotes": [
+  "categories": [
     {
-      "categories": [
-        {
-          "label": "sumplementos",
-          "path": "/suplementos"
-        },
-        {
-          "label": "aulas",
-          "path": "/aulas"
-        },
-        {
-          "label": "camisetas",
-          "path": "/camisetas"
-        },
-        {
-          "label": "acessórios",
-          "path": "/acessorios"
-        },
-        {
-          "label": "assinaturas",
-          "path": "/assinaturas"
-        }
-      ]
+      "label": "sumplementos",
+      "path": "/suplementos"
     },
+    {
+      "label": "aulas",
+      "path": "/aulas"
+    },
+    {
+      "label": "camisetas",
+      "path": "/camisetas"
+    },
+    {
+      "label": "acessórios",
+      "path": "/acessorios"
+    },
+    {
+      "label": "assinaturas",
+      "path": "/assinaturas"
+    }
+  ],
+  "siteDescription": [
     {
       "social": [
         {
           "whatsapp": "99999-9999"
         }
       ]
-    },
+    }
+  ],
+  "banners": [
     {
-      "siteDescription": [
+      "bannerPrincipal": [
         {
-          "whatsapp": "99999-9999"
+          "link": "https://www.oceandrop.com.br/media/pdp-seo/blog-ocean/suplementacao-para-iniciantes-na-academia.jpg",
+          "label": "bannerPrincipal"
+        },
+        {
+          "link": "https://rafaelpersonaltrainer.com.br/wp-content/uploads/2023/11/beneficios-da-musculacao-scaled.jpeg",
+          "label": "bannerPrincipal"
+        },
+        {
+          "link": "https://greenlifeacademias.com.br/wp/wp-content/uploads/2023/04/2.jpg",
+          "label": "bannerPrincipal"
         }
       ]
     }

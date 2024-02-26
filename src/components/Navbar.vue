@@ -1,22 +1,23 @@
 <script setup>
+import apiService from '@/js/fetchData'
 import pitchbar from './widgets/pitchbar.vue'
 </script>
 
 <template>
   <header>
     <pitchbar>
-      Entre em contato pelo tel: <a href="/teste">(18) {{ telWhatsapp }}</a>
+      Entre em contato pelo tel: <a href="/#">(18) {{ telWhatsapp }}</a>
     </pitchbar>
     <nav class="navbar-mobile">
       <section class="middle-top">
-        <RouterLink to="/">
-          <img src="https://livedemo00.template-help.com/wt_58939/images/logo.png" alt="Logo" />
+        <RouterLink class="logo" to="/">
+          <img src="@/img/iron.jpg" alt="Logo" />
         </RouterLink>
 
         <div class="nav">
           <div class="header-container-categorias">
             <ul>
-              <li v-for="(categoria, index) in categories" :key="index">
+              <li v-for="categoria in categoriesData" :key="categoria.id">
                 <RouterLink :to="categoria.path">
                   {{ categoria.label }}
                 </RouterLink>
@@ -25,7 +26,7 @@ import pitchbar from './widgets/pitchbar.vue'
           </div>
 
           <div class="search-container">
-            <input type="text" id="search" name="search" placeholder="busca" />
+            <input type="search" id="search" name="search" placeholder="O que você está procurando hoje?" />
             <button class="fake-button">
               <span class="material-symbols-outlined"> search </span>
             </button>
@@ -33,6 +34,7 @@ import pitchbar from './widgets/pitchbar.vue'
 
           <div class="user-container">
             <template v-if="userLogged"> logado </template>
+
 
             <template v-else>
               <p>Olá, Visitante!</p>
@@ -42,55 +44,54 @@ import pitchbar from './widgets/pitchbar.vue'
             </template>
           </div>
 
-          <button type="button" class="button-cart" @click="click">
+          <button type="button" class="button-cart" @click="cartToggleFunction">
             <span class="material-symbols-outlined"> shopping_cart </span>
           </button>
         </div>
       </section>
     </nav>
 
-    <section :class="{ 'cart-container': true, open: teste }"></section>
-    <div class="box-shadow" v-show="teste"></div>
+    <section :class="{ 'cart-container': true, 'open': cartWasOpen }">
+      <button type="button" class="button-cart" @click="cartToggleFunction">x</button>
+    </section>
+    <div class="box-shadow" v-show="boxShadowWasOpen"></div>
   </header>
 </template>
+
 
 <script>
 export default {
   data() {
     return {
-      rotes: [],
-      categories: [],
-      teste: false
-    }
-  },
-  computed: {
-    telWhatsapp() {
-      // this.rotes.find((item) => item.social)
-      // this.telWhatsapp = this.rotes.social.map(social => social.whatsapp)
-      return '99999-9999'
+      categoriesData: [],
+      telWhatsapp: '',
+      userLogged: false,
+      boxShadowWasOpen: false,
+      cartWasOpen: false
     }
   },
   methods: {
-    async getDadosOfCategories() {
+    async fetchData() {
       try {
-        const req = await fetch('http://localhost:3000/rotes')
-        const data = await req.json()
+        this.categoriesData = await apiService.getDadosOfCategories()
+        const description = await apiService.getDadosOfDescription()
+        this.telWhatsapp = description.find(item => item.social).social[0].whatsapp
 
-        this.rotes = data
-        this.categories = data.find((item) => item.categories)
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }
     },
-    click() {
-      this.teste = !this.teste
+    cartToggleFunction() {
+      this.boxShadowWasOpen = !this.boxShadowWasOpen
+      this.cartWasOpen = !this.cartWasOpen
     }
   },
   mounted() {
-    this.getDadosOfCategories()
+    this.fetchData()
   }
 }
 </script>
+
 
 <style scoped>
 header {
@@ -100,6 +101,7 @@ header {
   left: 0;
   top: 0;
 }
+
 nav {
   width: 100%;
   height: 75px;
@@ -110,9 +112,11 @@ nav {
   z-index: 10;
 }
 
+
 a {
   color: var(--background-white);
 }
+
 
 li a {
   color: var(--background-white);
@@ -121,13 +125,16 @@ li a {
   font-size: 14px;
 }
 
+
 nav a.router-link-active {
   color: var(--background-red);
 }
 
+
 nav a:hover {
   color: var(--background-red);
 }
+
 
 .middle-top {
   background: var(--background-white);
@@ -139,6 +146,7 @@ nav a:hover {
   padding: 12px 16px;
 }
 
+
 .nav {
   display: flex;
   width: 100%;
@@ -146,9 +154,11 @@ nav a:hover {
   align-items: center;
   gap: 8px;
 }
+
 .nav a {
   color: var(--background-gray-700);
 }
+
 
 input {
   color: var(--background-gray-700);
@@ -156,9 +166,11 @@ input {
   padding: 10px 0 10px 10px;
 }
 
+
 span {
   cursor: pointer;
 }
+
 
 .popup {
   background: var(--background-white);
@@ -176,6 +188,7 @@ span {
   padding: 16px;
 }
 
+
 .footer-top {
   display: flex;
   height: 100%;
@@ -184,9 +197,11 @@ span {
   align-items: center;
 }
 
+
 .header-container-categorias {
   display: flex;
 }
+
 
 .user-container {
   max-width: 167px;
@@ -203,6 +218,7 @@ span {
   text-decoration: underline;
   font-weight: bold;
 }
+
 .search-container {
   display: flex;
   width: 100%;
@@ -219,6 +235,7 @@ span {
   right: 0;
   background: var(--background-white);
   z-index: 20;
+  transition: .5s;
 }
 
 .cart-container.open {
@@ -226,8 +243,8 @@ span {
 }
 
 .box-shadow {
-  background: var(--background-gray-400);
-  opacity: 0.6;
+  background: var(--background-black);
+  opacity: 0.9;
   width: 100%;
   height: 100vh;
   position: fixed;
@@ -235,4 +252,13 @@ span {
   left: 0;
   z-index: 10;
 }
+
+.logo img {
+  width: 150px;
+}
 </style>
+
+
+
+
+
