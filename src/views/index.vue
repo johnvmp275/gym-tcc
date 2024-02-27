@@ -35,14 +35,17 @@ import pitchbarVue from '@/components/widgets/pitchbar.vue'
   </pitchbarVue>
 
   <section class="vitrine-home">
-    <h1>Mais Vendidos</h1>
+    <h1 class="vitrine-titulo">{{}}</h1>
 
-    <sliderVue :slidesPerView="4" :spaceBetween="10" v-if="principalBanner.length">
-      <swiper-slide v-for="produto in vitrine_home01" :key="produto.id" class="card-product">
-        <img class="image-product" :src="produto.image" alt="" />
-        <Strong>{{ produto.titulo }}</Strong>
+    <sliderVue :slidesPerView="'auto'" :spaceBetween="10" v-if="produtos.length">
+      <swiper-slide v-for="produto in produtos" :key="produto.id" class="card-product">
+        <a href="#" @click="getDadosProduto(produto)"
+          ><img class="image-product" :src="produto.image" alt=""
+        /></a>
+        <Strong class="produto-titulo">{{ produto.titulo }}</Strong>
         <p class="produto-descricao">{{ produto.descricoes.curta }}</p>
         <strong>{{ produto.price }}</strong>
+        <a class="detalhe-produto" href="#" @click="getDadosProduto(produto)">Ver detalhes</a>
       </swiper-slide>
     </sliderVue>
   </section>
@@ -54,7 +57,8 @@ export default {
     return {
       principalBanner: [],
       pitchbarHome: [],
-      vitrine_home01: []
+      vitrine_home01: [],
+      produtos: []
     }
   },
   methods: {
@@ -67,12 +71,16 @@ export default {
         this.pitchbarHome = menus.find((item) => item.pitchbar_home).pitchbar_home
 
         const vitrines = await apiService.getDadosOfVitrines()
-        this.vitrine_home01 = vitrines.vitrine_home01.produtos
+        this.vitrine_home01 = vitrines.vitrine_home01
+        this.produtos = vitrines.vitrine_home01.produtos
 
-        console.log(this.vitrine_home01)
+        console.log(this.produtos)
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }
+    },
+    getDadosProduto(produto) {
+      console.log(produto)
     }
   },
   mounted() {
@@ -116,29 +124,43 @@ h1 {
 .card-product {
   border: 2px solid var(--background-gray);
   padding: 10px;
+  width: 320px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
 }
 
 .image-product {
   width: 100%;
-  max-width: 290px;
+  height: 270px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .vitrine-home {
   padding: 16px;
   max-width: 1330px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
 }
 
-.produto-descricao {
+.produto-descricao,
+.produto-titulo {
   max-width: 400px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.detalhe-produto {
+  background: var(--background-wine);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: var(--background-white);
 }
 </style>

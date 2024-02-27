@@ -8,7 +8,7 @@ import pitchbar from './widgets/pitchbar.vue'
     <pitchbar>
       Entre em contato pelo tel: <a href="/#">(18) {{ telWhatsapp }}</a>
     </pitchbar>
-    <nav class="navbar-mobile">
+    <nav class="navbar-desktop">
       <section class="middle-top">
         <RouterLink class="logo" to="/">
           <img src="@/img/iron.jpg" alt="Logo" />
@@ -267,6 +267,12 @@ span {
 
 .logo img {
   width: 150px;
+}
+
+@media (max-width : 1200px) {
+  .navbar-desktop{
+    display: none;
+  }
 }
 </style>
 

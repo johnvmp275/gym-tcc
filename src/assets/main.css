@@ -76,7 +76,7 @@ ul {
 
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  color: var(--background-white);
+  color: var(--background-gray-400);
   font-weight: bold;
 }
 

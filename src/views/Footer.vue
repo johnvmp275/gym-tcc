@@ -2,7 +2,7 @@
   <footer>
     <div class="footer-top"></div>
     <section class="footer-final">
-      <div> Vetec | CNPJ: 47.733.562/0001-08 | Av. Paulista, 1000 - São Paulo - SP - Brasil | CEP: 01310-100 - Todos os Direitos Reservados.</div>
+      <p> Vetec | CNPJ: 47.733.562/0001-08 | Av. Paulista, 1000 - São Paulo - SP - Brasil | CEP: 01310-100 - Todos os Direitos Reservados.</p>
       <a class="logo" target="_blank" href="https://github.com/johnvmp275"><img src="@/img/vetec.jpg" alt="logo"></a>
     </section>
   </footer>
@@ -37,5 +37,9 @@ footer {
 
 .logo img{
   width: 100px;
+}
+
+p{
+  text-align: center
 }
 </style>
