@@ -12,12 +12,17 @@ body {
   background: var(--background-white);
 }
 
+html, body {
+  scroll-behavior: smooth;
+}
+
 #app {
   margin: 0 auto;
 }
 
 main {
   margin: 0 auto;
+  padding: 0 16px;
 }
 
 a {

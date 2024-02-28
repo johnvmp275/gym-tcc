@@ -41,9 +41,6 @@ export default {
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }
-    },
-    getDadosProduto(produto) {
-      console.log(produto)
     }
   },
   mounted() {
