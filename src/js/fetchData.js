@@ -44,5 +44,14 @@ export default {
       console.error('Erro ao buscar os dados do banner', error)
       throw error
     }
+  },
+  async getDetailsProduct() {
+    try {
+      const data = await this.fetchData('http://localhost:3000/produtos')
+      return data
+    } catch (error) {
+      console.error('Erro ao buscar os dados do banner', error)
+      throw error
+    }
   }
 }

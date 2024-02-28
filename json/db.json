@@ -58,19 +58,41 @@
       ]
     }
   ],
+  "produtos": [
+    {
+      "titulo": "[TESTE DE PRODUTO]",
+      "id": 1,
+      "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_kit-campe-o-as-camisetas-dry-mais-vendidas-2.jpg",
+      "price": "100,00",
+      "descricoes": {
+        "curta": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut aliquam neque, quis feugiat mi. Donec id tortor elit. Aliquam turpis sapien, ullamcorper eget est quis, placerat aliquam dolor. Quisque pharetra ante vitae lacus aliquam fringilla. Aliquam erat volutpat. Nam quam ipsum, fringilla at dui quis, pulvinar egestas elit. Fusce maximus, ante in tempor ullamcorper, sem velit blandit tortor, et euismod elit nisi vel purus. Praesent ut laoreet mi. Sed tristique massa ac ornare pretium. Pellentesque porttitor nunc non augue auctor, ut rutrum tortor tempor. Fusce fermentum libero erat, a dictum neque volutpat sit amet. Quisque eleifend diam ac nulla eleifend, ac dignissim eros varius. Praesent sagittis non purus eu luctus. In consequat, nisl vitae congue elementum, eros est aliquam lectus, sit amet ullamcorper dolor arcu non nisl. Aliquam erat volutpat. Nam sed fringilla enim. Aliquam neque lorem, vestibulum sed ullamcorper et, tempus at lectus. Fusce pretium efficitur purus, sed lacinia mi dignissim in. Ut pellentesque elit eu orci dictum, nec dapibus ligula placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut aliquam neque, quis feugiat mi. Donec id tortor elit. Aliquam turpis sapien, ullamcorper eget est quis, placerat aliquam dolor. Quisque pharetra ante vitae lacus aliquam fringilla. Aliquam erat volutpat. Nam quam ipsum, fringilla at dui quis, pulvinar egestas elit. Fusce maximus, ante in tempor ullamcorper, sem velit blandit tortor, et euismod elit nisi vel purus. Praesent ut laoreet mi. Sed tristique massa ac ornare pretium. Pellentesque porttitor nunc non augue auctor, ut rutrum tortor tempor. Fusce fermentum libero erat, a dictum neque volutpat sit amet.",
+        "longa": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut aliquam neque, quis feugiat mi. Donec id tortor elit. Aliquam turpis sapien, ullamcorper eget est quis, placerat aliquam dolor. Quisque pharetra ante vitae lacus aliquam fringilla. Aliquam erat volutpat. Nam quam ipsum, fringilla at dui quis, pulvinar egestas elit. Fusce maximus, ante in tempor ullamcorper, sem velit blandit tortor, et euismod elit nisi vel purus. Praesent ut laoreet mi. Sed tristique massa ac ornare pretium. Pellentesque porttitor nunc non augue auctor, ut rutrum tortor tempor. Fusce fermentum libero erat, a dictum neque volutpat sit amet. Quisque eleifend diam ac nulla eleifend, ac dignissim eros varius. Praesent sagittis non purus eu luctus. In consequat, nisl vitae congue elementum, eros est aliquam lectus, sit amet ullamcorper dolor arcu non nisl. Aliquam erat volutpat. Nam sed fringilla enim. Aliquam neque lorem, vestibulum sed ullamcorper et, tempus at lectus. Fusce pretium efficitur purus, sed lacinia mi dignissim in. Ut pellentesque elit eu orci dictum, nec dapibus ligula placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut aliquam neque, quis feugiat mi. Donec id tortor elit. Aliquam turpis sapien, ullamcorper eget est quis, placerat aliquam dolor. Quisque pharetra ante vitae lacus aliquam fringilla. Aliquam erat volutpat. Nam quam ipsum, fringilla at dui quis, pulvinar egestas elit. Fusce maximus, ante in tempor ullamcorper, sem velit blandit tortor, et euismod elit nisi vel purus. Praesent ut laoreet mi. Sed tristique massa ac ornare pretium. Pellentesque porttitor nunc non augue auctor, ut rutrum tortor tempor. Fusce fermentum libero erat, a dictum neque volutpat sit amet."
+      }
+    }
+  ],
   "banners": [
     {
       "bannerPrincipal": [
         {
-          "link": "https://www.oceandrop.com.br/media/pdp-seo/blog-ocean/suplementacao-para-iniciantes-na-academia.jpg",
+          "image": "https://www.oceandrop.com.br/media/pdp-seo/blog-ocean/suplementacao-para-iniciantes-na-academia.jpg",
           "label": "bannerPrincipal"
         },
         {
-          "link": "https://rafaelpersonaltrainer.com.br/wp-content/uploads/2023/11/beneficios-da-musculacao-scaled.jpeg",
+          "image": "https://greenlifeacademias.com.br/wp/wp-content/uploads/2023/04/2.jpg",
           "label": "bannerPrincipal"
         },
         {
-          "link": "https://greenlifeacademias.com.br/wp/wp-content/uploads/2023/04/2.jpg",
+          "image": "https://www.oceandrop.com.br/media/pdp-seo/blog-ocean/suplementacao-para-iniciantes-na-academia.jpg",
+          "label": "bannerPrincipal"
+        }
+      ],
+      "bannerSecundario": [
+        {
+          "image": "https://www.homeondigital.com.br/upload/banner/51ea1b23e479e0adf266dc712d998325.webp",
+          "label": "bannerPrincipal"
+        },
+        {
+          "image": "https://www.homeondigital.com.br/upload/banner/51ea1b23e479e0adf266dc712d998325.webp",
           "label": "bannerPrincipal"
         }
       ]
@@ -78,20 +100,23 @@
   ],
   "vitrines": {
     "vitrine_home01": {
-      "vitrine": { "titulo": "Mais Vendidos" },
-
+      "vitrine": {
+        "titulo": "Mais Vendidos"
+      },
       "produtos": [
         {
           "titulo": "[TESTE DE PRODUTO]",
+          "id": 1,
           "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_zZXYN-TASCTStpuVPLC9gQzQlQFNOxJMsKJqHtNzzQ&s",
           "price": "100,00",
+          "path": "testetesteteste",
           "descricoes": {
             "curta": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut aliquam neque, quis feugiat mi. Donec id tortor elit. Aliquam turpis sapien, ullamcorper eget est quis, placerat aliquam dolor. Quisque pharetra ante vitae lacus aliquam fringilla. Aliquam erat volutpat. Nam quam ipsum, fringilla at dui quis, pulvinar egestas elit. Fusce maximus, ante in tempor ullamcorper, sem velit blandit tortor, et euismod elit nisi vel purus. Praesent ut laoreet mi. Sed tristique massa ac ornare pretium. Pellentesque porttitor nunc non augue auctor, ut rutrum tortor tempor. Fusce fermentum libero erat, a dictum neque volutpat sit amet. Quisque eleifend diam ac nulla eleifend, ac dignissim eros varius. Praesent sagittis non purus eu luctus. In consequat, nisl vitae congue elementum, eros est aliquam lectus, sit amet ullamcorper dolor arcu non nisl. Aliquam erat volutpat. Nam sed fringilla enim. Aliquam neque lorem, vestibulum sed ullamcorper et, tempus at lectus. Fusce pretium efficitur purus, sed lacinia mi dignissim in. Ut pellentesque elit eu orci dictum, nec dapibus ligula placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut aliquam neque, quis feugiat mi. Donec id tortor elit. Aliquam turpis sapien, ullamcorper eget est quis, placerat aliquam dolor. Quisque pharetra ante vitae lacus aliquam fringilla. Aliquam erat volutpat. Nam quam ipsum, fringilla at dui quis, pulvinar egestas elit. Fusce maximus, ante in tempor ullamcorper, sem velit blandit tortor, et euismod elit nisi vel purus. Praesent ut laoreet mi. Sed tristique massa ac ornare pretium. Pellentesque porttitor nunc non augue auctor, ut rutrum tortor tempor. Fusce fermentum libero erat, a dictum neque volutpat sit amet.",
             "longa": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut aliquam neque, quis feugiat mi. Donec id tortor elit. Aliquam turpis sapien, ullamcorper eget est quis, placerat aliquam dolor. Quisque pharetra ante vitae lacus aliquam fringilla. Aliquam erat volutpat. Nam quam ipsum, fringilla at dui quis, pulvinar egestas elit. Fusce maximus, ante in tempor ullamcorper, sem velit blandit tortor, et euismod elit nisi vel purus. Praesent ut laoreet mi. Sed tristique massa ac ornare pretium. Pellentesque porttitor nunc non augue auctor, ut rutrum tortor tempor. Fusce fermentum libero erat, a dictum neque volutpat sit amet. Quisque eleifend diam ac nulla eleifend, ac dignissim eros varius. Praesent sagittis non purus eu luctus. In consequat, nisl vitae congue elementum, eros est aliquam lectus, sit amet ullamcorper dolor arcu non nisl. Aliquam erat volutpat. Nam sed fringilla enim. Aliquam neque lorem, vestibulum sed ullamcorper et, tempus at lectus. Fusce pretium efficitur purus, sed lacinia mi dignissim in. Ut pellentesque elit eu orci dictum, nec dapibus ligula placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut aliquam neque, quis feugiat mi. Donec id tortor elit. Aliquam turpis sapien, ullamcorper eget est quis, placerat aliquam dolor. Quisque pharetra ante vitae lacus aliquam fringilla. Aliquam erat volutpat. Nam quam ipsum, fringilla at dui quis, pulvinar egestas elit. Fusce maximus, ante in tempor ullamcorper, sem velit blandit tortor, et euismod elit nisi vel purus. Praesent ut laoreet mi. Sed tristique massa ac ornare pretium. Pellentesque porttitor nunc non augue auctor, ut rutrum tortor tempor. Fusce fermentum libero erat, a dictum neque volutpat sit amet."
           }
         },
         {
-          "titulo": "[TESTE DE PRODUTO]",
+          "titulo": "[Kit de Produto]",
           "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_kit-campe-o-as-camisetas-dry-mais-vendidas-2.jpg",
           "price": "100,00",
           "descricoes": {
@@ -156,11 +181,13 @@
       ]
     },
     "vitrine_home02": {
-      "vitrine": { "titulo": "Mais Vendidos" },
-
+      "vitrine": {
+        "titulo": "Mais Vendidos"
+      },
       "produtos": [
         {
           "titulo": "[TESTE DE PRODUTO]",
+          "id": 1,
           "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_kit-campe-o-as-camisetas-dry-mais-vendidas-2.jpg",
           "price": "100,00",
           "descricoes": {

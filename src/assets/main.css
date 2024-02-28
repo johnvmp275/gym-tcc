@@ -60,14 +60,8 @@ ul {
   overflow: visible;
 }
 
-.swiper-wrapper .swiper-slide {
-  display: flex;
-  align-items: center;
-}
-
 .swiper-slide img {
   display: flex;
-  margin: 0 auto;
   object-fit: cover;
   object-position: center;
   max-width: 100%;
@@ -84,4 +78,12 @@ ul {
   width: 60px;
   border-radius: 0px;
   background: var(--background-white);
+}
+
+.pitchbar {
+  display: flex;
+  align-items: center;
+  color: var(--background-white);
+  background: var(--background-wine);
+  padding: 5px 16px;
 }

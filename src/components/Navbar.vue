@@ -5,9 +5,9 @@ import pitchbar from './widgets/pitchbar.vue'
 
 <template>
   <header>
-    <pitchbar>
+    <div class="pitchbar">
       Entre em contato pelo tel: <a href="/#">(18) {{ telWhatsapp }}</a>
-    </pitchbar>
+    </div>
     <nav class="navbar-desktop">
       <section class="middle-top">
         <RouterLink class="logo" to="/">
