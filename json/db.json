@@ -60,7 +60,7 @@
   ],
   "produtos": [
     {
-      "titulo": "[TESTE DE PRODUTO]",
+      "titulo": "testetesteteste",
       "id": 1,
       "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_kit-campe-o-as-camisetas-dry-mais-vendidas-2.jpg",
       "price": "100,00",
@@ -105,7 +105,7 @@
       },
       "produtos": [
         {
-          "titulo": "[TESTE DE PRODUTO]",
+          "titulo": "testetesteteste",
           "id": 1,
           "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_zZXYN-TASCTStpuVPLC9gQzQlQFNOxJMsKJqHtNzzQ&s",
           "price": "100,00",
@@ -186,7 +186,7 @@
       },
       "produtos": [
         {
-          "titulo": "[TESTE DE PRODUTO]",
+          "titulo": "testetesteteste",
           "id": 1,
           "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_kit-campe-o-as-camisetas-dry-mais-vendidas-2.jpg",
           "price": "100,00",

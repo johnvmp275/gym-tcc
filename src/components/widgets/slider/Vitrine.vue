@@ -13,7 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
                 <Strong class="produto-titulo">{{ produto.titulo }}</Strong>
                 <p class="produto-descricao">{{ produto.descricoes.curta }}</p>
                 <strong>{{ produto.price }}</strong>
-                <RouterLink class="detalhe-produto" :to="`/${produto.path}`" @click="getDadosProduto(produto)">Ver detalhes</RouterLink>
+                <RouterLink class="detalhe-produto" :to="`/${produto.id}`" @click="getDadosProduto(produto)">Ver detalhes</RouterLink>
             </swiper-slide>
         </sliderVue>
     </section>
