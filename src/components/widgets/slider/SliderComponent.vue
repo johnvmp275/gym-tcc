@@ -28,8 +28,5 @@ export default {
     Swiper,
     SwiperSlide
   },
-  props:{
-    modules: Array
-  }
 }
 </script>

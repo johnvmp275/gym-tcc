@@ -6,16 +6,16 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 
 <template>
   <section class="vitrine-home">
-    <h1 class="vitrine-titulo">{{}}</h1>
+    <h1 class="vitrine-titulo">{{titulo}}</h1>
     <sliderVue :slidesPerView="'auto'" :spaceBetween="10" v-if="produtosCard.length">
       <swiper-slide v-for="produto in produtosCard" :key="produto.id" class="card-product">
-        <RouterLink :to="`/${produto.id}`" @click="fetchData">
+        <RouterLink :to="`/${produto.id}`">
           <img class="image-product" :src="produto.image" alt="" />
         </RouterLink>
         <Strong class="produto-titulo">{{ produto.titulo }}</Strong>
         <p class="produto-descricao">{{ produto.descricoes.curta }}</p>
         <strong>{{ produto.price }}</strong>
-        <RouterLink class="detalhe-produto" :to="`/${produto.id}`" @click="fetchData">
+        <RouterLink class="detalhe-produto" :to="`/${produto.id}`">
           Ver detalhes
         </RouterLink>
       </swiper-slide>
@@ -24,11 +24,15 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 </template>
 
 <script>
-   
+
 export default {
   props: {
     produtosCard: Array,
-    fetchData: Function
+    titulo: String,
+    fetchProductDetails: Function
+  },
+  mounted(){
+
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <script setup>
-import sliderVue from './slider/SliderComponent.vue';
+import sliderVue from '../slider/SliderComponent.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue'
 </script>
 
@@ -16,15 +16,10 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
     </div>
   </div>
   <div>
-    <sliderVue 
-    :spaceBetween="40" 
-    :autoplay="{
+    <sliderVue :spaceBetween="40" :autoplay="{
       delay: 3000,
       disableOnInteraction: false
-    }" 
-    :loop="true" 
-    :slidesPerView="'auto'" 
-    class="pitchbar pitchbar-home mobile">
+    }" :loop="true" :slidesPerView="'auto'" class="pitchbar pitchbar-home mobile">
       <swiper-slide v-for="pitchbar in pitchbarData" :key="pitchbar.id">
         <div class="pitchbar-box">
           <img :src="pitchbar.icone" :alt="pitchbar.titulo" />
@@ -80,6 +75,9 @@ export default {
   .mobile {
     display: flex;
   }
+
+  .pitchbar-home {
+    padding: 12px 60px;
+  }
 }
 </style>
-

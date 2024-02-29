@@ -1,9 +1,8 @@
 <script setup>
-import sliderVue from '@/components/widgets/slider/SliderComponent.vue'
 import apiService from '@/js/fetchData'
 import Vitrine from '@/components/widgets/slider/Vitrine.vue'
 import bannerVue from '@/components/widgets/banners/banner.vue'
-import Pitchbar from '@/components/widgets/pitchbar.vue'
+import Pitchbar from '@/components/widgets/pitchbar/pitchbar.vue'
 </script>
 
 <template>
@@ -11,7 +10,8 @@ import Pitchbar from '@/components/widgets/pitchbar.vue'
 
   <Pitchbar :pitchbarData="pitchbarHome"/>
 
-  <Vitrine :produtosCard="produtos" :getDadosProduto="getDadosProduto" />
+  <Vitrine :produtosCard="produtos" :getDadosProduto="getDadosProduto" :titulo="titulo" />
+  
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
     return {
       principalBanner: [],
       pitchbarHome: [],
-      vitrine_home01: [],
+      titulo: [],
       produtos: []
     }
   },
@@ -34,10 +34,11 @@ export default {
         this.pitchbarHome = menus.find((item) => item.pitchbar_home).pitchbar_home
 
         const vitrines = await apiService.getDadosOfVitrines()
-        this.vitrine_home01 = vitrines.vitrine_home01
+        this.titulo = vitrines.vitrine_home01.vitrine.titulo
         this.produtos = vitrines.vitrine_home01.produtos
 
-        console.log(this.produtos)
+        console.log(this.titulo);
+
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }
@@ -48,4 +49,3 @@ export default {
   }
 }
 </script>
-
