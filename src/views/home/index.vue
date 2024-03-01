@@ -3,15 +3,17 @@ import apiService from '@/js/fetchData'
 import Vitrine from '@/components/widgets/slider/Vitrine.vue'
 import bannerVue from '@/components/widgets/banners/banner.vue'
 import Pitchbar from '@/components/widgets/pitchbar/pitchbar.vue'
+import loaderVue from '@/components/widgets/loader/loader.vue'
 </script>
 
 <template>
-  <bannerVue :banners="principalBanner"/>
+  <loaderVue :isLoaderActive="loaderActive"/>
 
-  <Pitchbar :pitchbarData="pitchbarHome"/>
+  <bannerVue :banners="principalBanner" />
+
+  <Pitchbar :pitchbarData="pitchbarHome" />
 
   <Vitrine :produtosCard="produtos" :getDadosProduto="getDadosProduto" :titulo="titulo" />
-  
 </template>
 
 <script>
@@ -21,12 +23,14 @@ export default {
       principalBanner: [],
       pitchbarHome: [],
       titulo: [],
-      produtos: []
+      produtos: [],
+      loaderActive: true
     }
   },
   methods: {
     async fetchData() {
       try {
+        
         const banners = await apiService.getDadosOfBanner()
         this.principalBanner = banners.find((item) => item.bannerPrincipal).bannerPrincipal
 
@@ -37,7 +41,7 @@ export default {
         this.titulo = vitrines.vitrine_home01.vitrine.titulo
         this.produtos = vitrines.vitrine_home01.produtos
 
-        console.log(this.titulo);
+        this.loaderActive = false
 
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)

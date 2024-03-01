@@ -4,10 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import Vitrine from '@/components/widgets/slider/Vitrine.vue'
 import apiService from '@/js/fetchData.js'
 import sliderImage from '@/components/widgets/slider/sliderImage.vue'
-
+import loaderVue from '@/components/widgets/loader/loader.vue'
 </script>
 
 <template>
+    <loaderVue :isLoaderActive="loaderActive" />
     <section class="detalhe-produto container-div">
         <div class="container-produto">
             <sliderImage :slidesPerView="'auto'" class="slider-produto">
@@ -40,8 +41,16 @@ import sliderImage from '@/components/widgets/slider/sliderImage.vue'
         </div>
         <div class="teste">
             <span class="produto-preco">R${{ product.price }}</span>
-            <span>Quantidade:</span>
-            <button>Adicionar ao carrinho</button>
+            <div>
+                <span>Quantidade:</span>
+                <div class="container-amount">
+                    <button class="amount-button" @click="decrementAmount">-</button>
+                    <input type="tel" :value="amount"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
+                    <button class="amount-button" @click="amount++">+</button>
+                </div>
+            </div>
+            <button class="product-add-cart">Adicionar ao carrinho</button>
         </div>
     </section>
 
@@ -50,7 +59,7 @@ import sliderImage from '@/components/widgets/slider/sliderImage.vue'
         <p>{{ descricao.longa }}</p>
     </section>
 
-    <Vitrine :produtosCard="produtos" :fetchProductDetails="fetchProductDetails" />
+    <Vitrine :produtosCard="produtos" :fetchProductDetails="fetchProductDetails" :titulo="`Você também pode gostar`" />
 </template>
 
 <script>
@@ -59,7 +68,9 @@ export default {
         return {
             product: [],
             produtos: [],
-            descricao: {}
+            descricao: {},
+            loaderActive: true,
+            amount: 1
         }
     },
     methods: {
@@ -75,6 +86,7 @@ export default {
                     behavior: "smooth"
                 });
 
+                this.loaderActive = false;
             } catch (error) {
                 console.error('Não foi possível buscar os dados', error)
                 throw error
@@ -87,6 +99,11 @@ export default {
                 this.produtos = vitrines.vitrine_home01.produtos
             } catch (error) {
                 console.error('Não foi possivel buscar os dados pedidos', error)
+            }
+        },
+        decrementAmount() {
+            if (this.amount >= 2) {
+                this.amount--
             }
         }
     },
@@ -119,7 +136,7 @@ export default {
     max-width: 370px;
     height: 370px;
     object-fit: cover;
-    object-position: center;
+    object-position: top;
 }
 
 .produto-descricao {
@@ -180,7 +197,7 @@ h1 {
     font-size: 20px;
 }
 
-button {
+.product-add-cart {
     width: 100%;
     padding: 16px;
     justify-content: center;
@@ -190,6 +207,24 @@ button {
 
 .container-div {
     max-width: 1170px;
+}
+
+.amount-button {
+    padding: 16px;
+}
+
+.container-amount {
+    display: flex;
+    width: 116px;
+    flex-direction: row;
+    border: 1px solid var(--background-gray-400);
+}
+
+.container-amount input {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-align: center;
 }
 
 #descricao {
@@ -210,13 +245,14 @@ button {
     }
 
     .image-produto {
-        min-width: 250px;
-        max-width: 250px;
-        height: 250px;
+        min-width: 300px;
+        max-width: 300px;
+        height: 300px;
     }
 
     .slider-produto {
         min-width: 300px;
         max-width: 300px;
     }
-}</style>
+}
+</style>

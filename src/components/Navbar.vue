@@ -49,39 +49,6 @@ import apiService from '@/js/fetchData'
         </div>
       </section>
     </nav>
-
-    <section :class="{ 'cart-container': true, 'open': cartWasOpen }">
-      <div class="carrinho-topo">
-        <strong>Carrinho de compras</strong>
-        <button type="button" class="button-cart" @click="cartToggleFunction">x</button>
-      </div>
-      <template v-if="cartItem.length">
-        <div class="cart-div">
-          <div v-for="item in cartItem" :key="item.id" class="cart-item">
-            <img :src="item.image" alt="">
-            <div class="item-detalhe">
-              <h2>{{ item.titulo }}</h2>
-              <p>{{ item.price }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="resumo-compra">
-          <button class="button-compra">
-            Finalizar Compra
-          </button>
-        </div>
-      </template>
-      <template v-else>
-        <span class="aviso-carrinho-vazio">
-          <strong>SEU CARRINHO ESTÁ VAZIO</strong>
-          <p>Navegue agora pelas categorias de nossa loja e escolha os produtos desejados para adicionar em seu carrinho
-            de
-            compras
-          </p>
-        </span>
-      </template>
-    </section>
-    <div class="box-shadow" v-show="boxShadowWasOpen" @click="cartToggleFunction"></div>
   </header>
 </template>
 
@@ -92,6 +59,7 @@ export default {
     return {
       categoriesData: [],
       pitchbarHome: [],
+      amount: 1,
       cartItem: [
         {
           "titulo": "KIt de Short X8",
@@ -251,7 +219,7 @@ nav a:hover {
 }
 
 
-input {
+#search {
   color: var(--background-gray-700);
   border-radius: 5px;
   padding: 10px 0 10px 10px;
@@ -351,21 +319,29 @@ span {
   flex-direction: column;
   overflow-y: scroll;
   align-items: center;
+  padding: 0 10px;
   gap: 10px;
   height: 70%;
 }
 
 .cart-item {
   display: flex;
+  align-items: center;
+  width: 100%;
   padding: 10px;
   border: 2px solid var(--background-gray);
   gap: 16px;
 }
 
+.cart-item p {
+  font-weight: bold;
+  color: var(--background-gray-700);
+}
+
 .cart-item img {
-  min-width: 110px;
-  max-width: 110px;
-  height: 110px;
+  min-width: 66px;
+  max-width: 66px;
+  height: 66px;
   object-fit: cover;
 }
 
@@ -373,12 +349,12 @@ h2 {
   font-size: 16px;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 150px;
+  max-width: 180px;
   overflow: hidden;
 }
 
 .item-detalhe {
-  width: 152px;
+  width: 100%;
 }
 
 .button-compra {
@@ -406,6 +382,36 @@ h2 {
   align-items: center;
   justify-content: space-between;
   padding: 16px;
+}
+
+.item-detalhe-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-amount {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.amount-button {
+  padding: 16px;
+}
+
+.container-amount {
+  display: flex;
+  min-width: 96px;
+  height: 40px;
+  border: 1px solid var(--background-gray-400);
+}
+
+.container-amount input {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  text-align: center;
 }
 
 @media (max-width : 1200px) {
