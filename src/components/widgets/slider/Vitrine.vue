@@ -9,13 +9,13 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
     <h1 class="vitrine-titulo">{{titulo}}</h1>
     <sliderVue :slidesPerView="'auto'" :spaceBetween="10" v-if="produtosCard.length">
       <swiper-slide v-for="produto in produtosCard" :key="produto.id" class="card-product">
-        <RouterLink :to="`/${produto.id}`">
+        <RouterLink :to="`/produto/${produto.id}`">
           <img class="image-product" :src="produto.image" alt="" />
         </RouterLink>
         <Strong class="produto-titulo">{{ produto.titulo }}</Strong>
         <p class="produto-descricao">{{ produto.descricoes.curta }}</p>
         <strong>{{ produto.price }}</strong>
-        <RouterLink class="detalhe-produto" :to="`/${produto.id}`">
+        <RouterLink class="detalhe-produto" :to="`/produto/${produto.id}`">
           Ver detalhes
         </RouterLink>
       </swiper-slide>
@@ -85,6 +85,8 @@ h1 {
   display: flex;
   justify-content: center;
   color: var(--background-white);
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .detalhe-produto:hover {

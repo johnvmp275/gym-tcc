@@ -4,16 +4,19 @@ import Vitrine from '@/components/widgets/slider/Vitrine.vue'
 import bannerVue from '@/components/widgets/banners/banner.vue'
 import Pitchbar from '@/components/widgets/pitchbar/pitchbar.vue'
 import loaderVue from '@/components/widgets/loader/loader.vue'
+import bannerSecundario from '@/components/widgets/banners/bannerSecundario.vue'
 </script>
 
 <template>
-  <loaderVue :isLoaderActive="loaderActive"/>
+  <loaderVue :isLoaderActive="loaderActive" />
 
   <bannerVue :banners="principalBanner" />
 
   <Pitchbar :pitchbarData="pitchbarHome" />
 
   <Vitrine :produtosCard="produtos" :getDadosProduto="getDadosProduto" :titulo="titulo" />
+
+  <bannerSecundario :bannerSecundario="secundarioBanner" />
 </template>
 
 <script>
@@ -21,6 +24,14 @@ export default {
   data() {
     return {
       principalBanner: [],
+      secundarioBanner: [
+        {
+          image: 'https://www.usealphaco.com.br/upload/banner/a77e2e6b11b8d1ab6f97226ca3690509.jpg'
+        },
+        {
+          image: 'https://www.usealphaco.com.br/upload/banner/a77e2e6b11b8d1ab6f97226ca3690509.jpg'
+        }
+      ],
       pitchbarHome: [],
       titulo: [],
       produtos: [],
@@ -30,7 +41,6 @@ export default {
   methods: {
     async fetchData() {
       try {
-        
         const banners = await apiService.getDadosOfBanner()
         this.principalBanner = banners.find((item) => item.bannerPrincipal).bannerPrincipal
 
@@ -42,7 +52,6 @@ export default {
         this.produtos = vitrines.vitrine_home01.produtos
 
         this.loaderActive = false
-
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }
