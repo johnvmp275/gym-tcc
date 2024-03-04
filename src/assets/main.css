@@ -102,6 +102,13 @@ ul {
   cursor: pointer;
 }
 
+select {
+  width: 61px;
+  height: 33px;
+  padding: 0 9px;
+  cursor: pointer;
+}
+
 @media (max-width:1200px) {
 
   .slider-produto .slider-image img {

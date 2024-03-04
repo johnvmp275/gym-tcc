@@ -31,16 +31,13 @@ export default {
     titulo: String,
     fetchProductDetails: Function
   },
-  mounted(){
-
-  }
 }
 </script>
 
 <style scoped>
 .vitrine-home {
   padding: 16px;
-  max-width: 1330px;
+  max-width: 1170px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

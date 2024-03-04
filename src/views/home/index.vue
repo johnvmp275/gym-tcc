@@ -5,6 +5,7 @@ import bannerVue from '@/components/widgets/banners/banner.vue'
 import Pitchbar from '@/components/widgets/pitchbar/pitchbar.vue'
 import loaderVue from '@/components/widgets/loader/loader.vue'
 import bannerSecundario from '@/components/widgets/banners/bannerSecundario.vue'
+import Instashop from '@/components/instashop/cardInstashop.vue'
 </script>
 
 <template>
@@ -17,6 +18,8 @@ import bannerSecundario from '@/components/widgets/banners/bannerSecundario.vue'
   <Vitrine :produtosCard="produtos" :getDadosProduto="getDadosProduto" :titulo="titulo" />
 
   <bannerSecundario :bannerSecundario="secundarioBanner" />
+
+  <Instashop/>
 </template>
 
 <script>
@@ -26,10 +29,12 @@ export default {
       principalBanner: [],
       secundarioBanner: [
         {
-          image: 'https://www.usealphaco.com.br/upload/banner/a77e2e6b11b8d1ab6f97226ca3690509.jpg'
+          image: 'https://www.usealphaco.com.br/upload/banner/a77e2e6b11b8d1ab6f97226ca3690509.jpg',
+          path: 'suplementos'
         },
         {
-          image: 'https://www.usealphaco.com.br/upload/banner/a77e2e6b11b8d1ab6f97226ca3690509.jpg'
+          image: 'https://www.usealphaco.com.br/upload/banner/a77e2e6b11b8d1ab6f97226ca3690509.jpg',
+          path: 'camisetas'
         }
       ],
       pitchbarHome: [],

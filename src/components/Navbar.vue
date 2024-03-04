@@ -20,7 +20,7 @@ import CartItem from './widgets/cart/cartItem.vue'
           <div class="header-container-categorias">
             <ul>
               <li v-for="categoria in categoriesData" :key="categoria.id">
-                <RouterLink :to="`/categorias${categoria.path}`">
+                <RouterLink :to="`/categorias/${categoria.path}`">
                   {{ categoria.label }}
                 </RouterLink>
               </li>
@@ -28,12 +28,7 @@ import CartItem from './widgets/cart/cartItem.vue'
           </div>
 
           <div class="search-container">
-            <input
-              type="search"
-              id="search"
-              name="search"
-              placeholder="O que você está procurando hoje?"
-            />
+            <input type="search" id="search" name="search" placeholder="O que você está procurando hoje?" />
             <button class="fake-button">
               <span class="material-symbols-outlined"> search </span>
             </button>
@@ -52,17 +47,17 @@ import CartItem from './widgets/cart/cartItem.vue'
 
           <button type="button" class="button-cart" @click="cartToggleFunction">
             <span class="material-symbols-outlined"> shopping_cart </span>
-            <span class="caritem-amount">{{ cartItem.length }}</span>
+            <span class="caritem-amount">{{ cartItems.length }}</span>
           </button>
         </div>
 
       </section>
     </nav>
     <CartItem 
-      :cartItem="cartItem" 
-      :cartWasOpen="cartWasOpen" 
-      :cartToggleFunction="cartToggleFunction" 
-      :boxShadowWasOpen="boxShadowWasOpen"
+    :cartItem="cartItems" 
+    :cartWasOpen="cartWasOpen" 
+    :cartToggleFunction="cartToggleFunction"
+    :boxShadowWasOpen="boxShadowWasOpen" 
     />
   </header>
 </template>
@@ -73,7 +68,7 @@ export default {
     return {
       categoriesData: [],
       pitchbarHome: [],
-      cartItem: [],
+      cartItems: [],
       telWhatsapp: '',
       userLogged: false,
       boxShadowWasOpen: false,
@@ -121,7 +116,7 @@ header {
   top: 0;
 }
 
-.pitchbar span{
+.pitchbar span {
   max-width: 1330px;
   width: 100%;
   margin: 0 auto;
@@ -130,7 +125,7 @@ header {
   white-space: nowrap;
 }
 
-.pitchbar{
+.pitchbar {
   display: flex;
   align-items: center;
 }
@@ -226,9 +221,8 @@ span {
 }
 
 .user-container {
-  max-width: 200px;
+  max-width: 177px;
   width: 100%;
-  margin-left: 10px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -240,6 +234,7 @@ span {
   text-decoration: underline;
   font-weight: bold;
 }
+
 .search-container {
   display: flex;
   width: 100%;
@@ -247,15 +242,20 @@ span {
   border-radius: 8px;
 }
 
+.logo {
+  padding: 10px 0;
+  margin-right: 20px;
+}
+
 .logo img {
   width: 150px;
 }
 
-.button-cart{
+.button-cart {
   position: relative;
 }
 
-.caritem-amount{
+.caritem-amount {
   position: absolute;
   bottom: 5px;
   right: 0;
@@ -270,7 +270,11 @@ span {
   color: var(--background-white);
 }
 
-@media (max-width: 1200px) {
+.header-container-categorias a {
+  padding: 10px 5px;
+}
+
+@media (max-width: 1000px) {
   .navbar-desktop {
     display: none;
   }

@@ -1,9 +1,9 @@
 <template>
   <section>
     <div v-for="banner in bannerSecundario" :key="banner.id">
-      <a href="">
+      <RouterLink :to="`/categorias/${banner.path}`">
         <img :src="banner.image" :alt="banner.titulo" />
-      </a>
+      </RouterLink> 
     </div>
   </section>
 </template>
@@ -20,7 +20,7 @@ export default {
 section {
   display: flex;
   justify-content: center;
-  max-width: 1330px;
+  max-width: 1170px;
   padding: 16px;
   margin: 0 auto;
   gap: 16px;
@@ -48,7 +48,7 @@ a{
     padding: 0;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   section {
     flex-wrap: wrap;
   }

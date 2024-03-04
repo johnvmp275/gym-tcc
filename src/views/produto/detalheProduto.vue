@@ -46,30 +46,28 @@ import Tabs from '@/components/widgets/tab/tab.vue'
         <span>Quantidade:</span>
         <div class="container-amount">
           <button class="amount-button" @click="decrementAmount">-</button>
-          <input
-            type="tel"
-            :value="amount"
-            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
-          />
+          <input type="tel" :value="amount"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
           <button class="amount-button" @click="amount++">+</button>
         </div>
       </div>
-      <button class="product-add-cart">Adicionar ao carrinho</button>
+      <button class="product-add-cart" @click="addItemToCard">Adicionar ao carrinho</button>
     </div>
   </section>
 
   <Tabs id="descricao">
-      <p>{{ descricao.longa }}</p>
+    <p>{{ descricao.longa }}</p>
   </Tabs>
 
-  <Vitrine
-    :produtosCard="produtos"
-    :fetchProductDetails="fetchProductDetails"
-    :titulo="`Você também pode gostar`"
+  <Vitrine 
+  :produtosCard="produtos" 
+  :fetchProductDetails="fetchProductDetails" 
+  :titulo="`Você também pode gostar`" 
   />
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -143,7 +141,7 @@ export default {
   min-width: 370px;
   max-width: 370px;
   height: 370px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: top;
 }
 
@@ -227,7 +225,6 @@ h1 {
 
 .container-amount input {
   width: 100%;
-  height: 100%;
   display: flex;
   text-align: center;
 }
@@ -237,7 +234,8 @@ h1 {
   padding: 16px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
+
   .detalhe-produto,
   .container-produto {
     flex-direction: column;
