@@ -5,7 +5,7 @@
             <a>@IronForge</a>
         </div>
         <div class="instagram-post">
-            <a class="insta-posts" v-for="card in instashop" :key="card.id" :href="card.link">
+            <a class="insta-posts" v-for="card in instashop" :key="card.id" :href="card.link" target="blank">
                 <img :src="card.image" :alt="card.label">
                 <span class="material-symbols-outlined insta-hover">
                     exercise
@@ -134,7 +134,7 @@ a {
     background: rgba(26, 60, 88, 0.4);
     border-radius: 10px;
     opacity: 0;
-    z-index: 10;
+    z-index: 5;
     font-size: 80px;
 }
 

@@ -41,17 +41,33 @@ import Tabs from '@/components/widgets/tab/tab.vue'
       </div>
     </div>
     <div class="teste">
-      <span class="produto-preco">R${{ product.price }}</span>
-      <div>
-        <span>Quantidade:</span>
-        <div class="container-amount">
-          <button class="amount-button" @click="decrementAmount">-</button>
-          <input type="tel" :value="amount"
-            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
-          <button class="amount-button" @click="amount++">+</button>
+      <template v-if="qtdEstoque > 0">
+        <span class="produto-preco">R${{ product.price }}</span>
+        <div>
+          <span>Quantidade:</span>
+          <div class="container-amount">
+            <button class="amount-button" @click="decrementAmount">-</button>
+            <input
+              type="tel"
+              :value="amount"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+            />
+            <button class="amount-button" @click="amount++">+</button>
+          </div>
         </div>
-      </div>
-      <button class="product-add-cart" @click="addItemToCard">Adicionar ao carrinho</button>
+        <button class="button-click" @click="addItemToCard">Adicionar ao carrinho</button>
+      </template>
+      <template v-else>
+        <h2>Este produto se encontra indisponível no momento</h2>
+
+        <p class="aviso-produto-email">Preencha os campos abaixo para ser informado assim que o produto estiver disponível novamente</p>
+
+        <input class="input-produto-estoque" type="text" placeholder="Insira seu nome">
+        <input class="input-produto-estoque" type="email" placeholder="exemplo@gmail.com">
+
+        <button class="button-click">Avise-me</button>
+
+      </template>
     </div>
   </section>
 
@@ -59,15 +75,14 @@ import Tabs from '@/components/widgets/tab/tab.vue'
     <p>{{ descricao.longa }}</p>
   </Tabs>
 
-  <Vitrine 
-  :produtosCard="produtos" 
-  :fetchProductDetails="fetchProductDetails" 
-  :titulo="`Você também pode gostar`" 
+  <Vitrine
+    :produtosCard="produtos"
+    :fetchProductDetails="fetchProductDetails"
+    :titulo="`Você também pode gostar`"
   />
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -75,7 +90,8 @@ export default {
       produtos: [],
       descricao: {},
       loaderActive: true,
-      amount: 1
+      amount: 1,
+      qtdEstoque: 1
     }
   },
   methods: {
@@ -85,6 +101,7 @@ export default {
         const data = await req.json()
         this.product = data
         this.descricao = data.descricoes
+        this.qtdEstoque = data.qtdEstoque
 
         window.scrollTo({
           top: 0,
@@ -186,7 +203,7 @@ div {
 }
 
 .teste {
-  max-width: 422px;
+  max-width: 362px;
   width: 100%;
   padding: 16px;
   display: flex;
@@ -200,16 +217,6 @@ div {
 
 h1 {
   font-size: 20px;
-}
-
-.product-add-cart {
-  width: 100%;
-  padding: 16px;
-  font-size: 16px;
-  font-weight: bold;
-  justify-content: center;
-  background: var(--background-wine);
-  color: var(--background-white);
 }
 
 .amount-button {
@@ -234,8 +241,12 @@ h1 {
   padding: 16px;
 }
 
-@media (max-width: 1000px) {
+.input-produto-estoque{
+  border: 2px solid var(--background-gray);
+  padding: 10px;
+}
 
+@media (max-width: 1000px) {
   .detalhe-produto,
   .container-produto {
     flex-direction: column;

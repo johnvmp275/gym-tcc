@@ -1,5 +1,6 @@
 <template>
   <div class="tabs">
+    
     <ul>
       <li @click="selectTab(1)">Detalhe do Produto</li>
       <li @click="selectTab(2)">Avaliações</li>
@@ -9,9 +10,14 @@
       <slot />
     </section>
 
-    <section v-if="table == 2">qwsqws</section>
+    <section v-if="table == 2">
+    
+    </section>
 
-    <section v-if="table == 3">vvvvv</section>
+    <section v-if="table == 3">
+    
+    </section>
+
   </div>
 </template>
 

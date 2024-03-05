@@ -67,4 +67,10 @@ export default {
     text-align: center;
     color: var(--background-white);
 }
+
+@media (max-width: 1100px) {
+    .pagination{
+        margin: 0 auto;
+    }
+}
 </style>
