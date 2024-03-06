@@ -1,9 +1,19 @@
+<script setup>
+import Newslleter from '@/components/newslleter/newslleter.vue'
+</script>
+
 <template>
   <footer>
+    <Newslleter />
     <div class="footer-top"></div>
     <section class="footer-final">
-      <p> Vetec | CNPJ: 47.733.562/0001-08 | Av. Paulista, 1000 - São Paulo - SP - Brasil | CEP: 01310-100 - Todos os Direitos Reservados.</p>
-      <a class="logo" target="_blank" href="https://github.com/johnvmp275"><img src="@/img/vetec.jpg" alt="logo"></a>
+      <p>
+        Vetec | CNPJ: 47.733.562/0001-08 | Av. Paulista, 1000 - São Paulo - SP - Brasil | CEP:
+        01310-100 - Todos os Direitos Reservados.
+      </p>
+      <a class="logo" target="_blank" href="https://github.com/johnvmp275">
+        <img src="@/img/vetec.jpg" alt="logo" />
+      </a>
     </section>
   </footer>
 </template>
@@ -12,14 +22,14 @@
 
 <style scoped>
 footer {
-  margin-top: 20px;
+  margin-top: 40px;
   width: 100%;
   color: var(--background-gray-700);
   background: var(--background-white);
 }
 
-.footer-top{
-    padding: 6px 16px;
+.footer-top {
+  padding: 6px 16px;
 }
 
 .footer-final {
@@ -31,15 +41,15 @@ footer {
   align-items: center;
 }
 
-.logo{
+.logo {
   padding: 0;
 }
 
-.logo img{
+.logo img {
   width: 100px;
 }
 
-p{
-  text-align: center
+p {
+  text-align: center;
 }
 </style>
