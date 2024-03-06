@@ -97,11 +97,12 @@ export default {
       const body = document.querySelector('body')
       this.$store.commit('toggleCart');
 
-      if (this.cartWasOpen === true) {
-        body.style.overflowY = 'hidden'
-      } else {
-        body.style.overflowY = 'scroll'
-      }
+    }
+  },
+  watch: {
+    cartWasOpen(newValue) {
+      const body = document.querySelector('body');
+      body.style.overflowY = newValue ? 'hidden' : 'scroll';
     }
   },
   mounted() {
