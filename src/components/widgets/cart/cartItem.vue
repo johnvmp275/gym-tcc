@@ -1,15 +1,15 @@
 <template>
   <section :class="{ 'cart-container': true, open: cartWasOpen }">
     <div class="carrinho-topo">
-      <strong>Carrinho de compras (<span class="caritem-amount">{{ cartItem.length }}</span>)</strong>
+      <strong>
+        Carrinho de compras 
+        (<span class="caritem-amount">{{ cartItem.length }}</span>)
+      </strong>
       <button type="button" class="button-cart" @click="cartToggleFunction">x</button>
     </div>
     <template v-if="cartItem.length">
-
       <div class="cart-div">
-
         <div v-for="item in cartItem" :key="item.id" class="cart-item">
-          
           <img :src="item.imagem" alt="" />
           <div class="item-detalhe">
             <div class="item-detalhe-top">
@@ -18,18 +18,17 @@
                 <span class="material-symbols-outlined"> delete </span>
               </button>
             </div>
-
+            <span class="descricao-product">{{ item.descricao }}</span>
             <div class="price-amount">
               <p>R${{ item.preco }}</p>
               <div class="container-amount">
                 <button class="amount-button" @click="decrementAmount">-</button>
-                <input 
-                  type="tel" 
+                <input
+                  type="tel"
                   :value="amount"
-                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" 
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
                 />
                 <button class="amount-button" @click="amount++">+</button>
-
               </div>
             </div>
           </div>
@@ -39,7 +38,6 @@
       <div class="resumo-compra">
         <button class="button-compra">Finalizar Compra</button>
       </div>
-
     </template>
 
     <template v-else>
@@ -66,22 +64,21 @@ export default {
   },
   data() {
     return {
-      amount: 1,
+      amount: 1
     }
   },
   methods: {
     deteleItem(id) {
-
       // Encontra o id do item no carrinho
-      const itemProduct = this.cartItem.find(item => item.id === id);
+      const itemProduct = this.cartItem.find((item) => item.id === id)
 
-       // Remove o item do carrinho
-      this.cartItem.splice(itemProduct, 1);
+      // Remove o item do carrinho
+      this.cartItem.splice(itemProduct, 1)
 
-       // Atualiza o localStorage com os itens restantes no carrinho
-      localStorage.setItem('cartItems', JSON.stringify(this.cartItem));
+      // Atualiza o localStorage com os itens restantes no carrinho
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItem))
     },
-    decrementAmount(){
+    decrementAmount() {
       if (this.amount > 1) {
         this.amount--
       }
@@ -153,7 +150,7 @@ h2 {
   font-size: 16px;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 180px;
+  max-width: 147px;
   overflow: hidden;
 }
 
@@ -204,6 +201,7 @@ h2 {
   display: flex;
   margin-top: 20px;
   align-items: center;
+  justify-content: space-between;
 }
 
 .amount-button {
@@ -222,5 +220,13 @@ h2 {
   height: 100%;
   display: flex;
   text-align: center;
+}
+
+.descricao-product{
+  display: block;
+  width: 180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>
