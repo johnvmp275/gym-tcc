@@ -47,18 +47,14 @@ import CartItem from './widgets/cart/cartItem.vue'
 
           <button type="button" class="button-cart" @click="cartToggleFunction">
             <span class="material-symbols-outlined"> shopping_cart </span>
-            <span class="caritem-amount">{{ cartItems.length }}</span>
+            <span class="caritem-amount">{{ cartItemCount.length }}</span>
           </button>
         </div>
 
       </section>
     </nav>
-    <CartItem 
-    :cartItem="cartItems" 
-    :cartWasOpen="cartWasOpen" 
-    :cartToggleFunction="cartToggleFunction"
-    :boxShadowWasOpen="boxShadowWasOpen" 
-    />
+    <CartItem :cartItem="cartItemCount" :cartWasOpen="cartWasOpen" :cartToggleFunction="cartToggleFunction"
+      :boxShadowWasOpen="boxShadowWasOpen" />
   </header>
 </template>
 
@@ -68,11 +64,20 @@ export default {
     return {
       categoriesData: [],
       pitchbarHome: [],
-      cartItems: [],
+      cartItemCount: [],
       telWhatsapp: '',
       userLogged: false,
-      boxShadowWasOpen: false,
-      cartWasOpen: false
+    }
+  },
+  computed: {
+    cartItemCount() {
+      return this.$store.state.cartItems;
+    },
+    cartWasOpen() {
+      return this.$store.state.cartWasOpen;
+    },
+    boxShadowWasOpen() {
+      return this.$store.state.boxShadowWasOpen;
     }
   },
   methods: {
@@ -90,9 +95,7 @@ export default {
     },
     cartToggleFunction() {
       const body = document.querySelector('body')
-
-      this.boxShadowWasOpen = !this.boxShadowWasOpen
-      this.cartWasOpen = !this.cartWasOpen
+      this.$store.commit('toggleCart');
 
       if (this.cartWasOpen === true) {
         body.style.overflowY = 'hidden'
@@ -103,6 +106,7 @@ export default {
   },
   mounted() {
     this.fetchData()
+    console.log(this.cartWasOpen);
   }
 }
 </script>

@@ -5,33 +5,43 @@
       <button type="button" class="button-cart" @click="cartToggleFunction">x</button>
     </div>
     <template v-if="cartItem.length">
+
       <div class="cart-div">
+
         <div v-for="item in cartItem" :key="item.id" class="cart-item">
-          <img :src="item.image" alt="" />
+          
+          <img :src="item.imagem" alt="" />
           <div class="item-detalhe">
             <div class="item-detalhe-top">
-              <h2>{{ item.titulo }}</h2>
-              <span class="material-symbols-outlined"> delete </span>
+              <h2>{{ item.nome }}</h2>
+              <button @click="deteleItem(item.id)">
+                <span class="material-symbols-outlined"> delete </span>
+              </button>
             </div>
+
             <div class="price-amount">
-              <p>{{ item.price }}</p>
+              <p>R${{ item.preco }}</p>
               <div class="container-amount">
                 <button class="amount-button" @click="decrementAmount">-</button>
-                <input
-                  type="tel"
+                <input 
+                  type="tel" 
                   :value="amount"
-                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" 
                 />
                 <button class="amount-button" @click="amount++">+</button>
+
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div class="resumo-compra">
         <button class="button-compra">Finalizar Compra</button>
       </div>
+
     </template>
+
     <template v-else>
       <span class="aviso-carrinho-vazio">
         <span class="material-symbols-outlined"> shopping_cart </span>
@@ -45,6 +55,7 @@
   </section>
   <div class="box-shadow" v-show="boxShadowWasOpen" @click="cartToggleFunction"></div>
 </template>
+
 <script>
 export default {
   props: {
@@ -53,16 +64,33 @@ export default {
     cartToggleFunction: Function,
     boxShadowWasOpen: Boolean
   },
-  data(){
-    return{
+  data() {
+    return {
       amount: 1,
+    }
+  },
+  methods: {
+    deteleItem(id) {
+
+      // Encontra o id do item no carrinho
+      const itemProduct = this.cartItem.find(item => item.id === id);
+
+       // Remove o item do carrinho
+      this.cartItem.splice(itemProduct, 1);
+
+       // Atualiza o localStorage com os itens restantes no carrinho
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItem));
+    },
+    decrementAmount(){
+      if (this.amount > 1) {
+        this.amount--
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-
 .cart-container {
   height: 100vh;
   width: 336px;
@@ -155,7 +183,7 @@ h2 {
   gap: 16px;
 }
 
-.aviso-carrinho-vazio span{
+.aviso-carrinho-vazio span {
   font-size: 36px;
 }
 
