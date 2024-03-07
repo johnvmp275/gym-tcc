@@ -29,7 +29,14 @@ import { useRouter } from 'vue-router'
           </div>
 
           <div class="search-container">
-            <input type="text" id="search" name="search" placeholder="O que você está procurando hoje?" v-model="buscaResults" @keydown.enter="searchResults"/>
+            <input
+              type="text"
+              id="search"
+              name="search"
+              placeholder="O que você está procurando hoje?"
+              v-model="buscaResults"
+              @keydown.enter="searchResults"
+            />
             <button @click="searchResults" class="fake-button">
               <span class="material-symbols-outlined"> search </span>
             </button>
@@ -51,18 +58,77 @@ import { useRouter } from 'vue-router'
             <span class="caritem-amount">{{ cartItemCount.length }}</span>
           </button>
         </div>
-
       </section>
     </nav>
-    <CartItem :cartItem="cartItemCount" :cartWasOpen="cartWasOpen" :cartToggleFunction="cartToggleFunction"
-      :boxShadowWasOpen="boxShadowWasOpen" />
+    <nav class="navbar-mobile">
+      <section class="middle-top">
+        <button @click="menuToggleFunction">
+          <span class="material-symbols-outlined"> menu </span>
+        </button>
+
+        <RouterLink class="logo" to="/">
+          <img src="@/img/iron.jpg" alt="Logo" />
+        </RouterLink>
+
+        <section :class="{ 'menu-lateral': true, open: menuWasOpen }">
+          <div class="nav">
+            <button @click="menuToggleFunction">x</button>
+            <div class="header-container-categorias">
+              <ul>
+                <li v-for="categoria in categoriesData" :key="categoria.id">
+                  <RouterLink :to="`/categorias/${categoria.path}`">
+                    {{ categoria.label }}
+                  </RouterLink>
+                </li>
+              </ul>
+            </div>
+            <div class="user-container">
+              <!-- <template v-if="userLogged"> logado </template>
+  
+              <template v-else>
+                <p>Olá, Visitante!</p>
+                <a href="">Entre</a>
+                ou
+                <a href="">Cadastre-se</a>
+              </template> -->
+            </div>
+  
+          </div>
+        </section>
+
+        <button type="button" class="button-cart" @click="cartToggleFunction">
+          <span class="material-symbols-outlined"> shopping_cart </span>
+          <span class="caritem-amount">{{ cartItemCount.length }}</span>
+        </button>
+
+        <div class="search-container">
+          <input
+            type="text"
+            id="search"
+            name="search"
+            placeholder="O que você está procurando hoje?"
+            v-model="buscaResults"
+            @keydown.enter="searchResults"
+          />
+          <button @click="searchResults" class="fake-button">
+            <span class="material-symbols-outlined"> search </span>
+          </button>
+        </div>
+      </section>
+    </nav>
+    <CartItem
+      :cartItem="cartItemCount"
+      :cartWasOpen="cartWasOpen"
+      :cartToggleFunction="cartToggleFunction"
+      :boxShadowWasOpen="boxShadowWasOpen"
+    />
+    <div class="box-shadow" v-show="boxShadowWasOpen" @click="cartToggleFunction"></div>
   </header>
 </template>
 
 <script>
- const router = useRouter()
+
 export default {
-  
   data() {
     return {
       categoriesData: [],
@@ -75,13 +141,16 @@ export default {
   },
   computed: {
     cartItemCount() {
-      return this.$store.state.cartItems;
+      return this.$store.state.cartItems
     },
     cartWasOpen() {
-      return this.$store.state.cartWasOpen;
+      return this.$store.state.cartWasOpen
+    },
+    menuWasOpen() {
+      return this.$store.state.menuWasOpen
     },
     boxShadowWasOpen() {
-      return this.$store.state.boxShadowWasOpen;
+      return this.$store.state.boxShadowWasOpen
     }
   },
   methods: {
@@ -98,25 +167,34 @@ export default {
       }
     },
     cartToggleFunction() {
-      const body = document.querySelector('body')
-      this.$store.commit('toggleCart');
+      this.$store.commit('toggleCart')
     },
-    searchResults(){
-        if (this.buscaResults !== '') {
-          const encodedSearchTerm = encodeURIComponent(this.buscaResults);
-          this.$router.push({ path: '/busca', query: { busca: encodedSearchTerm } });
-        }
-      },
+    menuToggleFunction() {
+      this.$store.commit('toggleMenu')
+    },
+    searchResults() {
+      if (this.buscaResults !== '') {
+        const encodedSearchTerm = encodeURIComponent(this.buscaResults)
+        this.$router.push({ path: '/busca', query: { busca: encodedSearchTerm } })
+      }
+      this.buscaResults = ''
+    },
+    teste(){
+      this.menuWasOpen = !this.menuWasOpen
+    }
   },
   watch: {
-    cartWasOpen(newValue) {
-      const body = document.querySelector('body');
-      body.style.overflowY = newValue ? 'hidden' : 'scroll';
+    cartWasOpen(newParams) {
+      const body = document.querySelector('body')
+      body.style.overflowY = newParams ? 'hidden' : 'scroll'
+    },
+    menuWasOpen(newParams) {
+      const body = document.querySelector('body')
+      body.style.overflowY = newParams ? 'hidden' : 'scroll'
     }
   },
   mounted() {
     this.fetchData()
-    console.log(this.cartWasOpen);
   }
 }
 </script>
@@ -147,11 +225,15 @@ header {
 nav {
   width: 100%;
   background: var(--background-white);
-  height: 75px;
+  height: auto;
   display: flex;
   position: relative;
   flex-wrap: wrap;
   z-index: 10;
+}
+
+.navbar-mobile {
+  display: none;
 }
 
 a {
@@ -288,9 +370,66 @@ span {
   padding: 10px 5px;
 }
 
+.navbar-mobile .middle-top {
+  flex-wrap: wrap;
+}
+
+.menu-lateral{
+  transform: translateX(-500px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: var(--background-white);
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  transition: .5s;
+}
+
+.menu-lateral.open{
+  transform: translateX(0px);
+}
+
+.menu-lateral .nav{
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.menu-lateral .nav .header-container-categorias{
+  width: 100%;
+}
+
+.menu-lateral .nav ul{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.menu-lateral .nav ul a{
+  width: 100%;
+  height: 51px;
+}
+
+.box-shadow {
+  background: var(--background-black);
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
 @media (max-width: 1000px) {
   .navbar-desktop {
     display: none;
+  }
+  .navbar-mobile {
+    display: flex;
   }
 }
 </style>

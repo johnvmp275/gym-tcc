@@ -14,8 +14,8 @@ import paginationView from './pagination/paginationView.vue'
         <div class="categorie-top">
           <div>
             Exibindo
-            <span>{{ itensPorPagina }} de {{ productData.length }} produtos</span> nessa
-            categoria
+            <span>{{ productData.length }} de {{ productData.length }} produtos</span>
+            nessa página
           </div>
           <div>
             Itens por Página:
@@ -41,8 +41,12 @@ import paginationView from './pagination/paginationView.vue'
             </div>
           </div>
         </section>
-        <paginationView :paginaAtual="paginaAtual" :itensCategoria="productData" :totalPages="totalPages"
-          @paginaMudada="atualizarPagina" />
+        <paginationView
+          :paginaAtual="paginaAtual"
+          :itensCategoria="productData"
+          :totalPages="totalPages"
+          @paginaMudada="atualizarPagina"
+        />
       </section>
     </template>
 
@@ -50,23 +54,25 @@ import paginationView from './pagination/paginationView.vue'
       <section class="categorie-product-container categorie-not-found">
         <span>
           <h1>
-            A categoria "<span>{{ categories || busca }}</span>" infelizmente não foi encontrada :(
+            O item "<span>{{ categories || busca }}</span>" infelizmente não foi encontrado :(
           </h1>
           Mas indicamos para você alguns produtos!
         </span>
-        <div class="container-product">
-          <div class="card-product" v-for="produto in sugestoesProdutos" :key="produto.id">
-            <RouterLink class="image-link" :to="`/produto/${produto.id}`">
-              <img class="image-product" :src="produto.image" alt="" />
-            </RouterLink>
-            <Strong class="produto-titulo">{{ produto.titulo }}</Strong>
-            <p class="produto-descricao">{{ produto.descricoes.curta }}</p>
-            <strong class="product-price">R$ {{ produto.price }}</strong>
-            <RouterLink class="detalhe-produto" :to="`/produto/${produto.id}`">
-              Ver detalhes
-            </RouterLink>
+        <section class="categories-product">
+          <div class="container-product">
+            <div class="card-product" v-for="produto in sugestoesProdutos" :key="produto.id">
+              <RouterLink class="image-link" :to="`/produto/${produto.id}`">
+                <img class="image-product" :src="produto.image" alt="" />
+              </RouterLink>
+              <Strong class="produto-titulo">{{ produto.titulo }}</Strong>
+              <p class="produto-descricao">{{ produto.descricoes.curta }}</p>
+              <strong class="product-price">R$ {{ produto.price }}</strong>
+              <RouterLink class="detalhe-produto" :to="`/produto/${produto.id}`">
+                Ver detalhes
+              </RouterLink>
+            </div>
           </div>
-        </div>
+        </section>
       </section>
     </template>
   </section>
@@ -112,7 +118,9 @@ export default {
         if (this.categories) {
           this.productData = data.filter((item) => item.categorie === this.categories)
         } else {
-          this.productData = data.filter(item => item.titulo.toLowerCase().includes(this.busca.toLowerCase()));
+          this.productData = data.filter((item) =>
+            item.titulo.toLowerCase().match(this.busca.toLowerCase())
+          )
         }
 
         window.scrollTo({
@@ -147,7 +155,6 @@ export default {
   },
   mounted() {
     this.fetchCategories()
-    console.log(this.busca);
   }
 }
 </script>

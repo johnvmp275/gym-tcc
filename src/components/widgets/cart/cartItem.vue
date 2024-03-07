@@ -51,7 +51,6 @@
       </span>
     </template>
   </section>
-  <div class="box-shadow" v-show="boxShadowWasOpen" @click="cartToggleFunction"></div>
 </template>
 
 <script>
@@ -70,7 +69,7 @@ export default {
   methods: {
     deteleItem(id) {
       // Encontra o id do item no carrinho
-      const itemProduct = this.cartItem.find((item) => item.id === id)
+      const itemProduct = this.cartItem.findIndex((item) => item.id === id)
 
       // Remove o item do carrinho
       this.cartItem.splice(itemProduct, 1)
@@ -102,17 +101,6 @@ export default {
 
 .cart-container.open {
   transform: translateX(0px);
-}
-
-.box-shadow {
-  background: var(--background-black);
-  opacity: 0.7;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
 }
 
 .cart-div {

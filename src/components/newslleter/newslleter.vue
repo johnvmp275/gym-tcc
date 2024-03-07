@@ -33,7 +33,6 @@ export default {}
 
 .newslleter-container span {
   display: flex;
-  align-items: center;
   margin-top: 10px;
   gap: 5px;
   color: var(--background-gray-400);
@@ -93,6 +92,11 @@ label{
   .newslleter-div,
   .newslleter-inputs {
     flex-wrap: wrap;
+  }
+
+  span{
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>

@@ -3,6 +3,7 @@ import home from '../views/home/index.vue'
 import detalheProduto from '../views/produto/detalheProduto.vue'
 import categorias from '../views/categorias/categorias.vue'
 import pagina404 from '../views/404/pagina404.vue'
+import paginas from '../views/institucionais/paginas.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,6 +12,11 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       component: home
+    },
+    {
+      path: '/paginas',
+      name: 'Páginas',
+      component: paginas
     },
     {
       path: '/produto/:id',

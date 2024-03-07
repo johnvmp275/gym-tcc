@@ -6,7 +6,8 @@ const store = createStore({
         return {
             cartItems: [],
             cartWasOpen: false,
-            boxShadowWasOpen: false
+            boxShadowWasOpen: false,
+            menuWasOpen: false
         };
     },
     mutations: {
@@ -19,7 +20,10 @@ const store = createStore({
         toggleCart(state) {
             state.cartWasOpen = !state.cartWasOpen;
             state.boxShadowWasOpen = !state.boxShadowWasOpen;
-        }
+        },
+        toggleMenu(state) {
+            state.menuWasOpen = !state.menuWasOpen;
+        },
     }
 });
 
