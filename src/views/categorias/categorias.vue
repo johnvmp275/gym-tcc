@@ -8,20 +8,19 @@ import paginationView from './pagination/paginationView.vue'
   <section class="categorie-filter">
     <div class="filter-product">
       <span>Filtro</span>
-      {{ productBusca }}
     </div>
-    <template v-if="productCategorie.length">
+    <template v-if="productData.length">
       <section class="categorie-product-container">
         <div class="categorie-top">
           <div>
             Exibindo
-            <span>{{ itensPorPagina }} de {{ productCategorie.length }} produtos</span> nessa
+            <span>{{ itensPorPagina }} de {{ productData.length }} produtos</span> nessa
             categoria
           </div>
           <div>
             Itens por Página:
             <select name="select" id="select" v-model="itensPorPagina">
-              <option value="1" selected>1</option>
+              <option value="12" selected>12</option>
               <option value="2">2</option>
               <option value="3">3</option>
             </select>
@@ -42,7 +41,7 @@ import paginationView from './pagination/paginationView.vue'
             </div>
           </div>
         </section>
-        <paginationView :paginaAtual="paginaAtual" :itensCategoria="productCategorie" :totalPages="totalPages"
+        <paginationView :paginaAtual="paginaAtual" :itensCategoria="productData" :totalPages="totalPages"
           @paginaMudada="atualizarPagina" />
       </section>
     </template>
@@ -77,7 +76,7 @@ import paginationView from './pagination/paginationView.vue'
 export default {
   data() {
     return {
-      productCategorie: [],
+      productData: [],
       loaderActive: true,
       sugestoesProdutos: [],
       productBusca: [],
@@ -90,13 +89,13 @@ export default {
   },
   computed: {
     totalPages() {
-      const allItems = this.productCategorie || []
+      const allItems = this.productData || []
       return Math.ceil(allItems.length / this.itensPorPagina)
     },
     produtosPorPagina() {
       const startIndex = (this.paginaAtual - 1) * this.itensPorPagina
       const endIndex = startIndex + parseInt(this.itensPorPagina)
-      const allItems = this.productCategorie || []
+      const allItems = this.productData || []
 
       return allItems.slice(startIndex, endIndex)
     }
@@ -109,9 +108,13 @@ export default {
 
         this.categories = this.$route.params.path
         this.sugestoesProdutos = data.slice(0, 5)
-        this.productCategorie = data.filter((item) => item.categorie === this.categories)
-        this.productBusca = data.filter((item) => item.titulo)
-        console.log(this.productBusca);
+
+        if (this.categories) {
+          this.productData = data.filter((item) => item.categorie === this.categories)
+        } else {
+          this.productData = data.filter(item => item.titulo.toLowerCase().includes(this.busca.toLowerCase()));
+        }
+
         window.scrollTo({
           top: 0,
           behavior: 'smooth'
@@ -132,6 +135,12 @@ export default {
     '$route.params.path': {
       emit: true,
       handler(categoriaEscolhida) {
+        this.fetchCategories()
+      }
+    },
+    '$route.query.busca': {
+      emit: true,
+      handler() {
         this.fetchCategories()
       }
     }

@@ -1,6 +1,7 @@
 <script setup>
 import apiService from '@/js/fetchData'
 import CartItem from './widgets/cart/cartItem.vue'
+import { useRouter } from 'vue-router'
 </script>
 
 <template>
@@ -20,7 +21,7 @@ import CartItem from './widgets/cart/cartItem.vue'
           <div class="header-container-categorias">
             <ul>
               <li v-for="categoria in categoriesData" :key="categoria.id">
-                <RouterLink :to="`/${categoria.path}`">
+                <RouterLink :to="`/categorias/${categoria.path}`">
                   {{ categoria.label }}
                 </RouterLink>
               </li>
@@ -28,8 +29,8 @@ import CartItem from './widgets/cart/cartItem.vue'
           </div>
 
           <div class="search-container">
-            <input type="text" id="search" name="search" placeholder="O que você está procurando hoje?" />
-            <button class="fake-button">
+            <input type="text" id="search" name="search" placeholder="O que você está procurando hoje?" v-model="buscaResults" @keydown.enter="searchResults"/>
+            <button @click="searchResults" class="fake-button">
               <span class="material-symbols-outlined"> search </span>
             </button>
           </div>
@@ -59,13 +60,16 @@ import CartItem from './widgets/cart/cartItem.vue'
 </template>
 
 <script>
+ const router = useRouter()
 export default {
+  
   data() {
     return {
       categoriesData: [],
       pitchbarHome: [],
       cartItemCount: [],
       telWhatsapp: '',
+      buscaResults: '',
       userLogged: false,
     }
   },
@@ -96,8 +100,13 @@ export default {
     cartToggleFunction() {
       const body = document.querySelector('body')
       this.$store.commit('toggleCart');
-
-    }
+    },
+    searchResults(){
+        if (this.buscaResults !== '') {
+          const encodedSearchTerm = encodeURIComponent(this.buscaResults);
+          this.$router.push({ path: '/busca', query: { busca: encodedSearchTerm } });
+        }
+      },
   },
   watch: {
     cartWasOpen(newValue) {
