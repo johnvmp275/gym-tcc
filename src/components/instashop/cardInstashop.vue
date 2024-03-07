@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section v-if="instashop.length">
         <div class="insta-topo">
             <h2>Instashop</h2>
             <a>@IronForge</a>

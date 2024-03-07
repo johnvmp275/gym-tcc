@@ -7,12 +7,10 @@
       </div>
       <div class="newslleter-inputs">
         <div class="input-div">
-          <label for="name">Seu nome</label>
           <input type="text" id="name" placeholder="Seu nome" />
         </div>
         <div class="input-div">
-          <label for="email">Seu email</label>
-          <input type="email" placeholder="Seu email" name="email" id="email" />
+          <input type="email" placeholder="Seu melhor email" name="email" id="email" />
         </div>
         <button>Cadastrar</button>
       </div>
@@ -85,6 +83,10 @@ button {
   display: flex;
   justify-content: center;
   height: 46px;
+}
+
+label{
+  font-size: 14px;
 }
 
 @media (max-width: 1100px) {

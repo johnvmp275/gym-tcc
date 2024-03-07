@@ -20,7 +20,7 @@ import CartItem from './widgets/cart/cartItem.vue'
           <div class="header-container-categorias">
             <ul>
               <li v-for="categoria in categoriesData" :key="categoria.id">
-                <RouterLink :to="`/categorias/${categoria.path}`">
+                <RouterLink :to="`/${categoria.path}`">
                   {{ categoria.label }}
                 </RouterLink>
               </li>
@@ -28,7 +28,7 @@ import CartItem from './widgets/cart/cartItem.vue'
           </div>
 
           <div class="search-container">
-            <input type="search" id="search" name="search" placeholder="O que você está procurando hoje?" />
+            <input type="text" id="search" name="search" placeholder="O que você está procurando hoje?" />
             <button class="fake-button">
               <span class="material-symbols-outlined"> search </span>
             </button>
@@ -230,7 +230,7 @@ span {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  column-gap: 5px;
   align-items: center;
 }
 

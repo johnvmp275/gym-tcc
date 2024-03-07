@@ -16,7 +16,9 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
     v-if="banners.length"
   >
     <swiper-slide v-for="banner in banners" :key="banner.id">
-      <img :src="banner.image" :alt="banner.label" />
+      <RouterLink to="/categorias/suplementos">
+        <img :src="banner.image" :alt="banner.label" />
+      </RouterLink>
     </swiper-slide>
   </sliderVue>
 </template>

@@ -8,6 +8,7 @@ import paginationView from './pagination/paginationView.vue'
   <section class="categorie-filter">
     <div class="filter-product">
       <span>Filtro</span>
+      {{ productBusca }}
     </div>
     <template v-if="productCategorie.length">
       <section class="categorie-product-container">
@@ -20,7 +21,7 @@ import paginationView from './pagination/paginationView.vue'
           <div>
             Itens por Página:
             <select name="select" id="select" v-model="itensPorPagina">
-              <option value="1">1</option>
+              <option value="1" selected>1</option>
               <option value="2">2</option>
               <option value="3">3</option>
             </select>
@@ -41,12 +42,8 @@ import paginationView from './pagination/paginationView.vue'
             </div>
           </div>
         </section>
-        <paginationView
-          :paginaAtual="paginaAtual"
-          :itensCategoria="productCategorie"
-          :totalPages="totalPages"
-          @paginaMudada="atualizarPagina"
-        />
+        <paginationView :paginaAtual="paginaAtual" :itensCategoria="productCategorie" :totalPages="totalPages"
+          @paginaMudada="atualizarPagina" />
       </section>
     </template>
 
@@ -54,12 +51,10 @@ import paginationView from './pagination/paginationView.vue'
       <section class="categorie-product-container categorie-not-found">
         <span>
           <h1>
-            A categoria "<span>{{ categories }}</span
-            >" infelizmente não foi encontrada :(
+            A categoria "<span>{{ categories || busca }}</span>" infelizmente não foi encontrada :(
           </h1>
           Mas indicamos para você alguns produtos!
         </span>
-        <div class="categorie-top">ordenacao</div>
         <div class="container-product">
           <div class="card-product" v-for="produto in sugestoesProdutos" :key="produto.id">
             <RouterLink class="image-link" :to="`/produto/${produto.id}`">
@@ -85,9 +80,13 @@ export default {
       productCategorie: [],
       loaderActive: true,
       sugestoesProdutos: [],
+      productBusca: [],
       itensPorPagina: 12,
       paginaAtual: 1
     }
+  },
+  props: {
+    busca: String
   },
   computed: {
     totalPages() {
@@ -111,7 +110,8 @@ export default {
         this.categories = this.$route.params.path
         this.sugestoesProdutos = data.slice(0, 5)
         this.productCategorie = data.filter((item) => item.categorie === this.categories)
-
+        this.productBusca = data.filter((item) => item.titulo)
+        console.log(this.productBusca);
         window.scrollTo({
           top: 0,
           behavior: 'smooth'
@@ -138,6 +138,7 @@ export default {
   },
   mounted() {
     this.fetchCategories()
+    console.log(this.busca);
   }
 }
 </script>
@@ -254,7 +255,7 @@ h1 {
     height: 150px;
   }
 
-  .container-product{
+  .container-product {
     max-width: 350px;
   }
 }
