@@ -46,7 +46,4 @@ li {
   cursor: pointer;
   font-size: 18px;
 }
-.tabs {
-  max-width: 1330px;
-}
 </style>

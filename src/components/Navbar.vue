@@ -76,7 +76,7 @@ import { useRouter } from 'vue-router'
             <div class="header-container-categorias">
               <ul>
                 <li v-for="categoria in categoriesData" :key="categoria.id">
-                  <RouterLink :to="`/categorias/${categoria.path}`">
+                  <RouterLink :to="`/categorias/${categoria.path}`" @click="menuToggleFunction">
                     {{ categoria.label }}
                   </RouterLink>
                 </li>

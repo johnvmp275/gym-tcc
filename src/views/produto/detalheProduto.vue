@@ -6,6 +6,7 @@ import apiService from '@/js/fetchData.js'
 import sliderImage from '@/components/widgets/slider/sliderImage.vue'
 import loaderVue from '@/components/widgets/loader/loader.vue'
 import Tabs from '@/components/widgets/tab/tab.vue'
+import dropdown from '@/components/widgets/dropdown/dropdown.vue'
 </script>
 
 <template>
@@ -72,11 +73,15 @@ import Tabs from '@/components/widgets/tab/tab.vue'
     </div>
   </section>
 
-  <Tabs id="descricao">
-    <p>{{ descricao.longa }}</p>
-  </Tabs>
+  <section id="descricao">
+    <Tabs>
+      <p>{{ descricao.longa }}</p>
+    </Tabs>
+    <dropdown />
+  </section>
 
   <Vitrine :produtosCard="produtos" :fetchProductDetails="fetchProductDetails" :titulo="`Você também pode gostar`" />
+  
 </template>
 
 <script>
@@ -141,7 +146,7 @@ export default {
         this.$store.commit('addToCart', item);
         localStorage.setItem('cartItems', JSON.stringify(this.$store.state.cartItems));
       }
-      
+
       this.$store.commit('toggleCart');
     }
   },
@@ -255,6 +260,7 @@ h1 {
 #descricao {
   margin: 40px auto;
   padding: 16px;
+  max-width: 1330px;
 }
 
 .input-produto-estoque {
