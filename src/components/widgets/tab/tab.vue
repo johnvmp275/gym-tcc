@@ -46,4 +46,10 @@ li {
   cursor: pointer;
   font-size: 18px;
 }
+
+@media (max-width:1100px) {
+  .tabs{
+    display: none;
+  }
+}
 </style>

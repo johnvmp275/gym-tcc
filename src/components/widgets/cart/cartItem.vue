@@ -2,8 +2,7 @@
   <section :class="{ 'cart-container': true, open: cartWasOpen }">
     <div class="carrinho-topo">
       <strong>
-        Carrinho de compras 
-        (<span class="caritem-amount">{{ cartItem.length }}</span>)
+        Carrinho de compras (<span class="caritem-amount">{{ cartItem.length }}</span>)
       </strong>
       <button type="button" class="button-cart" @click="cartToggleFunction">x</button>
     </div>
@@ -37,18 +36,21 @@
 
       <div class="resumo-compra">
         <button class="button-compra">Finalizar Compra</button>
+        <button class="button-continuar-compra" @click="cartToggleFunction">Continuar comprando</button>
       </div>
     </template>
 
     <template v-else>
-      <span class="aviso-carrinho-vazio">
-        <span class="material-symbols-outlined"> shopping_cart </span>
-        <strong>SEU CARRINHO ESTÁ VAZIO</strong>
-        <p>
-          Navegue agora pelas categorias de nossa loja e escolha os produtos desejados para
-          adicionar em seu carrinho de compras
-        </p>
-      </span>
+      <section class="cart-was-empty">
+        <span class="aviso-carrinho-vazio">
+          <span class="material-symbols-outlined"> shopping_cart </span>
+          <strong>SEU CARRINHO ESTÁ VAZIO</strong>
+          <p>
+            Navegue agora pelas categorias de nossa loja e escolha os produtos desejados para
+            adicionar em seu carrinho de compras
+          </p>
+        </span>
+      </section>
     </template>
   </section>
 </template>
@@ -134,6 +136,12 @@ export default {
   object-fit: cover;
 }
 
+.cart-was-empty{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
 h2 {
   font-size: 16px;
   white-space: nowrap;
@@ -210,11 +218,17 @@ h2 {
   text-align: center;
 }
 
-.descricao-product{
+.descricao-product {
   display: block;
   width: 180px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.button-continuar-compra{
+  width: 100%;
+  justify-content: center;
+  display: flex;
 }
 </style>

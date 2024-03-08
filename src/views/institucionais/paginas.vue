@@ -1,10 +1,22 @@
+<script setup>
+import Dropdown from '@/components/widgets/dropdown/dropdown.vue'
+</script>
+
 <template>
   <section>
     <div class="nav-paginas">
-      <select name="" id="" v-model="paginaEscolhida">
+      <Dropdown titlteDropdown="Institucionais">
+        <template #dropdown_description>
+          <div v-for="pagina in paginas" :key="pagina.id">
+            qwsqwsqwsqw
+          </div>
+          qwsqwsqws
+        </template>
+      </Dropdown>
+      <!-- <select name="" id="" v-model="paginaEscolhida">
         <option value="institucionais">Institucionais</option>
         <option value="quem_somos">Quem somos</option>
-      </select>
+      </select> -->
     </div>
     <div class="paginas" v-html="conteudoPagina"></div>
   </section>
@@ -110,7 +122,6 @@ section {
   display: flex;
   min-width: 281px;
   height: 250px;
-  align-items: center;
 }
 
 .paginas {

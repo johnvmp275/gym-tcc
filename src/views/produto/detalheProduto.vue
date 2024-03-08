@@ -1,12 +1,10 @@
 <script setup>
-import SliderVue from '@/components/widgets/slider/SliderComponent.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import Vitrine from '@/components/widgets/slider/Vitrine.vue'
 import apiService from '@/js/fetchData.js'
 import sliderImage from '@/components/widgets/slider/sliderImage.vue'
 import loaderVue from '@/components/widgets/loader/loader.vue'
-import Tabs from '@/components/widgets/tab/tab.vue'
-import dropdown from '@/components/widgets/dropdown/dropdown.vue'
+import Dropdown from '@/components/widgets/dropdown/dropdown.vue'
 </script>
 
 <template>
@@ -48,40 +46,59 @@ import dropdown from '@/components/widgets/dropdown/dropdown.vue'
           <span>Quantidade:</span>
           <div class="container-amount">
             <button class="amount-button" @click="decrementAmount">-</button>
-            <input type="tel" :value="amount"
-              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
-            <button class="amount-button" @click="amount++">+</button>
+            <input
+              type="tel"
+              :value="amount"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+            />
+            <button class="amount-button" @click="acressAmount">+</button>
           </div>
         </div>
-        <button class="button-click"
-          @click="addItemToCard(product.id, product.titulo, product.price, descricao.curta, product.image)">Adicionar
-          ao carrinho</button>
+        <button
+          class="button-click"
+          @click="
+            addItemToCard(product.id, product.titulo, product.price, descricao.curta, product.image)
+          "
+        >
+          Adicionar ao carrinho
+        </button>
       </template>
 
       <template v-else>
         <h2>Este produto se encontra indisponível no momento</h2>
 
-        <p class="aviso-produto-email">Preencha os campos abaixo para ser informado assim que o produto estiver
-          disponível novamente</p>
+        <p class="aviso-produto-email">
+          Preencha os campos abaixo para ser informado assim que o produto estiver disponível
+          novamente
+        </p>
 
-        <input class="input-produto-estoque" type="text" placeholder="Insira seu nome">
-        <input class="input-produto-estoque" type="email" placeholder="exemplo@gmail.com">
+        <input class="input-produto-estoque" type="text" placeholder="Insira seu nome" />
+        <input class="input-produto-estoque" type="email" placeholder="exemplo@gmail.com" />
 
         <button class="button-click">Avise-me</button>
-
       </template>
     </div>
   </section>
 
   <section id="descricao">
-    <Tabs>
-      <p>{{ descricao.longa }}</p>
-    </Tabs>
-    <dropdown />
+    <Dropdown titlteDropdown="Descrição do produto">
+      <template #dropdown_description>
+        <div v-html="descricao.longa"></div>
+      </template>
+    </Dropdown>
+
+    <Dropdown titlteDropdown="Interações dos usuários">
+      <template #dropdown_description>
+        <p>teste</p>
+      </template>
+    </Dropdown>
   </section>
 
-  <Vitrine :produtosCard="produtos" :fetchProductDetails="fetchProductDetails" :titulo="`Você também pode gostar`" />
-  
+  <Vitrine
+    :produtosCard="produtos"
+    :fetchProductDetails="fetchProductDetails"
+    :titulo="`Você também pode gostar`"
+  />
 </template>
 
 <script>
@@ -130,9 +147,13 @@ export default {
         this.amount--
       }
     },
+    acressAmount() {
+      if (this.amount !== this.qtdEstoque) {
+        this.amount++
+      }
+    },
     addItemToCard(id, titulo, preco, descricao, imagem) {
-
-      const itemWasAdd = this.$store.state.cartItems.find(item => item.id === id);
+      const itemWasAdd = this.$store.state.cartItems.find((item) => item.id === id)
 
       if (!itemWasAdd) {
         const item = {
@@ -141,13 +162,13 @@ export default {
           preco: preco,
           descricao: descricao,
           imagem: imagem
-        };
+        }
 
-        this.$store.commit('addToCart', item);
-        localStorage.setItem('cartItems', JSON.stringify(this.$store.state.cartItems));
+        this.$store.commit('addToCart', item)
+        localStorage.setItem('cartItems', JSON.stringify(this.$store.state.cartItems))
       }
 
-      this.$store.commit('toggleCart');
+      this.$store.commit('toggleCart')
     }
   },
   watch: {
@@ -246,13 +267,12 @@ h1 {
 
 .container-amount {
   display: flex;
-  width: 116px;
   flex-direction: row;
   border: 1px solid var(--background-gray-400);
 }
 
 .container-amount input {
-  width: 100%;
+  width: 35px;
   display: flex;
   text-align: center;
 }
@@ -269,7 +289,6 @@ h1 {
 }
 
 @media (max-width: 1000px) {
-
   .detalhe-produto,
   .container-produto {
     flex-direction: column;

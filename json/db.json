@@ -70,7 +70,7 @@
     {
       "titulo": "KIt de Camisetas X8",
       "id": 2,
-      "qtdEstoque": 1,
+      "qtdEstoque": 10,
       "categorie": "camisetas",
       "image": "https://www.usealphaco.com.br/upload/lista-compra/imagem/b_kit-diverso-dry-fit-3-camisetas-2-bermudas.webp",
       "price": 300.0,
@@ -82,7 +82,7 @@
     {
       "titulo": "Camiseta",
       "id": 3,
-      "qtdEstoque": 1,
+      "qtdEstoque": 10,
       "categorie": "camisetas",
       "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_tshirt-dry-perfomance-black-alpha-co.webp",
       "price": 80.0,
@@ -94,7 +94,7 @@
     {
       "titulo": "Kit de 8X Camiseta",
       "id": 4,
-      "qtdEstoque": 1,
+      "qtdEstoque": 10,
       "categorie": "camisetas",
       "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_kit-6-camisetas-pretas-de-treino.jpg",
       "price": 50.0,
@@ -106,7 +106,7 @@
     {
       "titulo": "Kit de Camiseta",
       "id": 5,
-      "qtdEstoque": 1,
+      "qtdEstoque": 10,
       "categorie": "camisetas",
       "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_kit-campe-o-as-camisetas-dry-mais-vendidas-2.jpg",
       "price": 200.0,
@@ -118,7 +118,7 @@
     {
       "titulo": "(1) Whey Protein",
       "id": 6,
-      "qtdEstoque": 1,
+      "qtdEstoque": 10,
       "categorie": "suplementos",
       "image": "https://www.gsuplementos.com.br/upload/produto/imagem/m_top-whey-protein-concentrado-1kg-growth-supplements.png",
       "price": 200.0,
@@ -130,7 +130,7 @@
     {
       "titulo": "(1) Whey Protein",
       "id": 7,
-      "qtdEstoque": 1,
+      "qtdEstoque": 10,
       "categorie": "suplementos",
       "image": "https://www.gsuplementos.com.br/upload/produto/imagem/m_top-whey-protein-isolado-1kg-growth-supplements.jpg",
       "price": 200.0,
@@ -142,7 +142,7 @@
     {
       "titulo": "(1) Whey Protein",
       "id": 8,
-      "qtdEstoque": 1,
+      "qtdEstoque": 10,
       "categorie": "suplementos",
       "image": "https://www.gsuplementos.com.br/upload/produto/imagem/m_top-whey-protein-concentrado-1kg-growth-supplements.png",
       "price": 200.0,
@@ -154,7 +154,7 @@
     {
       "titulo": "(1) Whey Protein",
       "id": 9,
-      "qtdEstoque": 1,
+      "qtdEstoque": 10,
       "categorie": "suplementos",
       "image": "https://www.gsuplementos.com.br/upload/produto/imagem/m_top-whey-protein-isolado-1kg-growth-supplements.jpg",
       "price": 200.0,
@@ -214,7 +214,7 @@
         {
           "titulo": "KIt de Camisetas X8",
           "id": 2,
-          "qtdEstoque": 1,
+          "qtdEstoque": 10,
           "image": "https://www.usealphaco.com.br/upload/lista-compra/imagem/b_kit-diverso-dry-fit-3-camisetas-2-bermudas.webp",
           "price": 300.0,
           "descricoes": {
@@ -225,7 +225,7 @@
         {
           "titulo": "Camiseta",
           "id": 3,
-          "qtdEstoque": 1,
+          "qtdEstoque": 10,
           "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_tshirt-dry-perfomance-black-alpha-co.webp",
           "price": 80.0,
           "descricoes": {
@@ -236,7 +236,7 @@
         {
           "titulo": "Kit de 8X Camiseta",
           "id": 4,
-          "qtdEstoque": 1,
+          "qtdEstoque": 10,
           "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_kit-6-camisetas-pretas-de-treino.jpg",
           "price": 50.0,
           "descricoes": {
@@ -247,7 +247,7 @@
         {
           "titulo": "Kit de Camiseta",
           "id": 5,
-          "qtdEstoque": 1,
+          "qtdEstoque": 10,
           "image": "https://www.usealphaco.com.br/upload/produto/imagem/m_kit-campe-o-as-camisetas-dry-mais-vendidas-2.jpg",
           "price": 200.0,
           "descricoes": {
