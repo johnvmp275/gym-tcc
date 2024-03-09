@@ -8,8 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/",
-    "backend": "json-server --watch json/db.json --port 3000"
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "json-server": "^0.17.4",
