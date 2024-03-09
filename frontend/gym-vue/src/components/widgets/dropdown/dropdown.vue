@@ -68,6 +68,7 @@ button {
 }
 
 .dropdown-top-select {
+  width: 100%;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
