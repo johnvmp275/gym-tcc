@@ -1,5 +1,5 @@
 <script setup>
-import apiService from '@/js/fetchData'
+import apiService from '@/components/store/fetchData'
 import CartItem from '../carrinho/cartItem.vue'
 import { useRouter } from 'vue-router'
 import menuMobile from './menuMobile.vue';
@@ -191,10 +191,6 @@ li a {
   transition: 0.5s;
   text-transform: uppercase;
   font-size: 14px;
-}
-
-nav a.router-link-active {
-  color: var(--background-red);
 }
 
 nav a:hover {

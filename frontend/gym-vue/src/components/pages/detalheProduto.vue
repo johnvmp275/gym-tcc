@@ -1,7 +1,7 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import Vitrine from '@/components/geral/vitrine.vue'
-import apiService from '@/js/fetchData.js'
+import apiService from '@/components/store/fetchData.js'
 import sliderImage from '@/components/geral/sliderImage.vue'
 import loaderVue from '@/components/geral/loader.vue'
 import Dropdown from '@/components/geral/dropdown.vue'
@@ -87,7 +87,7 @@ import Dropdown from '@/components/geral/dropdown.vue'
       </template>
     </Dropdown>
 
-    <Dropdown titlteDropdown="Interações dos usuários">
+    <Dropdown titlteDropdown="Interações">
       <template #dropdown_description>
         <p>teste</p>
       </template>
@@ -115,10 +115,9 @@ export default {
   },
   methods: {
     async fetchProductDetails() {
-
       window.scrollTo({
-        top: 0,
-      });
+        top: 0
+      })
 
       try {
         const req = await fetch(`http://localhost:3000/produtos/${this.$route.params.id}`)
@@ -126,7 +125,6 @@ export default {
         this.product = data
         this.descricao = data.descricoes
         this.qtdEstoque = data.qtdEstoque
-
 
         this.loaderActive = false
       } catch (error) {
@@ -200,8 +198,7 @@ export default {
   min-width: 370px;
   max-width: 370px;
   height: 370px;
-  object-fit: contain;
-  object-position: top;
+  object-fit: scale-down;
 }
 
 .produto-descricao {
@@ -213,10 +210,11 @@ export default {
 }
 
 .produto-descricao p {
-  height: 160px;
-  display: block;
-  text-overflow: ellipsis;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
 .ancora-dropdown {

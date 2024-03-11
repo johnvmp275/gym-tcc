@@ -1,5 +1,5 @@
 <template>
-    <section v-if="isLoaderActive">
+    <section class="container-loader" v-if="isLoaderActive">
         <div class="loader">
             <div></div>
             <div></div>
@@ -25,7 +25,7 @@ export default {
 
 <style scoped>
 
-section {
+.container-loader {
     position: fixed;
     top: 0;
     left: 0;

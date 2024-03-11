@@ -1,27 +1,22 @@
 <script setup>
 import Dropdown from '@/components/geral/dropdown.vue'
-import apiService from '@/js/fetchData.js'
+import apiService from '@/components/store/fetchData.js'
+import loader from '../geral/loader.vue'
 </script>
 
 <template>
-  <section>
+  <loader :isLoaderActive="isLoaderActive" />
+  <section class="container">
     <div class="nav-paginas">
-      <!-- {{ teste }} -->
       <Dropdown titlteDropdown="Institucionais">
         <template #dropdown_description>
-          <div v-for="pagina in paginas" :key="pagina.id">
-            qwsqwsqwsqw
-          </div>
-          qwsqwsqws
+          <span v-for="item in pagina" :key="item.id">
+            <RouterLink :to="item.path"> {{ item.label }}</RouterLink>
+          </span>
         </template>
       </Dropdown>
-      <!-- <select name="" id="" v-model="paginaEscolhida">
-        <option value="institucionais">Institucionais</option>
-        <option value="quem_somos">Quem somos</option>
-      </select> -->
     </div>
     <div class="paginas" v-html="conteudoPagina"></div>
-    <RouterView />
   </section>
 </template>
 
@@ -29,28 +24,42 @@ import apiService from '@/js/fetchData.js'
 export default {
   data() {
     return {
-      pagina : [],
-      conteudoPagina: ''
+      pagina: [],
+      conteudoPagina: '',
+      isLoaderActive: true
     }
   },
   methods: {
     async fetchData() {
+      this.isLoaderActive = true
+      
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+
       try {
         const menu = await apiService.getDadosOfMenus()
-        this.menu = menu.find(item => item.paginas)
+        this.menu = menu.find((item) => item.paginas)
         this.pagina = this.menu.paginas
-        this.conteudoPagina = this.pagina.find(item => item.path == this.paginaEscolhida).conteudo
-
-        console.log(this.conteudoPagina);
-
+        this.conteudoPagina = this.pagina.find((item) => item.path == this.paginaEscolhida).conteudo
+        this.isLoaderActive = false
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }
-    },
+    }
   },
   computed: {
     paginaEscolhida() {
       return this.$route.params.path
+    }
+  },
+  watch: {
+    '$route.params.path': {
+      emit: true,
+      handler(produtoEscolhido) {
+        this.fetchData()
+      }
     }
   },
   mounted() {
@@ -60,7 +69,7 @@ export default {
 </script>
 
 <style scoped>
-section {
+.container {
   display: flex;
   max-width: 1170px;
   margin: 0 auto;
@@ -70,7 +79,7 @@ section {
 .nav-paginas {
   display: flex;
   min-width: 281px;
-  height: 250px;
+  flex-direction: column;
 }
 
 .paginas {
@@ -80,6 +89,15 @@ section {
 
 select {
   width: 100%;
+}
+
+a {
+  color: var(--background-gray-400);
+}
+
+a.router-link-active {
+  color: var(--background-gray-700);
+  font-weight: bold;
 }
 
 @media (max-width: 1100px) {

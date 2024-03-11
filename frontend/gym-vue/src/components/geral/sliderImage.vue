@@ -27,6 +27,7 @@ const setThumbsSwiper = (swiper) => {
         :spaceBetween="10"
         :thumbs="{ swiper: thumbsSwiper }" 
         :modules="modules"
+        :grab-cursor="true"
         class="mySwiper2"
       >
       <slot/>
@@ -39,6 +40,7 @@ const setThumbsSwiper = (swiper) => {
         :watchSlidesProgress="true"
         :modules="modules"
         class="mySwiper slider-image"
+        :grab-cursor="true"
       >
         <slot/>
       </swiper>

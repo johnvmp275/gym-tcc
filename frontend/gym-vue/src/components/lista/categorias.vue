@@ -192,7 +192,7 @@ export default {
   border: 2px solid var(--background-gray);
   padding: 10px;
   width: 204px;
-  height: 315px;
+  height: 345px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

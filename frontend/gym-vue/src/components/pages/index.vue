@@ -1,5 +1,5 @@
 <script setup>
-import apiService from '@/js/fetchData'
+import apiService from '@/components/store/fetchData'
 import Vitrine from '@/components/geral/vitrine.vue'
 import bannerVue from '@/components/home/banner.vue'
 import Pitchbar from '@/components/geral/pitchbar.vue'

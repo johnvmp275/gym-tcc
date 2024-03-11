@@ -4,7 +4,7 @@ import Rodape from './components/geral/rodape.vue'
 </script>
 
 <template>
-  <template v-if="$route.path !== '/checkout'">
+  <template v-if="!$route.path.includes('/checkout') && !$route.path.includes('/painel')">
     <Navbar />
     <main>
       <RouterView />

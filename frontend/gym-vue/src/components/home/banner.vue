@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 </script>
 
 <template>
- <sliderVue
+  <sliderVue
     :loop="true"
     :pagination="{
       clickable: true
@@ -25,8 +25,14 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 
 <script>
 export default {
-    props: {
-        banners: Array
-    }
+  props: {
+    banners: Array
+  }
 }
 </script>
+
+<style scoped>
+a {
+  padding: 0;
+}
+</style>

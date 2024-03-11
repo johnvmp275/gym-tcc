@@ -1,5 +1,5 @@
 <script setup>
-import apiService from '@/js/fetchData'
+import apiService from '@/components/store/fetchData'
 </script>
 
 <template>
