@@ -1,11 +1,11 @@
 <script setup>
 import apiService from '@/js/fetchData'
-import Vitrine from '@/components/widgets/slider/Vitrine.vue'
-import bannerVue from '@/components/widgets/banners/banner.vue'
-import Pitchbar from '@/components/widgets/pitchbar/pitchbar.vue'
-import loaderVue from '@/components/widgets/loader/loader.vue'
-import bannerSecundario from '@/components/widgets/banners/bannerSecundario.vue'
-import Instashop from '@/components/instashop/cardInstashop.vue'
+import Vitrine from '@/components/geral/vitrine.vue'
+import bannerVue from '@/components/home/banner.vue'
+import Pitchbar from '@/components/geral/pitchbar.vue'
+import loaderVue from '@/components/geral/loader.vue'
+import bannerSecundario from '@/components/home/bannerSecundario.vue'
+import Instashop from '@/components/home/cardInstashop.vue'
 </script>
 
 <template>
@@ -45,6 +45,11 @@ export default {
   },
   methods: {
     async fetchData() {
+
+      window.scrollTo({
+          top: 0,
+      });
+
       try {
         const banners = await apiService.getDadosOfBanner()
         this.principalBanner = banners.find((item) => item.bannerPrincipal).bannerPrincipal

@@ -1,5 +1,24 @@
 {
-  "menus": [
+  "menu": [
+    {
+      "paginas": [
+        {
+          "label": "Sobre nós",
+          "path": "sobre-nos",
+          "conteudo": "<article class=\"about-us\">\n  <section class=\"institutional-banner-container\">\n    <img class=\"main-institutional-banner desktop-institutional\" src=\"https://www.homeondigital.wapstore.dev.br/upload/editor/banner%20institucionais.png\" width=\"870\" height=\"160\">\n  </section>\n  <section class=\"institutional-container\">\n    <h1><br><span style=\"font-size: 14pt;\"><span style=\"font-size: 18pt;\">Sobre nós</span>&nbsp;</span></h1>\n    <p class=\"p1\"><span style=\"font-size: 14pt;\">Somos a HomeOn, o marketplace da construção civil e agro, estamos empenhados em conectar consumidores, lojistas e profissionais do setor, criando um ambiente colaborativo e transparente. Queremos simplificar o processo de compra e venda, oferecendo uma ampla variedade de produtos de alta qualidade, com preços competitivos e informações discriminadas, para que nossos clientes possam tomar as melhores decisões para sua obra, em um só lugar, onde estiverem.</span><br><br><br><br><span style=\"font-size: 18pt;\"><strong>Nossa Missão<br></strong></span><br><span style=\"font-size: 14pt;\"><strong>Impulsionar a transformação digital do setor e firmar parcerias duradouras com lojistas, clientes e parceiros.</strong></span><br><br></p>\n  </section>\n  <section class=\"institutional-container\"></section>\n</article>"
+        },
+        {
+          "label": "Fale Conosco",
+          "path": "fale-conosco",
+          "conteudo": "<article class=\"about-us\">\n  <section class=\"institutional-banner-container\">\n    <img class=\"main-institutional-banner desktop-institutional\" src=\"https://www.homeondigital.wapstore.dev.br/upload/editor/banner%20institucionais.png\" width=\"870\" height=\"160\">\n  </section>\n  <section class=\"institutional-container\">\n    <h1><br><span style=\"font-size: 14pt;\"><span style=\"font-size: 18pt;\">Sobre nós</span>&nbsp;</span></h1>\n    <p class=\"p1\"><span style=\"font-size: 14pt;\">Somos a HomeOn, o marketplace da construção civil e agro, estamos empenhados em conectar consumidores, lojistas e profissionais do setor, criando um ambiente colaborativo e transparente. Queremos simplificar o processo de compra e venda, oferecendo uma ampla variedade de produtos de alta qualidade, com preços competitivos e informações discriminadas, para que nossos clientes possam tomar as melhores decisões para sua obra, em um só lugar, onde estiverem.</span><br><br><br><br><span style=\"font-size: 18pt;\"><strong>Nossa Missão<br></strong></span><br><span style=\"font-size: 14pt;\"><strong>Impulsionar a transformação digital do setor e firmar parcerias duradouras com lojistas, clientes e parceiros.</strong></span><br><br></p>\n  </section>\n  <section class=\"institutional-container\"></section>\n</article>"
+        },
+        {
+          "label": "Formas de Pagamento",
+          "path": "formas-de-pagamento",
+          "conteudo": ""
+        }
+      ]
+    },
     {
       "menu_home": [
         {

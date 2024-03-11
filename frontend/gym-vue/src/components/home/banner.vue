@@ -1,5 +1,5 @@
 <script setup>
-import sliderVue from '../slider/SliderComponent.vue';
+import sliderVue from '../geral/sliderComponent.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 </script>
 

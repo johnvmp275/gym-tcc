@@ -90,7 +90,7 @@ export default {
 
 <style scoped>
 .cart-container {
-  height: 100vh;
+  height: 100%;
   width: 336px;
   position: fixed;
   transform: translateX(336px);
@@ -112,7 +112,7 @@ export default {
   align-items: center;
   padding: 0 10px;
   gap: 10px;
-  height: 70%;
+  height: calc(100% - 226px);
 }
 
 .cart-item {

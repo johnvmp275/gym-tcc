@@ -1,10 +1,10 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import Vitrine from '@/components/widgets/slider/Vitrine.vue'
+import Vitrine from '@/components/geral/vitrine.vue'
 import apiService from '@/js/fetchData.js'
-import sliderImage from '@/components/widgets/slider/sliderImage.vue'
-import loaderVue from '@/components/widgets/loader/loader.vue'
-import Dropdown from '@/components/widgets/dropdown/dropdown.vue'
+import sliderImage from '@/components/geral/sliderImage.vue'
+import loaderVue from '@/components/geral/loader.vue'
+import Dropdown from '@/components/geral/dropdown.vue'
 </script>
 
 <template>
@@ -115,6 +115,11 @@ export default {
   },
   methods: {
     async fetchProductDetails() {
+
+      window.scrollTo({
+        top: 0,
+      });
+
       try {
         const req = await fetch(`http://localhost:3000/produtos/${this.$route.params.id}`)
         const data = await req.json()
@@ -122,15 +127,10 @@ export default {
         this.descricao = data.descricoes
         this.qtdEstoque = data.qtdEstoque
 
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        })
 
         this.loaderActive = false
       } catch (error) {
         console.error('Não foi possível buscar os dados', error)
-        throw error
       }
     },
     async fetchData() {

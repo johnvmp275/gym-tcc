@@ -11,7 +11,7 @@ export default {
   },
   async getDadosOfMenus() {
     try {
-      const data = await this.fetchData('http://localhost:3000/menus')
+      const data = await this.fetchData('http://localhost:3000/menu')
       return data
     } catch (error) {
       console.error('Erro ao buscar os dados de categorias', error)

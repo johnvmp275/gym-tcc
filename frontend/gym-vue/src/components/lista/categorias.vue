@@ -1,6 +1,7 @@
 <script setup>
-import loaderVue from '@/components/widgets/loader/loader.vue'
-import paginationView from './pagination/paginationView.vue'
+import loaderVue from '@/components/geral/loader.vue'
+import paginationView from '../listagem/paginacao.vue'
+import cardProduto from '../geral/card-produto.vue';
 </script>
 
 <template>
@@ -9,8 +10,8 @@ import paginationView from './pagination/paginationView.vue'
     <div class="filter-product">
       <span>Filtro</span>
     </div>
-    <template v-if="productData.length">
-      <section class="categorie-product-container">
+    <section class="categorie-product-container">
+      <template v-if="productData.length">
         <div class="categorie-top">
           <div>
             Exibindo
@@ -28,31 +29,22 @@ import paginationView from './pagination/paginationView.vue'
         </div>
         <section class="categories-product">
           <div class="container-product">
-            <div class="card-product" v-for="produto in produtosPorPagina" :key="produto.id">
-              <RouterLink class="image-link" :to="`/produto/${produto.id}`">
-                <img class="image-product" :src="produto.image" alt="" />
-              </RouterLink>
-              <Strong class="produto-titulo">{{ produto.titulo }}</Strong>
-              <p class="produto-descricao">{{ produto.descricoes.curta }}</p>
-              <strong class="product-price">R$ {{ produto.price }}</strong>
-              <RouterLink class="detalhe-produto" :to="`/produto/${produto.id}`">
-                Ver detalhes
-              </RouterLink>
+            <div class="card-product-list" v-for="produto in produtosPorPagina" :key="produto.id">
+              <cardProduto :produto="produto" />
             </div>
           </div>
         </section>
-        <paginationView
-          :paginaAtual="paginaAtual"
-          :itensCategoria="productData"
+        <paginationView 
+          :paginaAtual="paginaAtual" 
+          :itensCategoria="productData" 
           :totalPages="totalPages"
-          @paginaMudada="atualizarPagina"
-        />
-      </section>
-    </template>
+          @paginaMudada="atualizarPagina" 
+          />
 
-    <template v-else>
-      <section class="categorie-product-container categorie-not-found">
-        <span>
+      </template>
+
+      <template v-else>
+        <span class="product-not-found">
           <h1>
             O item "<span>{{ categories || busca }}</span>" infelizmente não foi encontrado :(
           </h1>
@@ -60,21 +52,13 @@ import paginationView from './pagination/paginationView.vue'
         </span>
         <section class="categories-product">
           <div class="container-product">
-            <div class="card-product" v-for="produto in sugestoesProdutos" :key="produto.id">
-              <RouterLink class="image-link" :to="`/produto/${produto.id}`">
-                <img class="image-product" :src="produto.image" alt="" />
-              </RouterLink>
-              <Strong class="produto-titulo">{{ produto.titulo }}</Strong>
-              <p class="produto-descricao">{{ produto.descricoes.curta }}</p>
-              <strong class="product-price">R$ {{ produto.price }}</strong>
-              <RouterLink class="detalhe-produto" :to="`/produto/${produto.id}`">
-                Ver detalhes
-              </RouterLink>
+            <div class="card-product-list" v-for="produto in sugestoesProdutos" :key="produto.id">
+              <cardProduto :produto="produto" />
             </div>
           </div>
         </section>
-      </section>
-    </template>
+      </template>
+    </section>
   </section>
 </template>
 
@@ -159,7 +143,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .categorie-filter {
   display: flex;
   justify-content: center;
@@ -199,50 +183,25 @@ export default {
   gap: 5px;
 }
 
-.categorie-not-found span {
+.product-not-found  {
   text-align: center;
   margin: 20px 0 20px 0;
 }
 
-.card-product {
+.card-product-list {
   border: 2px solid var(--background-gray);
   padding: 10px;
   width: 204px;
-  height: 414px;
+  height: 315px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.card-product .image-product {
+.card-product-list .image-product-card {
   max-width: 100%;
-  margin: 0 auto;
-  height: 170px;
-  object-fit: contain;
-  object-position: center;
-}
-
-.card-product .produto-descricao,
-.card-product .produto-titulo {
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.card-product .detalhe-produto {
-  background: var(--background-wine);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  color: var(--background-white);
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.detalhe-produto:hover {
-  background: red;
+  height: 160px;
 }
 
 .categorie-not-found p {
@@ -253,22 +212,18 @@ export default {
   font-size: 24px;
 }
 
-h1 {
+.categorie-filter h1 {
   font-size: 20px;
 }
 
-.image-link {
-  padding: 0;
-  margin: 0 auto;
-}
-
 @media (max-width: 450px) {
-  .card-product {
+  .card-product-list {
     width: 165px;
   }
 
-  .card-product .image-product {
-    height: 150px;
+  .card-product-list .image-product-card {
+    width: 120px;
+    height: 120px;
   }
 
   .container-product {
@@ -281,7 +236,7 @@ h1 {
     display: none;
   }
 
-  .card-product {
+  .card-product-list {
     max-width: 189px;
   }
 

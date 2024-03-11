@@ -1,5 +1,5 @@
 <script setup>
-import Newslleter from '@/components/newslleter/newslleter.vue'
+import Newslleter from './newslleter/newslleter.vue'
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import home from '../views/home/index.vue'
-import detalheProduto from '../views/produto/detalheProduto.vue'
-import categorias from '../views/categorias/categorias.vue'
-import pagina404 from '../views/404/pagina404.vue'
-import paginas from '../views/institucionais/paginas.vue'
+import home from '../components/pages/index.vue'
+import detalheProduto from '../components/pages/detalheProduto.vue'
+import categorias from '../components/lista/categorias.vue'
+import pagina404 from '../components/layouts/error.vue'
+import paginas from '../components/institucionais/paginas.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,11 +12,6 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       component: home
-    },
-    {
-      path: '/paginas',
-      name: 'Páginas',
-      component: paginas
     },
     {
       path: '/produto/:id',
@@ -33,6 +28,11 @@ const router = createRouter({
       path: '/categorias/:path',
       name: 'Categoria',
       component: categorias
+    },
+    {
+      path: '/paginas/:path',
+      name: 'Páginas',
+      component: paginas
     },
     {
       path: '/:pathMatch(.*)*',

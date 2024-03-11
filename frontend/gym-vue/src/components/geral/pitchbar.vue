@@ -1,5 +1,5 @@
 <script setup>
-import sliderVue from '../slider/SliderComponent.vue';
+import sliderVue from './sliderComponent.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue'
 </script>
 
@@ -8,18 +8,26 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
     <div class="pitchbar-container">
       <div class="pitchbar-box" v-for="pitchbar in pitchbarData" :key="pitchbar.id">
         <img :src="pitchbar.icone" :alt="pitchbar.titulo" />
-        <p>
-          <strong>{{ pitchbar.titulo }}</strong>
-          {{ pitchbar.texto }}
-        </p>
+          <span>
+            <strong>{{ pitchbar.titulo }}</strong>
+            <p>
+              {{ pitchbar.texto }}
+            </p>
+          </span>
       </div>
     </div>
   </div>
   <div>
-    <sliderVue :spaceBetween="40" :autoplay="{
-      delay: 3000,
-      disableOnInteraction: false
-    }" :loop="true" :slidesPerView="'auto'" class="pitchbar pitchbar-home mobile">
+    <sliderVue 
+      :spaceBetween="40" 
+      :autoplay="{
+        delay: 3000,
+        disableOnInteraction: false
+      }" 
+      :loop="true" 
+      :slidesPerView="'auto'" 
+      class="pitchbar pitchbar-home mobile"
+    >
       <swiper-slide v-for="pitchbar in pitchbarData" :key="pitchbar.id">
         <div class="pitchbar-box">
           <img :src="pitchbar.icone" :alt="pitchbar.titulo" />
@@ -50,17 +58,27 @@ export default {
 .pitchbar-home div {
   display: flex;
   gap: 16px;
+  align-items: center;
 }
 
-.pitchbar-home p {
+.pitchbar-home span {
   display: flex;
   font-size: 12px;
-  height: 40px;
+  height: auto;
   flex-direction: column;
 }
 
-.pitchbar-home p strong {
+.pitchbar-home img {
+  width: 30px;
+  height: 30px;
+}
+
+.pitchbar-home span strong {
   font-size: 16px;
+}
+
+.pitchbar-home span p {
+  white-space: nowrap;
 }
 
 .mobile {

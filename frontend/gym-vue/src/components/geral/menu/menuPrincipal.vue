@@ -1,7 +1,8 @@
 <script setup>
 import apiService from '@/js/fetchData'
-import CartItem from './widgets/cart/cartItem.vue'
+import CartItem from '../carrinho/cartItem.vue'
 import { useRouter } from 'vue-router'
+import menuMobile from './menuMobile.vue';
 </script>
 
 <template>
@@ -60,62 +61,7 @@ import { useRouter } from 'vue-router'
         </div>
       </section>
     </nav>
-    <nav class="navbar-mobile">
-      <section class="middle-top">
-        <button @click="menuToggleFunction">
-          <span class="material-symbols-outlined"> menu </span>
-        </button>
-
-        <RouterLink class="logo" to="/">
-          <img src="@/img/iron.jpg" alt="Logo" />
-        </RouterLink>
-
-        <section :class="{ 'menu-lateral': true, open: menuWasOpen }">
-          <div class="nav">
-            <button @click="menuToggleFunction">x</button>
-            <div class="header-container-categorias">
-              <ul>
-                <li v-for="categoria in categoriesData" :key="categoria.id">
-                  <RouterLink :to="`/categorias/${categoria.path}`" @click="menuToggleFunction">
-                    {{ categoria.label }}
-                  </RouterLink>
-                </li>
-              </ul>
-            </div>
-            <div class="user-container">
-              <!-- <template v-if="userLogged"> logado </template>
-  
-              <template v-else>
-                <p>Olá, Visitante!</p>
-                <a href="">Entre</a>
-                ou
-                <a href="">Cadastre-se</a>
-              </template> -->
-            </div>
-  
-          </div>
-        </section>
-
-        <button type="button" class="button-cart" @click="cartToggleFunction">
-          <span class="material-symbols-outlined"> shopping_cart </span>
-          <span class="caritem-amount">{{ cartItemCount.length }}</span>
-        </button>
-
-        <div class="search-container">
-          <input
-            type="text"
-            id="search"
-            name="search"
-            placeholder="O que você está procurando hoje?"
-            v-model="buscaResults"
-            @keydown.enter="searchResults"
-          />
-          <button @click="searchResults" class="fake-button">
-            <span class="material-symbols-outlined"> search </span>
-          </button>
-        </div>
-      </section>
-    </nav>
+    <menuMobile/>
     <CartItem
       :cartItem="cartItemCount"
       :cartWasOpen="cartWasOpen"
@@ -156,9 +102,9 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const menus = await apiService.getDadosOfMenus()
-        this.categoriesData = menus.find((item) => item.menu_home).menu_home
-        this.pitchbarHome = menus.find((item) => item.pitchbar_home).pitchbar_home
+        const menu = await apiService.getDadosOfMenus()
+        this.categoriesData = menu.find((item) => item.menu_home).menu_home
+        this.pitchbarHome = menu.find((item) => item.pitchbar_home).pitchbar_home
 
         const description = await apiService.getDadosOfDescription()
         this.telWhatsapp = description.find((item) => item.social).social[0].whatsapp
