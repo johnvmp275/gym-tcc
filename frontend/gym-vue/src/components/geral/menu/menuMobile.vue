@@ -275,7 +275,6 @@ span {
 
 .logo {
   padding: 10px 0;
-  margin-right: 20px;
 }
 
 .logo img {

@@ -1,11 +1,14 @@
 <script setup>
 import Newslleter from './newslleter/newslleter.vue'
+import menuInstitucional from './rodape/menu.vue';
 </script>
 
 <template>
   <footer>
     <Newslleter />
-    <div class="footer-top"></div>
+    <div class="footer-top">
+      <menuInstitucional />
+    </div>
     <section class="footer-final">
       <p>
         Vetec | CNPJ: 47.733.562/0001-08 | Av. Paulista, 1000 - São Paulo - SP - Brasil | CEP:
