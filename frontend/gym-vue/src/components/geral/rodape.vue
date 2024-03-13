@@ -27,6 +27,8 @@ import menuInstitucional from './rodape/menu.vue';
 footer {
   margin-top: 40px;
   width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
   color: var(--background-gray-700);
   background: var(--background-white);
 }

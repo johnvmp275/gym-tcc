@@ -9,17 +9,19 @@ import Instashop from '@/components/home/cardInstashop.vue'
 </script>
 
 <template>
-  <loaderVue :isLoaderActive="loaderActive" />
+  <main>
+    <loaderVue :isLoaderActive="loaderActive" />
 
-  <bannerVue :banners="principalBanner" />
+    <bannerVue :banners="principalBanner" />
 
-  <Pitchbar :pitchbarData="pitchbarHome" />
+    <Pitchbar :pitchbarData="pitchbarHome" />
 
-  <Vitrine :produtosCard="produtos" :getDadosProduto="getDadosProduto" :titulo="titulo" />
+    <Vitrine :produtosCard="produtos" :getDadosProduto="getDadosProduto" :titulo="titulo" />
 
-  <bannerSecundario :bannerSecundario="secundarioBanner" />
+    <bannerSecundario :bannerSecundario="secundarioBanner" />
 
-  <Instashop/>
+    <Instashop />
+  </main>
 </template>
 
 <script>
@@ -45,10 +47,9 @@ export default {
   },
   methods: {
     async fetchData() {
-
       window.scrollTo({
-          top: 0,
-      });
+        top: 0
+      })
 
       try {
         const banners = await apiService.getDadosOfBanner()

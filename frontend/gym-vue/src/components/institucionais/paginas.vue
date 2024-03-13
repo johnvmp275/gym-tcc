@@ -5,19 +5,26 @@ import loader from '../geral/loader.vue'
 </script>
 
 <template>
-  <loader :isLoaderActive="isLoaderActive" />
-  <section class="container">
-    <div class="nav-paginas">
-      <Dropdown titlteDropdown="Institucionais">
-        <template #dropdown_description>
-          <span v-for="item in pagina" :key="item.id">
-            <RouterLink :to="item.path"> {{ item.label }}</RouterLink>
-          </span>
-        </template>
-      </Dropdown>
-    </div>
-    <div class="paginas" v-html="conteudoPagina"></div>
-  </section>
+  <main>
+    <loader :isLoaderActive="isLoaderActive" />
+    <section class="container">
+      <div class="nav-paginas">
+        <Dropdown :titlteDropdown="item.label" v-for="item in menuNv" :key="item.id">
+          <span>{{ item.label }}</span>
+          <template #dropdown_description>
+            <ul class="dropdown-menu">
+              <li v-for="sub in item.sub" :key="sub.id">
+                <RouterLink class="link-institucionais" :to="sub.path">
+                  {{ sub.label }}
+                </RouterLink>
+              </li>
+            </ul>
+          </template>
+        </Dropdown>
+      </div>
+      <div class="paginas" v-html="conteudoPagina"></div>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -26,13 +33,14 @@ export default {
     return {
       pagina: [],
       conteudoPagina: '',
-      isLoaderActive: true
+      isLoaderActive: true,
+      menuNv: []
     }
   },
   methods: {
     async fetchData() {
       this.isLoaderActive = true
-      
+
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -40,9 +48,15 @@ export default {
 
       try {
         const menu = await apiService.getDadosOfMenus()
-        this.menu = menu.find((item) => item.paginas)
-        this.pagina = this.menu.paginas
+
+        this.pagina = menu.find((item) => item.paginas).paginas
         this.conteudoPagina = this.pagina.find((item) => item.path == this.paginaEscolhida).conteudo
+
+        const menus = await apiService.getDadosOfMenus()
+
+        const menuRodape = menus.find((item) => item.rodape_menu).rodape_menu
+        this.menuNv = menuRodape
+
         this.isLoaderActive = false
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
@@ -98,6 +112,11 @@ a {
 a.router-link-active {
   color: var(--background-gray-700);
   font-weight: bold;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 1100px) {

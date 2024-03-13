@@ -4,14 +4,13 @@ import apiService from '@/components/store/fetchData';
 
 <template>
     <div class="menu-rodape">
-        {{ teste }}
         <ul class="list-menu-rodape">
-            <li v-for="item in menuNv">
+            <li v-for="item in menuNv" :key="item.id" class="menu">
                 <span>{{item.label}}</span>
-                <ul>
-                    <li>
-                        <RouterLink class="link-institucionais" :to="`/paginas/${item.path}`">
-                            {{ item.label }}
+                <ul class="sub-list-menu">
+                    <li v-for="sub in item.sub" :key="sub.id">
+                        <RouterLink class="link-institucionais" :to="sub.path">
+                            {{ sub.label }}
                         </RouterLink>
                     </li>
                 </ul>
@@ -30,7 +29,7 @@ export default {
     methods: {
         async fetchData() {
             const menus = await apiService.getDadosOfMenus()
-            const menuRodape = menus.find(item => item.paginas).paginas
+            const menuRodape = menus.find(item => item.rodape_menu).rodape_menu
             this.menuNv = menuRodape
         }
     },
@@ -42,18 +41,33 @@ export default {
 
 <style scoped>
 .menu-rodape {
-    max-width: 1170px;
+    max-width: 720px;
     width: 100%;
     margin: 0 auto;
     padding: 16px;
 }
 
+span{
+    font-weight: 800;
+}
+
 a {
-    padding: 10px 0;
+    padding: 0;
+    color: var(--background-gray-700);
+}
+
+a:hover{
+    text-decoration: underline;
 }
 
 li {
     width: auto;
+}
+
+.sub-list-menu{
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
 }
 
 .list-menu-rodape {

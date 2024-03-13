@@ -4,6 +4,7 @@ import detalheProduto from '../components/pages/detalheProduto.vue'
 import categorias from '../components/lista/categorias.vue'
 import pagina404 from '../components/layouts/error.vue'
 import paginas from '../components/institucionais/paginas.vue'
+import checkout from '@/components/geral/checkout/checkout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,6 +13,11 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       component: home
+    },
+    {
+      path: '/checkout/:path',
+      name: 'Checkout',
+      component: checkout
     },
     {
       path: '/produto/:id',
@@ -30,12 +36,12 @@ const router = createRouter({
       component: categorias
     },
     {
-      path: '/paginas/:path',
+      path: '/pagina/:path',
       name: 'Páginas',
-      component: paginas
+      component: paginas,
     },
     {
-      path: '/:pathMatch(.*)*',
+      path: '/:path',
       name: '404',
       component: pagina404,
     },

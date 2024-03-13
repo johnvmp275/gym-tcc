@@ -41,13 +41,13 @@ import apiService from '@/components/store/fetchData'
               </template>
 
               <template v-else>
-                <a class="menu-login" href="">
+                <a class="menu-login" href="/checkout/acesso">
                   <span class="material-symbols-outlined">
                     person
                   </span>
                   Entre ou Cadastre-se
                 </a>
-                <a class="menu-favoritos" href="">
+                <a class="menu-favoritos" href="/checkout/cadastro">
                   <span class="material-symbols-outlined">
                     favorite
                   </span>

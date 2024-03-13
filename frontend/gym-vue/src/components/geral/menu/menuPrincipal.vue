@@ -48,9 +48,9 @@ import menuMobile from './menuMobile.vue';
 
             <template v-else>
               <p>Olá, Visitante!</p>
-              <a href="">Entre</a>
+              <a href="/checkout/acesso">Entre</a>
               ou
-              <a href="">Cadastre-se</a>
+              <a href="/checkout/cadastro">Cadastre-se</a>
             </template>
           </div>
 
