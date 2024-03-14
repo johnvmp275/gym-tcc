@@ -97,7 +97,7 @@ export default {
   top: 0;
   right: 0;
   background: var(--background-white);
-  z-index: 20;
+  z-index: 999999;
   transition: 0.5s;
 }
 

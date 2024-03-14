@@ -363,7 +363,7 @@ span {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 888888;
 }
 
 @media (max-width: 1000px) {
