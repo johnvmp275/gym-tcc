@@ -309,7 +309,7 @@ span {
 }
 
 .menu-lateral {
-  transform: translateX(-500px);
+  transform: translateX(-1000px);
   position: fixed;
   top: 0;
   left: 0;
