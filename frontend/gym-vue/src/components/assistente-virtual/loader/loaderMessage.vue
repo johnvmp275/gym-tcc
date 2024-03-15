@@ -1,6 +1,6 @@
 <template>
     <div v-if="messageLoader" class="resposta-massage assistente-resposta loading ">
-        loading...
+        Digitando...
     </div>
 </template>
  
