@@ -3,10 +3,7 @@ import loaderMessage from './loader/loaderMessage.vue'
 import assistenteChat from './script-assistente/scriptAssiste.js'
 </script>
 <template>
-  <div
-    :class="{ 'assistente-button': true, open: chatWasOpen, closed: chatBotOpen }"
-    @click="toggleChatBot"
-  >
+  <div :class="{ 'assistente-button': true, open: chatWasOpen, closed: chatBotOpen }" @click="toggleChatBot">
     <img src="@/img/atendente.png" alt="assitente botão" />
     <!-- <img src="https://cdn.leadster.com.br/neurolead/img/avatar/12.png" alt="assitente botão" /> -->
   </div>
@@ -22,26 +19,19 @@ import assistenteChat from './script-assistente/scriptAssiste.js'
     </div>
     <div class="chat-main">
       <div id="chat-message">
+
         <!-- imprime o texto do usuário -->
-        <div
-          v-for="(response, index) in userRespostas"
-          :key="'response-' + index"
-          :class="[response.type + '-container-message']"
-        >
+        <div v-for="response in mergedResponsesChat" :key="response.id" :class="[response.type + '-container-message']">
           <span :class="['resposta-massage', response.from]" v-html="response.message"></span>
+          <span>{{ response.enviadoEm }}</span>
         </div>
 
         <loaderMessage :messageLoader="messageLoader" />
       </div>
       <div class="chat-massage-bottom" v-if="showInput">
         <template v-if="teste">
-          <input
-            type="text"
-            id="text"
-            placeholder="Envie sua resposta..."
-            v-model="userResposta"
-            @keydown.enter="enviarResposta(this.userResposta)"
-          />
+          <input type="text" id="text" placeholder="Envie sua resposta..." v-model="userResposta"
+            @keydown.enter="enviarResposta(this.userResposta)" />
         </template>
         <template v-else>
           <select name="" id="">
@@ -66,76 +56,101 @@ export default {
       chatBotOpen: false,
       userResposta: '',
       userRespostas: [],
+      assistenteRespostas: [],
       username: '',
       assistenteScript: [],
       assistenteMessage: false,
       messageLoader: true,
-      showInput: false,
       limit: 2,
       ultimoIndex: 0,
-      teste: true
+      teste: true,
+      showInput: false,
+      mergedResponsesChat:[]
     }
   },
   methods: {
     toggleChatBot() {
-      this.chatWasOpen = !this.chatWasOpen
-      this.chatBotOpen = !this.chatBotOpen
+      this.chatWasOpen = !this.chatWasOpen;
+      this.chatBotOpen = !this.chatBotOpen;
 
-      this.assistenteDigitando()
+      this.assistenteDigitando();
     },
     enviarResposta(username) {
       if (this.userResposta !== '') {
-        this.userRespostas.push({ message: this.userResposta, type: 'user', from: 'user-resposta' }) //Puxa a resposta do usuário
-        this.userResposta = '' // Limpa o campo de resposta
 
-        this.limit++
-        this.assistenteMessage = false
-        this.assistenteDigitando()
+        const dataDeEnvio = new Date();
 
-        // Atualize o username
-        this.username = username
+        // horas e minutos
+        const horaEnvio = `${dataDeEnvio.getHours()}:${dataDeEnvio.getMinutes()}`;
 
-        // Chame criarAssistenteChat novamente para atualizar o assistenteScript com o novo nome de usuário
-        this.assistenteScript = assistenteChat.criarAssistenteChat(this.username)
+        //Puxa a resposta do usuário
+        this.userRespostas.push({
+          message: this.userResposta,
+          type: 'user',
+          from: 'user-resposta',
+          checkInput: true,
+          enviadoEm: horaEnvio,
+        })
+
+        console.log(this.userRespostas);
+
+        // Limpa o campo de resposta
+        this.userResposta = '';
+
+        // Aumenta o limite de respostas da assitente
+        this.limit++;
+        this.assistenteMessage = false;
+        this.showInput = false;
+
+        // Envia os dados do user name
+        this.username = username;
+        this.assistenteScript = assistenteChat.criarAssistenteChat(this.username);
+
+        this.assistenteDigitando();
+
       }
     },
     assistenteDigitando() {
       if (!this.assistenteMessage) {
-        this.assistenteMessage = true
-        this.messageLoader = true
+        this.assistenteMessage = true;
+        this.messageLoader = true;
 
-        let i = this.ultimoIndex
+        const dataDeEnvio = new Date();
+
+        // horas e minutos
+        const horaEnvio = `${dataDeEnvio.getHours()}:${dataDeEnvio.getMinutes()}`;
+
+        let i = this.ultimoIndex;
 
         setInterval(() => {
           if (i <= this.limit) {
             // Verifique se ainda há mensagens a serem exibidas
-            this.userRespostas.push({
+            this.assistenteRespostas.push({
               message: this.assistenteScript[this.ultimoIndex].message,
               type: 'assistente',
-              from: 'assistente-resposta'
-            })
+              from: 'assistente-resposta',
+              checkInput: this.assistenteScript[this.ultimoIndex].checkInput,
+              loader: this.assistenteScript[this.ultimoIndex].loading,
+              enviadoEm: horaEnvio,
+            });
 
-            this.ultimoIndex++
+            this.showInput = this.assistenteRespostas[this.ultimoIndex].checkInput;
+            this.messageLoader = this.assistenteRespostas[this.ultimoIndex].loader;
+            this.ultimoIndex++;
 
-            console.log('typing...')
-
-            i++
+            i++;
           }
-        }, 3000)
+        }, 2000);
       }
-    }
+    },
+  },
+  computed: {
+    mergedResponsesChat() {
+      return [...this.assistenteRespostas, ...this.userRespostas];
+    },
   },
   watch: {
-    ultimoIndex(newValue) {
-      if (newValue === 3 || newValue == 5 || newValue == 7) {
-        this.messageLoader = false
-        this.showInput = true
-      } else {
-        this.messageLoader = true
-        this.showInput = false
-      }
-      console.log(newValue)
-    }
+    mergedResponsesChat(newVal) { console.log(this.mergedResponsesChat, newVal); }
   },
   mounted() {
     this.assistenteScript = assistenteChat.criarAssistenteChat()

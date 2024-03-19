@@ -1,23 +1,31 @@
 function criarAssistenteChat(username) {
   return [
     {
-      message:
-        'Olá! É um prazer tê-lo(a) aqui! Meu nome é Lívia e vou auxiliá-lo(a) no que precisar😄',
-        showInput: false
+      message: 'Olá! É um prazer tê-lo(a) aqui! Meu nome é Lívia e vou auxiliá-lo(a) no que precisar😄',
+      checkInput: false,
+      loading: true
     },
     {
       message: 'Para isso preciso de algumas informações <strong>rápidas</strong> 🙂',
-      showInput: false
+      checkInput: false,
+      loading: false
     },
-    { message: 'Como posso te <strong>chamar</strong>?', 
-      showInput: true
+    {
+      message: 'Como posso te <strong>chamar</strong>?',
+      checkInput: true,
+      loading: false
     },
-    { 
+    {
       message: `Olá <strong>${username}</strong>`,
-      showInput: false
+      checkInput: false,
+      loading: true
     },
     //{ message: `Para seguirmos, por favor <strong>${username}</strong> nos informe seu e-mail para contato` },
-    { message: 'Por gentileza, poderia selecionar qual a sua dúvida?' },
+    {
+      message: 'Por gentileza, poderia selecionar qual a sua dúvida?',
+      checkInput: true,
+      loading: false
+    },
     { message: 'Excelente, estamos quase lá 😁' }
   ]
 }
