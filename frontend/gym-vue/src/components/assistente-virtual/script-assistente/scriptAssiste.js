@@ -8,7 +8,7 @@ function criarAssistenteChat(username) {
     {
       message: 'Para isso preciso de algumas informações <strong>rápidas</strong> 🙂',
       checkInput: false,
-      loading: false
+      loading: true
     },
     {
       message: 'Como posso te <strong>chamar</strong>?',
@@ -20,7 +20,6 @@ function criarAssistenteChat(username) {
       checkInput: false,
       loading: true
     },
-    //{ message: `Para seguirmos, por favor <strong>${username}</strong> nos informe seu e-mail para contato` },
     {
       message: 'Por gentileza, poderia selecionar qual a sua dúvida?',
       checkInput: true,

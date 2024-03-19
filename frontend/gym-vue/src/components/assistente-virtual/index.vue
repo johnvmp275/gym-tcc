@@ -3,7 +3,10 @@ import loaderMessage from './loader/loaderMessage.vue'
 import assistenteChat from './script-assistente/scriptAssiste.js'
 </script>
 <template>
-  <div :class="{ 'assistente-button': true, open: chatWasOpen, closed: chatBotOpen }" @click="toggleChatBot">
+  <div
+    :class="{ 'assistente-button': true, open: chatWasOpen, closed: chatBotOpen }"
+    @click="toggleChatBot"
+  >
     <img src="@/img/atendente.png" alt="assitente botão" />
     <!-- <img src="https://cdn.leadster.com.br/neurolead/img/avatar/12.png" alt="assitente botão" /> -->
   </div>
@@ -19,19 +22,29 @@ import assistenteChat from './script-assistente/scriptAssiste.js'
     </div>
     <div class="chat-main">
       <div id="chat-message">
-
         <!-- imprime o texto do usuário -->
-        <div v-for="response in mergedResponsesChat" :key="response.id" :class="[response.type + '-container-message']">
-          <span :class="['resposta-massage', response.from]" v-html="response.message"></span>
-          <span>{{ response.enviadoEm }}</span>
+        <div
+          v-for="response in mergedResponsesChat"
+          :key="response.id"
+          :class="[response.type + '-container-message']"
+        >
+          <p :class="['resposta-massage', response.from]">
+            <span v-html="response.message"></span>
+            <span class="message-hr">{{ response.enviadoEm }}</span>
+          </p>
         </div>
 
         <loaderMessage :messageLoader="messageLoader" />
       </div>
       <div class="chat-massage-bottom" v-if="showInput">
         <template v-if="teste">
-          <input type="text" id="text" placeholder="Envie sua resposta..." v-model="userResposta"
-            @keydown.enter="enviarResposta(this.userResposta)" />
+          <input
+            type="text"
+            id="text"
+            placeholder="Envie sua resposta..."
+            v-model="userResposta"
+            @keydown.enter="enviarResposta(this.userResposta)"
+          />
         </template>
         <template v-else>
           <select name="" id="">
@@ -65,92 +78,90 @@ export default {
       ultimoIndex: 0,
       teste: true,
       showInput: false,
-      mergedResponsesChat:[]
+      mergedResponsesChat: []
     }
   },
   methods: {
     toggleChatBot() {
-      this.chatWasOpen = !this.chatWasOpen;
-      this.chatBotOpen = !this.chatBotOpen;
+      this.chatWasOpen = !this.chatWasOpen
+      this.chatBotOpen = !this.chatBotOpen
 
-      this.assistenteDigitando();
+      this.assistenteDigitando()
     },
     enviarResposta(username) {
       if (this.userResposta !== '') {
-
-        const dataDeEnvio = new Date();
+        const dataDeEnvio = new Date()
 
         // horas e minutos
-        const horaEnvio = `${dataDeEnvio.getHours()}:${dataDeEnvio.getMinutes()}`;
+        const horaEnvio = `${dataDeEnvio.getHours()}:${dataDeEnvio.getMinutes()}`
 
         //Puxa a resposta do usuário
-        this.userRespostas.push({
+        this.mergedResponsesChat.push({
           message: this.userResposta,
           type: 'user',
           from: 'user-resposta',
           checkInput: true,
-          enviadoEm: horaEnvio,
+          enviadoEm: horaEnvio
         })
 
-        console.log(this.userRespostas);
-
         // Limpa o campo de resposta
-        this.userResposta = '';
+        this.userResposta = ''
 
         // Aumenta o limite de respostas da assitente
-        this.limit++;
-        this.assistenteMessage = false;
-        this.showInput = false;
+        this.limit++
+
+        this.messageLoader = true
+        this.assistenteMessage = false
+        this.showInput = false
 
         // Envia os dados do user name
-        this.username = username;
-        this.assistenteScript = assistenteChat.criarAssistenteChat(this.username);
+        this.username = username
+        this.assistenteScript = assistenteChat.criarAssistenteChat(this.username)
 
-        this.assistenteDigitando();
-
+        this.assistenteDigitando()
       }
     },
     assistenteDigitando() {
       if (!this.assistenteMessage) {
-        this.assistenteMessage = true;
-        this.messageLoader = true;
+        this.assistenteMessage = true
+        this.messageLoader = true
 
-        const dataDeEnvio = new Date();
-
-        // horas e minutos
-        const horaEnvio = `${dataDeEnvio.getHours()}:${dataDeEnvio.getMinutes()}`;
-
-        let i = this.ultimoIndex;
+        let i = this.ultimoIndex
 
         setInterval(() => {
           if (i <= this.limit) {
+            
+            const dataDeEnvio = new Date()
+
+            // horas e minutos
+            const horaEnvio = `${dataDeEnvio.getHours()}:${dataDeEnvio.getMinutes()}`
+
             // Verifique se ainda há mensagens a serem exibidas
-            this.assistenteRespostas.push({
+            this.mergedResponsesChat.push({
               message: this.assistenteScript[this.ultimoIndex].message,
               type: 'assistente',
               from: 'assistente-resposta',
               checkInput: this.assistenteScript[this.ultimoIndex].checkInput,
               loader: this.assistenteScript[this.ultimoIndex].loading,
-              enviadoEm: horaEnvio,
-            });
+              enviadoEm: horaEnvio
+            })
 
-            this.showInput = this.assistenteRespostas[this.ultimoIndex].checkInput;
-            this.messageLoader = this.assistenteRespostas[this.ultimoIndex].loader;
-            this.ultimoIndex++;
+            this.showInput = this.assistenteScript[this.ultimoIndex].checkInput
+            this.messageLoader = this.assistenteScript[this.ultimoIndex].loading
+            this.ultimoIndex++
 
-            i++;
+            i++
           }
-        }, 2000);
+        }, 3000)
       }
-    },
-  },
-  computed: {
-    mergedResponsesChat() {
-      return [...this.assistenteRespostas, ...this.userRespostas];
-    },
+    }
   },
   watch: {
-    mergedResponsesChat(newVal) { console.log(this.mergedResponsesChat, newVal); }
+    mergedResponsesChat(newVal) {
+      // Definindo um observador de mudanças para mergedResponsesChat
+      console.log('Valor anterior:', this.mergedResponsesChat)
+      console.log('Novo valor:', newVal)
+    }
   },
   mounted() {
     this.assistenteScript = assistenteChat.criarAssistenteChat()
@@ -345,13 +356,23 @@ export default {
 }
 
 .resposta-massage {
+  width: auto;
   padding: 15px 26px;
+  display: flex;
+  flex-direction: column;
   border-radius: 20px;
   margin-bottom: 20px;
   max-width: 340px;
   overflow: hidden;
   text-overflow: ellipsis;
   animation: popAnimation 0.5s forwards;
+}
+
+.message-hr {
+  font-size: 11px;
+  display: flex;
+  margin-top: 5px;
+  justify-content: end;
 }
 
 .loading {
