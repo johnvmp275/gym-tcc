@@ -1,11 +1,13 @@
 <template>
+    <!-- Verifica se o array do instashop possui itens -->
     <section v-if="instashop.length">
         <div class="insta-topo">
             <h2>Instashop</h2>
             <a>@IronForge</a>
         </div>
         <div class="instagram-post">
-            <a class="insta-posts" v-for="card in instashop" :key="card.id" :href="card.link" target="blank">
+            <!-- Adiciona um limit ao puxar as imagens -->
+            <a class="insta-posts" v-for="card in instashop.slice(0,6)" :key="card.id" :href="card.link" target="blank">
                 <img :src="card.image" :alt="card.label">
                 <span class="material-symbols-outlined insta-hover">
                     exercise
