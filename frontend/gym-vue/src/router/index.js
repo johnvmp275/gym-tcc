@@ -38,13 +38,17 @@ const router = createRouter({
     {
       path: '/pagina/:path',
       name: 'Páginas',
-      component: paginas,
+      component: paginas
     },
     {
-      path: '/:path',
+      path: '/404',
       name: '404',
-      component: pagina404,
+      component: pagina404
     },
+    { 
+     path: '/:path',
+     redirect: '/404' 
+    }
   ]
 })
 

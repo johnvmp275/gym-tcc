@@ -1,7 +1,7 @@
-function criarAssistenteChat(username) {
+function criarAssistenteChat(response) {
   return [
     {
-      message: 'Olá! É um prazer tê-lo(a) aqui! Meu nome é <strong>Roberta</strong> e vou auxiliá-lo(a) no que precisar😄',
+      message: 'Olá! É um prazer tê-lo(a) aqui! Meu nome é Roberta e vou auxiliá-lo(a) no que precisar😄',
       checkInput: false,
       typeInput: true,
       loading: true
@@ -19,7 +19,7 @@ function criarAssistenteChat(username) {
       loading: false
     },
     {
-      message: `Olá <strong>${username}</strong>`,
+      message: `Olá <strong>${response}</strong>`,
       checkInput: false,
       typeInput: true,
       loading: true
@@ -37,11 +37,18 @@ function criarAssistenteChat(username) {
       loading: true
     },
     {
-      teste:
-        [
+      message: 'Estou te redirecionando para um dos nossos atendentes agora mesmo!',
+      checkInput: false,
+      typeInput: true,
+      loading: false,
+      redirect: true,
+    },
+    // {
+    //   teste:
+    //     [
 
-        ]
-    }
+    //     ]
+    // }
   ]
 }
 

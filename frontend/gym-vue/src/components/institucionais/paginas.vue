@@ -60,6 +60,7 @@ export default {
         this.isLoaderActive = false
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
+        this.$router.push({ path: '/404' });
       }
     }
   },

@@ -116,6 +116,7 @@ export default {
         this.paginaAtual = 1
       } catch (error) {
         console.error('Não foi possível buscar os dados', error)
+        this.$router.push({ path: '/404' })
         throw error
       }
     },
