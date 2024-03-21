@@ -23,7 +23,6 @@ import assistenteChat from './script-assistente/scriptAssiste.js'
     </div>
     <div class="chat-main">
       <div id="chat-message">
-
         <!-- <loaderRedirect :redirectLoader="true"/> -->
 
         <!-- imprime o texto do usuário -->
@@ -39,7 +38,6 @@ import assistenteChat from './script-assistente/scriptAssiste.js'
         </div>
 
         <loaderMessage :messageLoader="messageLoader" />
-
       </div>
       <div class="chat-massage-bottom" v-if="showInput">
         <template v-if="typeInputText">
@@ -56,7 +54,7 @@ import assistenteChat from './script-assistente/scriptAssiste.js'
             name="select-options"
             id="select-options"
             v-model="userResposta"
-            @keydown.enter="enviarResposta(this.userResposta)"
+            @keydown.enter="enviarResposta"
           >
             <option value="null" style="display: none">-- Selecione uma opção--</option>
             <option value="Não estou conseguindo achar um produto.">
@@ -93,7 +91,9 @@ export default {
       redirectUser: false,
       ultimoIndex: 0,
       limit: 2,
-      userResposta: null
+      userResposta: null,
+      userName: 'John',
+      userEamil: 'joao@gmail.com'
     }
   },
   methods: {
@@ -104,7 +104,7 @@ export default {
       this.assistenteDigitando()
     },
     enviarResposta(response) {
-      if (this.userResposta !== null) {
+      if (this.userResposta !== null || this.userSelected !== null) {
         const dataDeEnvio = new Date()
 
         // horas e minutos
@@ -173,18 +173,21 @@ export default {
               if (this.redirectUser) {
                 this.assistenteRedirect()
               }
-
             }
           }, 3000)
         }, 1000)
-
       }
     },
     assistenteRedirect() {
-      console.log('teste')
 
       setTimeout(() => {
-        console.log('redirecionado')
+        const texto = encodeURIComponent(`Olá, meu nome é ${this.userName} e meu e-mail é ${this.userEamil}. Vim através do assistente de leads do site. ${this.userResposta}`)
+        const numeroTelefone = '5518991468828'
+
+        const url = `https://web.whatsapp.com/send?text=${texto}&phone=${numeroTelefone}`
+
+        window.open(url, '_blank')
+        console.log(url);
       }, 5000)
     }
   },

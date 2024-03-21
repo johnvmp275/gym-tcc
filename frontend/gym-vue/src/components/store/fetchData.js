@@ -10,8 +10,9 @@ export default {
     }
   },
   async getDadosOfMenus() {
+    const url = ['http://192.168.87.24:3000/menu']
     try {
-      const data = await this.fetchData('http://localhost:3000/menu')
+      const data = await this.fetchData(url)
       return data
     } catch (error) {
       console.error('Erro ao buscar os dados de categorias', error)
@@ -19,8 +20,9 @@ export default {
     }
   },
   async getDadosOfBanner() {
+    const url = ['http://192.168.87.24:3000/banners']
     try {
-      const data = await this.fetchData('http://localhost:3000/banners')
+      const data = await this.fetchData(url)
       return data
     } catch (error) {
       console.error('Erro ao buscar os dados do banner', error)
@@ -28,8 +30,9 @@ export default {
     }
   },
   async getDadosOfDescription() {
+    const url = ['http://192.168.87.24:3000/siteDescription']
     try {
-      const data = await this.fetchData('http://localhost:3000/siteDescription')
+      const data = await this.fetchData(url) 
       return data
     } catch (error) {
       console.error('Erro ao buscar os dados do banner', error)
@@ -37,21 +40,23 @@ export default {
     }
   },
   async getDadosOfVitrines() {
+    const url = ['http://192.168.87.24:3000/vitrines']
     try {
-      const data = await this.fetchData('http://localhost:3000/vitrines')
+      const data = await this.fetchData(url) 
       return data
     } catch (error) {
       console.error('Erro ao buscar os dados do banner', error)
       throw error
     }
   },
-  async getDetailsProduct() {
+  async getDadosOfCategories() {
+    const url = ['http://192.168.87.24:3000/produtos']
     try {
-      const data = await this.fetchData('http://localhost:3000/produtos')
+      const data = await this.fetchData(url) 
       return data
     } catch (error) {
       console.error('Erro ao buscar os dados do banner', error)
       throw error
     }
-  }
+  },
 }

@@ -117,12 +117,15 @@ export default {
   },
   methods: {
     async fetchProductDetails() {
+
       window.scrollTo({
         top: 0
       })
 
+      const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
+
       try {
-        const req = await fetch(`http://localhost:3000/produtos/${this.$route.params.id}`)
+        const req = await fetch(url)
         const data = await req.json()
         this.product = data
         this.descricao = data.descricoes

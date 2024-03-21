@@ -1,7 +1,8 @@
 <script setup>
 import loaderVue from '@/components/geral/loader.vue'
 import paginationView from '../listagem/paginacao.vue'
-import cardProduto from '../geral/card-produto.vue';
+import cardProduto from '../geral/card-produto.vue'
+import apiService from '@/components/store/fetchData'
 </script>
 
 <template>
@@ -34,20 +35,17 @@ import cardProduto from '../geral/card-produto.vue';
             </div>
           </div>
         </section>
-        <paginationView 
-          :paginaAtual="paginaAtual" 
-          :itensCategoria="productData" 
+        <paginationView
+          :paginaAtual="paginaAtual"
+          :itensCategoria="productData"
           :totalPages="totalPages"
-          @paginaMudada="atualizarPagina" 
-          />
-
+          @paginaMudada="atualizarPagina"
+        />
       </template>
 
       <template v-else>
         <span class="product-not-found">
-          <h1>
-            O item "<span>{{ categories || busca }}</span>" infelizmente não foi encontrado :(
-          </h1>
+          <h1>Ops! O produto infelizmente não foi encontrado :(</h1>
           Mas indicamos para você alguns produtos!
         </span>
         <section class="categories-product">
@@ -92,49 +90,46 @@ export default {
   },
   methods: {
     async fetchCategories() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+
       try {
-        const req = await fetch('http://localhost:3000/produtos')
-        const data = await req.json()
-
+        const categorie = await apiService.getDadosOfCategories()
         this.categories = this.$route.params.path
-        this.sugestoesProdutos = data.slice(0, 5)
-
-        if (this.categories) {
-          this.productData = data.filter((item) => item.categorie === this.categories)
-        } else {
-          this.productData = data.filter((item) =>
-            item.titulo.toLowerCase().match(this.busca.toLowerCase())
-          )
-        }
-
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        })
+        this.sugestoesProdutos = categorie.slice(0, 5)
 
         this.loaderActive = false
         this.paginaAtual = 1
+
+        if (this.categories) {
+          this.productData = categorie.filter((item) => item.categorie === this.categories)
+        } else {
+          this.productData = categorie.filter((item) =>
+            item.titulo.toLowerCase().match(this.busca.toLowerCase())
+          )
+        }
       } catch (error) {
-        console.error('Não foi possível buscar os dados', error)
         this.$router.push({ path: '/404' })
-        throw error
+        console.error('Não foi possivel buscar os dados pedidos', error)
       }
     },
     atualizarPagina(novaPagina) {
       this.paginaAtual = novaPagina
-    }
-  },
-  watch: {
-    '$route.params.path': {
-      emit: true,
-      handler(categoriaEscolhida) {
-        this.fetchCategories()
-      }
     },
-    '$route.query.busca': {
-      emit: true,
-      handler() {
-        this.fetchCategories()
+    watch: {
+      '$route.params.path': {
+        emit: true,
+        handler(categoriaEscolhida) {
+          this.fetchCategories()
+        }
+      },
+      '$route.query.busca': {
+        emit: true,
+        handler() {
+          this.fetchCategories()
+        }
       }
     }
   },
@@ -184,7 +179,7 @@ export default {
   gap: 5px;
 }
 
-.product-not-found  {
+.product-not-found {
   text-align: center;
   margin: 20px 0 20px 0;
 }
