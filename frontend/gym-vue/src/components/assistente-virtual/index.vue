@@ -1,44 +1,51 @@
 <script setup>
-import loaderMessage from './loader/loaderMessage.vue'
-import loaderRedirect from './loader/loaderRedirect.vue'
+import chatMassage from './components/chat/chatMassage.vue'
 import assistenteChat from './script-assistente/scriptAssiste.js'
 </script>
+
 <template>
+
   <div
-    :class="{ 'assistente-button': true, open: chatWasOpen, closed: chatBotOpen }"
+    :class="{ 
+    'assistente-button': true,
+     open: chatWasOpen, 
+     closed: chatBotOpen 
+     }"
     @click="toggleChatBot"
   >
-    <img src="./img/atendente.png" alt="assitente botão" />
-    <!-- <img src="https://cdn.leadster.com.br/neurolead/img/avatar/12.png" alt="assitente botão" /> -->
+    <img 
+      src="./img/atendente.png" 
+      alt="assitente botão" 
+    />
   </div>
-  <div :class="{ 'chat-container': true, open: chatBotOpen, closed: chatWasOpen }">
+
+  <div 
+    :class="{ 'chat-container': true, 
+    open: chatBotOpen, 
+    closed: chatWasOpen }"
+  >
     <div class="chat-header">
+
       <div class="assistente-icon">
-        <img src="./img/atendente.png" alt="assitente botão" />
-        <!-- <img src="https://cdn.leadster.com.br/neurolead/img/avatar/12.png" alt="assitente botão" /> -->
+        <img 
+          src="./img/atendente.png" 
+          alt="assitente botão" 
+        />
       </div>
+
       <button @click="toggleChatBot">
         <span class="material-symbols-outlined"> cancel </span>
       </button>
+
     </div>
+
     <div class="chat-main">
-      <div id="chat-message">
-        <!-- <loaderRedirect :redirectLoader="true"/> -->
 
-        <!-- imprime o texto do usuário -->
-        <div
-          v-for="response in mergedResponsesChat"
-          :key="response.id"
-          :class="[response.type + '-container-message']"
-        >
-          <p :class="['resposta-massage', response.from]">
-            <span v-html="response.message"></span>
-            <span class="message-hr">{{ response.enviadoEm }}</span>
-          </p>
-        </div>
+      <chatMassage 
+        :mergedResponsesChat="mergedResponsesChat" 
+        :messageLoader="messageLoader"
+      />
 
-        <loaderMessage :messageLoader="messageLoader" />
-      </div>
       <div class="chat-massage-bottom" v-if="showInput">
         <template v-if="typeInputText">
           <input
@@ -182,12 +189,18 @@ export default {
 
       setTimeout(() => {
         const texto = encodeURIComponent(`Olá, meu nome é ${this.userName} e meu e-mail é ${this.userEamil}. Vim através do assistente de leads do site. ${this.userResposta}`)
-        const numeroTelefone = '5518991468828'
+        const numeroTelefone = '5518991724468'
 
-        const url = `https://web.whatsapp.com/send?text=${texto}&phone=${numeroTelefone}`
+        // const url = `whatsapp://send?text=${texto}&phone=${numeroTelefone}`;
 
-        window.open(url, '_blank')
-        console.log(url);
+        // window.open(url, '_blank');
+
+        if (window.innerWidth < 768) {
+          window.open(`whatsapp://send?phone=${numeroTelefone}&text=${texto}`, '_blank');
+        }else{
+          window.open(`https://web.whatsapp.com/send?text=${texto}&phone=${numeroTelefone}`, '_blank');
+        }
+
       }, 5000)
     }
   },
@@ -288,15 +301,6 @@ export default {
   border-radius: 0 0 8px 8px;
 }
 
-#chat-message {
-  width: 100%;
-  height: 200px;
-  padding: 0 16px;
-  overflow-y: auto;
-  margin-bottom: 10px;
-  position: relative;
-}
-
 .chat-massage-bottom {
   position: relative;
   height: 56px;
@@ -339,6 +343,7 @@ export default {
 
 ::-webkit-scrollbar-track {
   background-color: #f1f1f1;
+  border-radius: 6px;
 }
 
 .assistente-icon {
@@ -364,53 +369,6 @@ export default {
   animation: iconAnimation 0.8s cubic-bezier(0, 0.35, 0.28, 0.9) forwards;
   animation-delay: 0.5s;
   transform: scale(0, 0);
-}
-
-.user-container-message {
-  width: 100%;
-  display: flex;
-  justify-content: end;
-}
-
-.assistente-container-message {
-  width: 100%;
-  display: flex;
-}
-
-.user-resposta {
-  background: var(--background-wine);
-  color: var(--background-white);
-}
-
-.assistente-resposta {
-  background: rgb(238, 238, 238);
-  color: var(--background-gray-400);
-}
-
-.resposta-massage {
-  width: auto;
-  padding: 15px 26px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  max-width: 340px;
-  min-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  animation: popAnimation 0.5s forwards;
-}
-
-.message-hr {
-  font-size: 11px;
-  display: flex;
-  margin-top: 5px;
-  justify-content: end;
-}
-
-.loading {
-  max-width: 150px;
-  text-align: center;
 }
 
 #select-options {
@@ -451,27 +409,6 @@ select {
   }
 }
 
-@keyframes popAnimation {
-  0% {
-    opacity: 0;
-    transform: scale(0, 0);
-  }
-
-  30% {
-    opacity: 1;
-    transform: scale(1.1, 1.1);
-  }
-
-  80% {
-    transform: scale(1, 1);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1, 1);
-  }
-}
-
 @keyframes iconAnimation {
   0% {
     opacity: 0;
@@ -498,10 +435,6 @@ select {
     height: 100%;
     border-radius: 0px;
     max-width: 100%;
-  }
-
-  #chat-message {
-    height: calc(100% - 117px);
   }
 }
 </style>

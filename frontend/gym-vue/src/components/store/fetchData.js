@@ -59,4 +59,14 @@ export default {
       throw error
     }
   },
+  async getDadosOfInstashop() {
+    const url = ['http://192.168.87.24:3000/instashop']
+    try {
+      const data = await this.fetchData(url) 
+      return data
+    } catch (error) {
+      console.error('Erro ao buscar os dados do banner', error)
+      throw error
+    }
+  },
 }

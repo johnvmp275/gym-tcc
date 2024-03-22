@@ -46,19 +46,27 @@ import Dropdown from '@/components/geral/dropdown.vue'
           <div>
             <span>Quantidade:</span>
             <div class="container-amount">
-              <button class="amount-button" @click="decrementAmount">-</button>
+              <button class="amount-button" @click="decrementAmount(product.id)">-</button>
               <input
                 type="tel"
-                :value="amount"
+                :value="amounts[product.id] || 1"
                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
               />
-              <button class="amount-button" @click="acressAmount">+</button>
+              <button class="amount-button" @click="acressAmount(product.id)">+</button>
             </div>
           </div>
+
           <button
             class="button-click"
             @click="
-              addItemToCard(product.id, product.titulo, product.price, descricao.curta, product.image)
+              addItemToCard(
+                product.id,
+                product.titulo,
+                product.price,
+                descricao.curta,
+                product.image,
+                product.qtdEstoque
+              )
             "
           >
             Adicionar ao carrinho
@@ -110,14 +118,13 @@ export default {
       product: [],
       produtos: [],
       descricao: {},
+      amounts: {},
       loaderActive: true,
-      amount: 1,
-      qtdEstoque: 1
+      qtdEstoque: 10
     }
   },
   methods: {
     async fetchProductDetails() {
-
       window.scrollTo({
         top: 0
       })
@@ -145,26 +152,32 @@ export default {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }
     },
-    decrementAmount() {
-      if (this.amount >= 2) {
-        this.amount--
+    decrementAmount(id) {
+      if (this.amounts[id] > 0) {
+        this.amounts[id]--
       }
     },
-    acressAmount() {
-      if (this.amount !== this.qtdEstoque) {
-        this.amount++
+    acressAmount(id) {
+      if (!this.amounts[id]) {
+        this.amounts[id] = 1
+      } else if (this.amounts[id] < this.qtdEstoque) {
+        this.amounts[id]++
       }
     },
-    addItemToCard(id, titulo, preco, descricao, imagem) {
+    addItemToCard(id, titulo, preco, descricao, imagem, qtdEstoque) {
       const itemWasAdd = this.$store.state.cartItems.find((item) => item.id === id)
 
       if (!itemWasAdd) {
+        const amount = this.amounts[id] || 1
+
         const item = {
           id: id,
           nome: titulo,
           preco: preco,
           descricao: descricao,
-          imagem: imagem
+          imagem: imagem,
+          qtdProduto: amount,
+          qtdEstoque: qtdEstoque
         }
 
         this.$store.commit('addToCart', item)

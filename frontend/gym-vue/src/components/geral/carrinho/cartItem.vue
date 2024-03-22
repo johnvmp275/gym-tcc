@@ -2,13 +2,14 @@
   <section :class="{ 'cart-container': true, open: cartWasOpen }">
     <div class="carrinho-topo">
       <strong>
-        Carrinho de compras (<span class="caritem-amount">{{ cartItem.length }}</span>)
+        Carrinho de compras (<span class="caritem-amount">{{ cartItem.length }}</span
+        >)
       </strong>
       <button type="button" class="button-cart" @click="cartToggleFunction">x</button>
     </div>
     <template v-if="cartItem.length">
       <div class="cart-div">
-        <div v-for="item in cartItem" :key="item.id" class="cart-item">
+        <div v-for="(item, index) in cartItem" :key="item.id" class="cart-item">
           <img :src="item.imagem" alt="" />
           <div class="item-detalhe">
             <div class="item-detalhe-top">
@@ -21,13 +22,13 @@
             <div class="price-amount">
               <p>R${{ item.preco }}</p>
               <div class="container-amount">
-                <button class="amount-button" @click="decrementAmount">-</button>
+                <button class="amount-button" @click="decrementAmount(index)">-</button>
                 <input
                   type="tel"
-                  :value="amount"
+                  :value="item.qtdProduto"
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
                 />
-                <button class="amount-button" @click="amount++">+</button>
+                <button class="amount-button" @click="acressAmount(index)">+</button>
               </div>
             </div>
           </div>
@@ -36,7 +37,9 @@
 
       <div class="resumo-compra">
         <button class="button-compra">Finalizar Compra</button>
-        <button class="button-continuar-compra" @click="cartToggleFunction">Continuar comprando</button>
+        <button class="button-continuar-compra" @click="cartToggleFunction">
+          Continuar comprando
+        </button>
       </div>
     </template>
 
@@ -63,11 +66,6 @@ export default {
     cartToggleFunction: Function,
     boxShadowWasOpen: Boolean
   },
-  data() {
-    return {
-      amount: 1
-    }
-  },
   methods: {
     deteleItem(id) {
       // Encontra o id do item no carrinho
@@ -79,10 +77,24 @@ export default {
       // Atualiza o localStorage com os itens restantes no carrinho
       localStorage.setItem('cartItems', JSON.stringify(this.cartItem))
     },
-    decrementAmount() {
-      if (this.amount > 1) {
-        this.amount--
+    decrementAmount(index) {
+
+      if( this.cartItem[index].qtdProduto > 1){
+        this.cartItem[index].qtdProduto --
+        console.log(index, this.cartItem[index].qtdProduto)
+        this.updateLocalStorage();
       }
+
+    },
+    acressAmount(index) {
+      if( this.cartItem[index].qtdProduto < this.cartItem[index].qtdEstoque){
+        this.cartItem[index].qtdProduto ++
+        console.log(index, this.cartItem[index].qtdProduto)
+        this.updateLocalStorage();
+      }
+    },
+    updateLocalStorage() {
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItem))
     }
   }
 }
@@ -136,7 +148,7 @@ export default {
   object-fit: cover;
 }
 
-.cart-was-empty{
+.cart-was-empty {
   height: 100%;
   display: flex;
   align-items: center;
@@ -226,9 +238,22 @@ h2 {
   text-overflow: ellipsis;
 }
 
-.button-continuar-compra{
+.button-continuar-compra {
   width: 100%;
   justify-content: center;
   display: flex;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--background-gray-700);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
 }
 </style>
