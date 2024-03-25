@@ -37,18 +37,12 @@ function criarAssistenteChat(response) {
       loading: true
     },
     {
-      message: 'Estou te redirecionando para um dos nossos atendentes agora mesmo!',
+      message: 'Muito obrigada! Já estou te redirecionando para um dos nossos atendentes! 😉💻 <button class="btn-redirect-whats" @click="teste" >Falar por WhatsApp</button>',
       checkInput: false,
       typeInput: true,
       loading: false,
       redirect: true,
     },
-    // {
-    //   teste:
-    //     [
-
-    //     ]
-    // }
   ]
 }
 

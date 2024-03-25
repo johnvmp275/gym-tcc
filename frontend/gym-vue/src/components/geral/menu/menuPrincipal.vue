@@ -62,13 +62,21 @@ import menuMobile from './menuMobile.vue';
       </section>
     </nav>
     <menuMobile/>
+    
     <CartItem
       :cartItem="cartItemCount"
       :cartWasOpen="cartWasOpen"
       :cartToggleFunction="cartToggleFunction"
       :boxShadowWasOpen="boxShadowWasOpen"
     />
-    <div class="box-shadow" v-show="boxShadowWasOpen" @click="cartToggleFunction"></div>
+
+    <div 
+    class="box-shadow" 
+    v-show="boxShadowWasOpen" 
+    @click="cartToggleFunction"
+    >
+  </div>
+
   </header>
 </template>
 
@@ -125,9 +133,6 @@ export default {
       }
       this.buscaResults = ''
     },
-    teste(){
-      this.menuWasOpen = !this.menuWasOpen
-    }
   },
   watch: {
     cartWasOpen(newParams) {

@@ -13,22 +13,7 @@ import Dropdown from '@/components/geral/dropdown.vue'
     <section class="detalhe-produto container-div">
       <div class="container-produto">
         <sliderImage :slidesPerView="'auto'" class="slider-produto">
-          <swiper-slide>
-            <img class="image-produto" :src="product.image" alt="" srcset="" />
-          </swiper-slide>
-          <swiper-slide>
-            <img class="image-produto" :src="product.image" alt="" srcset="" />
-          </swiper-slide>
-          <swiper-slide>
-            <img class="image-produto" :src="product.image" alt="" srcset="" />
-          </swiper-slide>
-          <swiper-slide>
-            <img class="image-produto" :src="product.image" alt="" srcset="" />
-          </swiper-slide>
-          <swiper-slide>
-            <img class="image-produto" :src="product.image" alt="" srcset="" />
-          </swiper-slide>
-          <swiper-slide>
+          <swiper-slide v-for="index in 5" :key="index">
             <img class="image-produto" :src="product.image" alt="" srcset="" />
           </swiper-slide>
         </sliderImage>
@@ -129,7 +114,8 @@ export default {
         top: 0
       })
 
-      const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
+      //const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
+      const url = [`http://192.168.0.106:3000/produtos/${this.$route.params.id}`]
 
       try {
         const req = await fetch(url)

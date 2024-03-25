@@ -136,9 +136,6 @@ export default {
       }
       this.buscaResults = ''
     },
-    teste() {
-      this.menuWasOpen = !this.menuWasOpen
-    }
   },
   watch: {
     cartWasOpen(newParams) {

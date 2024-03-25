@@ -30,28 +30,43 @@ import apiService from '@/components/store/fetchData'
         </div>
         <section class="categories-product">
           <div class="container-product">
-            <div class="card-product-list" v-for="produto in produtosPorPagina" :key="produto.id">
-              <cardProduto :produto="produto" />
+            <div 
+              class="card-product-list" 
+              v-for="produto in produtosPorPagina" 
+              :key="produto.id">
+
+              <cardProduto 
+                :produto="produto" 
+              />
+
             </div>
           </div>
         </section>
-        <paginationView
-          :paginaAtual="paginaAtual"
-          :itensCategoria="productData"
+        <paginationView 
+          :paginaAtual="paginaAtual" 
+          :itensCategoria="productData" 
           :totalPages="totalPages"
-          @paginaMudada="atualizarPagina"
+          @paginaMudada="atualizarPagina" 
         />
       </template>
 
       <template v-else>
         <span class="product-not-found">
-          <h1>Ops! O produto infelizmente não foi encontrado :(</h1>
+          <h1>Ops! O item infelizmente não foi encontrado :(</h1>
           Mas indicamos para você alguns produtos!
         </span>
         <section class="categories-product">
           <div class="container-product">
-            <div class="card-product-list" v-for="produto in sugestoesProdutos" :key="produto.id">
-              <cardProduto :produto="produto" />
+            <div 
+              class="card-product-list" 
+              v-for="produto in sugestoesProdutos" 
+              :key="produto.id"
+            >
+            
+              <cardProduto 
+                :produto="produto" 
+              />
+
             </div>
           </div>
         </section>
@@ -103,11 +118,14 @@ export default {
         this.loaderActive = false
         this.paginaAtual = 1
 
+        
         if (this.categories) {
           this.productData = categorie.filter((item) => item.categorie === this.categories)
         } else {
+          const busca = decodeURIComponent(this.busca).toLowerCase();
+
           this.productData = categorie.filter((item) =>
-            item.titulo.toLowerCase().match(this.busca.toLowerCase())
+            item.titulo.toLowerCase().includes(busca)
           )
         }
       } catch (error) {
@@ -118,18 +136,18 @@ export default {
     atualizarPagina(novaPagina) {
       this.paginaAtual = novaPagina
     },
-    watch: {
-      '$route.params.path': {
-        emit: true,
-        handler(categoriaEscolhida) {
-          this.fetchCategories()
-        }
-      },
-      '$route.query.busca': {
-        emit: true,
-        handler() {
-          this.fetchCategories()
-        }
+  },
+  watch: {
+    '$route.params.path': {
+      emit: true,
+      handler(categoriaEscolhida) {
+        this.fetchCategories()
+      }
+    },
+    '$route.query.busca': {
+      emit: true,
+      handler() {
+        this.fetchCategories()
       }
     }
   },
