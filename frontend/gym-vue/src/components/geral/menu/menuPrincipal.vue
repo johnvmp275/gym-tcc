@@ -9,7 +9,7 @@ import menuMobile from './menuMobile.vue';
   <header>
     <div class="pitchbar">
       <span>
-        Entre em contato pelo tel: <a href="/#">(18) {{ telWhatsapp }}</a>
+        Entre em contato pelo tel: <a :href="telWhatsapp.path" :target="telWhatsapp.target">(18) {{ telWhatsapp.number }}</a>
       </span>
     </div>
     <nav class="navbar-desktop">
@@ -61,6 +61,7 @@ import menuMobile from './menuMobile.vue';
         </div>
       </section>
     </nav>
+    
     <menuMobile/>
     
     <CartItem
@@ -115,7 +116,7 @@ export default {
         this.pitchbarHome = menu.find((item) => item.pitchbar_home).pitchbar_home
 
         const description = await apiService.getDadosOfDescription()
-        this.telWhatsapp = description.find((item) => item.social).social[0].whatsapp
+        this.telWhatsapp = description.whatsapp
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }

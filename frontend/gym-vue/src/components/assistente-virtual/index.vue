@@ -143,7 +143,11 @@ export default {
         const dataDeEnvio = new Date()
         
         // horas e minutos
-        const horaEnvio = `${dataDeEnvio.getHours()}:${dataDeEnvio.getMinutes()}`
+        const hora = dataDeEnvio.getHours();
+        const minutos = dataDeEnvio.getMinutes();
+
+        // Adicionando zero à esquerda se a hora ou os minutos forem menores que 10
+        const horaEnvio = `${hora < 10 ? '0' + hora : hora}:${minutos < 10 ? '0' + minutos : minutos}`;
         
         //Puxa a resposta do usuário
         this.mergedResponsesChat.push({
@@ -183,8 +187,12 @@ export default {
             if (i <= this.limit) {
               const dataDeEnvio = new Date()
               
-              // horas e minutos
-              const horaEnvio = `${dataDeEnvio.getHours()}:${dataDeEnvio.getMinutes()}`
+             // horas e minutos
+            const hora = dataDeEnvio.getHours();
+            const minutos = dataDeEnvio.getMinutes();
+
+            // Adicionando zero à esquerda se a hora ou os minutos forem menores que 10
+            const horaEnvio = `${hora < 10 ? '0' + hora : hora}:${minutos < 10 ? '0' + minutos : minutos}`;
               
               // Verifique se ainda há mensagens a serem exibidas
               this.mergedResponsesChat.push({
@@ -217,8 +225,6 @@ export default {
     assistenteRedirect() {
       if (this.redirectUser) {
 
-        console.log(this.userName);
-
         setTimeout(() => {
           const texto = encodeURIComponent(`Olá, meu nome é ${this.userName} e meu e-mail é ${this.userEmail}. Vim através do assistente de leads do site. ${this.userSelected}`)
           const numeroTelefone = '5518991724468'
@@ -234,16 +240,12 @@ export default {
     },
     defineUserName(value) {
       this.userName = value
-      console.log(this.userName);
     },
     defineUserEmail() {
       this.userEmail = email;
-      console.log(this.userEmail);
     },
     defineSelected(value) {
-      console.log(this.userName); 
       this.userSelected = value;
-      console.log(this.userSelected); 
     },
   },
   watch: {
@@ -491,6 +493,10 @@ select {
     height: 100%;
     border-radius: 0px;
     max-width: 100%;
+  }
+
+  #select-options{
+    max-width: 260px;
   }
 }
 </style>

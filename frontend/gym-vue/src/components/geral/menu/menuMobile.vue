@@ -91,7 +91,6 @@ export default {
       categoriesData: [],
       pitchbarHome: [],
       cartItemCount: [],
-      telWhatsapp: '',
       buscaResults: '',
       userLogged: false,
     }
@@ -116,9 +115,6 @@ export default {
         const menus = await apiService.getDadosOfMenus()
         this.categoriesData = menus.find((item) => item.menu_home).menu_home
         this.pitchbarHome = menus.find((item) => item.pitchbar_home).pitchbar_home
-
-        const description = await apiService.getDadosOfDescription()
-        this.telWhatsapp = description.find((item) => item.social).social[0].whatsapp
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
       }

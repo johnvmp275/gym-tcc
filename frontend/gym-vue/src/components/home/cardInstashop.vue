@@ -4,7 +4,7 @@ import apiService from '@/components/store/fetchData'
 
 <template>
   <!-- Verifica se o array do instashop possui itens -->
-  <section v-if="instashop.length" >
+  <section v-if="instashop.length">
     <div class="insta-topo">
       <h2>Instashop</h2>
       <a>@IronForge</a>
@@ -29,7 +29,7 @@ import apiService from '@/components/store/fetchData'
 export default {
   data() {
     return {
-        instashop:[]
+      instashop: []
     }
   },
   methods: {
@@ -42,7 +42,7 @@ export default {
       }
     }
   },
-  mounted(){
+  mounted() {
     this.fetchData()
   }
 }
@@ -51,6 +51,10 @@ export default {
 <style scoped>
 section {
   max-width: 1170px;
+  margin: 0 auto;
+}
+
+.insta-posts {
   margin: 0 auto;
 }
 
@@ -112,8 +116,7 @@ a {
   grid-template-areas:
     'imgA   imgB   imgC imgE'
     'imgA   imgB   imgD imgF';
-  grid-row-gap: 14px;
-  grid-column-gap: 17px;
+  gap: 17px;
 }
 
 .insta-hover {
@@ -156,7 +159,8 @@ a:hover .insta-hover {
       'imgB imgB'
       'imgC imgD'
       'imgE imgF';
-    gap: 8px;
+    grid-row-gap: 17px;
+    grid-column-gap: 10px;
   }
   .insta-topo {
     flex-direction: column;

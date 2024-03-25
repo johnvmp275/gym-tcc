@@ -93,6 +93,7 @@ export default {
 
 .nav-paginas {
   display: flex;
+  width: 100%;
   min-width: 281px;
   flex-direction: column;
 }
@@ -100,10 +101,6 @@ export default {
 .paginas {
   width: 100%;
   padding: 25px;
-}
-
-select {
-  width: 100%;
 }
 
 a {

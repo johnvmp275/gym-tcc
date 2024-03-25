@@ -12,9 +12,17 @@ import Dropdown from '@/components/geral/dropdown.vue'
     <loaderVue :isLoaderActive="loaderActive" />
     <section class="detalhe-produto container-div">
       <div class="container-produto">
-        <sliderImage :slidesPerView="'auto'" class="slider-produto">
+        <sliderImage 
+          :key="resetComponent" 
+          :slidesPerView="'auto'" 
+          class="slider-produto"
+        >
           <swiper-slide v-for="index in 5" :key="index">
-            <img class="image-produto" :src="product.image" alt="" srcset="" />
+            <img 
+              class="image-produto" 
+              :src="product.image" 
+              alt="" 
+            />
           </swiper-slide>
         </sliderImage>
         <div>
@@ -25,7 +33,7 @@ import Dropdown from '@/components/geral/dropdown.vue'
           </span>
         </div>
       </div>
-      <div class="teste">
+      <div class="produto-preco-descricao">
         <template v-if="qtdEstoque > 0">
           <span class="produto-preco">R${{ product.price }}</span>
           <div>
@@ -75,13 +83,13 @@ import Dropdown from '@/components/geral/dropdown.vue'
     </section>
 
     <section id="descricao">
-      <Dropdown titlteDropdown="Descrição do produto">
+      <Dropdown :key="resetComponent" titlteDropdown="Descrição do produto">
         <template #dropdown_description>
           <div v-html="descricao.longa"></div>
         </template>
       </Dropdown>
 
-      <Dropdown titlteDropdown="Interações">
+      <Dropdown :key="resetComponent" titlteDropdown="Interações">
         <template #dropdown_description>
           <p>teste</p>
         </template>
@@ -89,6 +97,7 @@ import Dropdown from '@/components/geral/dropdown.vue'
     </section>
 
     <Vitrine
+      :key="resetComponent"
       :produtosCard="produtos"
       :fetchProductDetails="fetchProductDetails"
       :titulo="`Você também pode gostar`"
@@ -105,6 +114,7 @@ export default {
       descricao: {},
       amounts: {},
       loaderActive: true,
+      resetComponent: true,
       qtdEstoque: 10
     }
   },
@@ -115,7 +125,8 @@ export default {
       })
 
       //const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
-      const url = [`http://192.168.0.106:3000/produtos/${this.$route.params.id}`]
+      //const url = [`http://192.168.0.106:3000/produtos/${this.$route.params.id}`]
+      const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
 
       try {
         const req = await fetch(url)
@@ -175,9 +186,10 @@ export default {
   },
   watch: {
     '$route.params.id': {
-      emit: true,
+      immediate: true,
       handler(produtoEscolhido) {
         this.fetchProductDetails()
+        this.resetComponent = !this.resetComponent
       }
     }
   },
@@ -246,7 +258,7 @@ div {
   padding: 16px;
 }
 
-.teste {
+.produto-preco-descricao {
   max-width: 362px;
   width: 100%;
   padding: 16px;

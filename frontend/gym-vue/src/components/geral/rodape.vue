@@ -1,6 +1,7 @@
 <script setup>
 import Newslleter from './newslleter/newslleter.vue'
-import menuInstitucional from './rodape/menu.vue';
+import menuInstitucional from './rodape/menu.vue'
+import apiService from '@/components/store/fetchData'
 </script>
 
 <template>
@@ -10,10 +11,7 @@ import menuInstitucional from './rodape/menu.vue';
       <menuInstitucional />
     </div>
     <section class="footer-final">
-      <p>
-        Vetec | CNPJ: 47.733.562/0001-08 | Av. Paulista, 1000 - São Paulo - SP - Brasil | CEP:
-        01310-100 - Todos os Direitos Reservados.
-      </p>
+      <p>{{ footerInfo }}</p>
       <a class="logo" target="_blank" href="https://github.com/johnvmp275">
         <img src="@/img/vetec.jpg" alt="logo" />
       </a>
@@ -21,7 +19,30 @@ import menuInstitucional from './rodape/menu.vue';
   </footer>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      infoSite: {}
+    }
+  },
+  computed:{
+    footerInfo(){
+      return `${this.infoSite.nome_site} | CNPJ: ${this.infoSite.cnpj} | ${this.infoSite.endereco} | CEP: ${this.infoSite.cep}  - Todos os Direitos Reservados.`;
+    }
+  },
+  methods: {
+    async fetchData() {
+      const description = await apiService.getDadosOfDescription()
+      this.infoSite = description.siteInfo
+      console.log(this.infoSite);
+    }
+  },
+  mounted(){
+    this.fetchData()
+  }
+}
+</script>
 
 <style scoped>
 footer {

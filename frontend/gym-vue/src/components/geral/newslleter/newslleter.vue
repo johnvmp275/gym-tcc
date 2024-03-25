@@ -27,7 +27,7 @@ export default {}
 .newslleter-container {
   width: 100%;
   max-width: 1170px;
-  margin: 0 auto;
+  margin: 30px auto;
   padding: 16px;
 }
 

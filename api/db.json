@@ -109,15 +109,21 @@
       ]
     }
   ],
-  "siteDescription": [
-    {
-      "social": [
-        {
-          "whatsapp": "99999-9999"
-        }
-      ]
+  "siteDescription": {
+    "whatsapp": 
+      {
+        "number": "99999-9999",
+        "path": "https://www.youtube.com/watch?v=iKtTp2QOHcA",
+        "target": "_blank"
+      }
+    ,
+    "siteInfo": {
+      "nome_site" : "Vetec",
+      "cnpj": "47.733.562/0001-08",
+      "endereco" : "Av. Paulista, 1000 - São Paulo - SP - Brasil",
+      "cep" : "01310-100"
     }
-  ],
+  },
   "produtos": [
     {
       "titulo": "KIt de Short X8",
@@ -232,15 +238,18 @@
     {
       "bannerPrincipal": [
         {
-          "image": "https://www.oceandrop.com.br/media/pdp-seo/blog-ocean/suplementacao-para-iniciantes-na-academia.jpg",
+          "imageDesktop": "https://www.oceandrop.com.br/media/pdp-seo/blog-ocean/suplementacao-para-iniciantes-na-academia.jpg",
+          "imageMobile": "https://www.gsuplementos.com.br/upload/banner/231fa08c11e9ac9a3728194f68e4f1cd.webp",
           "label": "bannerPrincipal"
         },
         {
-          "image": "https://greenlifeacademias.com.br/wp/wp-content/uploads/2023/04/2.jpg",
+          "imageDesktop": "https://greenlifeacademias.com.br/wp/wp-content/uploads/2023/04/2.jpg",
+          "imageMobile": "https://www.gsuplementos.com.br/upload/banner/231fa08c11e9ac9a3728194f68e4f1cd.webp",
           "label": "bannerPrincipal"
         },
         {
-          "image": "https://www.oceandrop.com.br/media/pdp-seo/blog-ocean/suplementacao-para-iniciantes-na-academia.jpg",
+          "imageDesktop": "https://www.oceandrop.com.br/media/pdp-seo/blog-ocean/suplementacao-para-iniciantes-na-academia.jpg",
+          "imageMobile": "https://www.gsuplementos.com.br/upload/banner/231fa08c11e9ac9a3728194f68e4f1cd.webp",
           "label": "bannerPrincipal"
         }
       ],

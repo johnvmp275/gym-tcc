@@ -8,8 +8,7 @@
       <p class="produto-descricao-card">{{ produto.descricoes.curta }}</p>
     </div>
     <div v-if="starAvaliation">
-      <svg v-for="star in starAvaliation" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"
-        fill="#FFF">
+      <svg v-for="index in starAvaliation" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="#FFF" :key="index">
         <g clip-path="url(#clip0_121_1599)">
           <path
             d="M5 0.244629L6.52833 3.39796L10 3.87755L7.47333 6.30588L8.09 9.75546L5 8.10255L1.90958 9.75546L2.52667 6.30588L0 3.87755L3.47167 3.39796L5 0.244629Z"

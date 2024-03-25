@@ -17,7 +17,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
   >
     <swiper-slide v-for="banner in banners" :key="banner.id">
       <RouterLink to="/categorias/suplementos">
-        <img :src="banner.image" :alt="banner.label" />
+        <img class="banner-format-desktop" :src="banner.imageDesktop" :alt="banner.label" />
+        <img class="banner-format-mobile" :src="banner.imageMobile" :alt="banner.label" />
       </RouterLink>
     </swiper-slide>
   </sliderVue>
@@ -34,5 +35,18 @@ export default {
 <style scoped>
 a {
   padding: 0;
+}
+
+.banner-format-mobile {
+  display: none;
+}
+
+@media (max-width: 876px) {
+  .banner-format-desktop {
+    display: none;
+  }
+  .banner-format-mobile {
+    display: block;
+  }
 }
 </style>

@@ -117,7 +117,7 @@ export default {
 
 @media (max-width: 500px) {
   #chat-message {
-    height: calc(100% - 117px);
+    height: calc(100% - 104px);
   }
 }
 </style>
