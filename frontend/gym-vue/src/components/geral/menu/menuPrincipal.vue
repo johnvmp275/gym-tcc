@@ -182,6 +182,7 @@ nav {
   position: relative;
   flex-wrap: wrap;
   z-index: 10;
+  border-bottom: 2px solid var(--background-gray);
 }
 
 .navbar-mobile {

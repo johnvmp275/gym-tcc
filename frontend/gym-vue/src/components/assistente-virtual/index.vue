@@ -128,7 +128,8 @@ export default {
       userSelected: null,
       userResposta: null,
       userName: '',
-      userEmail: ''
+      userEmail: '',
+      linkForWhats: ''
     }
   },
   methods: {
@@ -185,9 +186,9 @@ export default {
         setTimeout(() => {
           setInterval(() => {
             if (i <= this.limit) {
-              const dataDeEnvio = new Date()
+            const dataDeEnvio = new Date();
               
-             // horas e minutos
+            // horas e minutos
             const hora = dataDeEnvio.getHours();
             const minutos = dataDeEnvio.getMinutes();
 
@@ -205,11 +206,11 @@ export default {
                 enviadoEm: horaEnvio
               })
               
-              this.showInput = this.assistenteScript[this.ultimoIndex].checkInput
-              this.messageLoader = this.assistenteScript[this.ultimoIndex].loading
-              this.typeInputText = this.assistenteScript[this.ultimoIndex].typeInput
-              this.redirectUser = this.assistenteScript[this.ultimoIndex].redirect
-              this.ultimoIndex++
+              this.showInput = this.assistenteScript[this.ultimoIndex].checkInput;
+              this.messageLoader = this.assistenteScript[this.ultimoIndex].loading;
+              this.typeInputText = this.assistenteScript[this.ultimoIndex].typeInput;
+              this.redirectUser = this.assistenteScript[this.ultimoIndex].redirect;
+              this.ultimoIndex++;
               
               i++
               
@@ -218,21 +219,23 @@ export default {
               }
               
             }
-          }, 4000)
-        }, 1000)
+          }, 3000);
+        }, 1000);
       }
     },
     assistenteRedirect() {
       if (this.redirectUser) {
 
         setTimeout(() => {
-          const texto = encodeURIComponent(`Olá, meu nome é ${this.userName} e meu e-mail é ${this.userEmail}. Vim através do assistente de leads do site. ${this.userSelected}`)
-          const numeroTelefone = '5518991724468'
+          const texto = encodeURIComponent(`Olá, meu nome é ${this.userName} e meu e-mail é ${this.userEmail}. Vim através do assistente de leads do site. ${this.userSelected}`);
+          const numeroTelefone = '5518991724468';
           
           if (window.innerWidth < 768) {
-            window.open(`whatsapp://send?phone=${numeroTelefone}&text=${texto}`, '_blank');
+            this.linkForWhats = `whatsapp://send?phone=${numeroTelefone}&text=${texto}`;
+            window.open(this.linkForWhats, '_blank');
           } else {
-            window.open(`https://web.whatsapp.com/send?text=${texto}&phone=${numeroTelefone}`, '_blank');
+            this.linkForWhats = `https://web.whatsapp.com/send?text=${texto}&phone=${numeroTelefone}`;
+            window.open(this.linkForWhats, '_blank');
           }
           
         }, 5000)

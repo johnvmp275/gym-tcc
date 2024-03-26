@@ -40,4 +40,10 @@ a{
 a:hover{
     text-decoration: underline;
 }
+
+@media (max-width: 720px) {
+    h1{
+        font-size: 20px;
+    }
+}
 </style>

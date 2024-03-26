@@ -159,7 +159,7 @@ a:hover .insta-hover {
       'imgB imgB'
       'imgC imgD'
       'imgE imgF';
-    grid-row-gap: 17px;
+    grid-row-gap: 12px;
     grid-column-gap: 10px;
   }
   .insta-topo {

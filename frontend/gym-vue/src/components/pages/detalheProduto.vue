@@ -12,17 +12,9 @@ import Dropdown from '@/components/geral/dropdown.vue'
     <loaderVue :isLoaderActive="loaderActive" />
     <section class="detalhe-produto container-div">
       <div class="container-produto">
-        <sliderImage 
-          :key="resetComponent" 
-          :slidesPerView="'auto'" 
-          class="slider-produto"
-        >
+        <sliderImage :key="resetComponent" :slidesPerView="'auto'" class="slider-produto">
           <swiper-slide v-for="index in 5" :key="index">
-            <img 
-              class="image-produto" 
-              :src="product.image" 
-              alt="" 
-            />
+            <img class="image-produto" :src="product.image" alt="" />
           </swiper-slide>
         </sliderImage>
         <div>
@@ -34,8 +26,15 @@ import Dropdown from '@/components/geral/dropdown.vue'
         </div>
       </div>
       <div class="produto-preco-descricao">
-        <template v-if="qtdEstoque > 0">
-          <span class="produto-preco">R${{ product.price }}</span>
+        <template v-if="qtdEstoque < product.price.por">
+          <span class="produto-preco">
+            <template v-if="product.price.de > 0">
+              <span class="preco-por-maior">R${{ product.price.de }}</span>
+              <strong>R${{ product.price.por }}</strong>
+            </template>
+            <template v-else> R${{ product.price.de }} </template>
+            <!-- <span class="desconto-vista">{{descontoCalculado}}%</span> -->
+          </span>
           <div>
             <span>Quantidade:</span>
             <div class="container-amount">
@@ -118,16 +117,22 @@ export default {
       qtdEstoque: 10
     }
   },
+  computed: {
+    descontoCalculado() {
+      let divisao = this.product.price.por / this.product.price.de
+      let resultadoFinal = divisao * 100
+      return resultadoFinal
+    }
+  },
   methods: {
     async fetchProductDetails() {
       window.scrollTo({
         top: 0
       })
 
-      //const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
+      const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
       //const url = [`http://192.168.0.106:3000/produtos/${this.$route.params.id}`]
-      //const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
-      const url = [`http://10.67.7.97:3000/produtos/${this.$route.params.id}`]
+      //const url = [`http://10.67.7.97:3000/produtos/${this.$route.params.id}`]
 
       try {
         const req = await fetch(url)
@@ -139,6 +144,7 @@ export default {
         this.loaderActive = false
       } catch (error) {
         console.error('Não foi possível buscar os dados', error)
+        this.$router.push({ path: '/404' })
       }
     },
     async fetchData() {
@@ -161,6 +167,7 @@ export default {
       } else if (this.amounts[id] < this.qtdEstoque) {
         this.amounts[id]++
       }
+      console.log(this.amounts[id]);
     },
     addItemToCard(id, titulo, preco, descricao, imagem, qtdEstoque) {
       const itemWasAdd = this.$store.state.cartItems.find((item) => item.id === id)
@@ -268,8 +275,25 @@ div {
 }
 
 .produto-preco {
-  font-weight: bold;
+  display: flex;
+  align-items: baseline;
+}
+
+.produto-preco strong {
   font-size: 24px;
+}
+
+.preco-por-maior {
+  font-size: 14px;
+  margin-right: 5px;
+  font-weight: normal;
+  text-decoration: line-through;
+}
+
+.desconto-vista{
+  margin-left: 10px;
+  color: var(--background-wine);
+  font-weight: bold;
 }
 
 h1 {
@@ -302,7 +326,6 @@ h1 {
   border: 2px solid var(--background-gray);
   padding: 10px;
 }
-
 @media (max-width: 1000px) {
   .detalhe-produto,
   .container-produto {

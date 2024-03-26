@@ -216,6 +216,7 @@ export default {
 .card-product-list .image-product-card {
   max-width: 100%;
   height: 160px;
+  object-fit: contain;
 }
 
 .categorie-not-found p {

@@ -60,7 +60,7 @@ export default {
         this.isLoaderActive = false
       } catch (error) {
         console.error('Não foi possivel buscar os dados pedidos', error)
-        this.$router.push({ path: '/404' });
+        this.$router.push({ path: '/404' })
       }
     }
   },
@@ -93,7 +93,6 @@ export default {
 
 .nav-paginas {
   display: flex;
-  width: 100%;
   min-width: 281px;
   flex-direction: column;
 }
@@ -124,7 +123,11 @@ a.router-link-active {
   }
 
   .nav-paginas {
+    width: 100%;
     margin: 0 auto;
+  }
+  .paginas {
+    padding: 0;
   }
 }
 </style>

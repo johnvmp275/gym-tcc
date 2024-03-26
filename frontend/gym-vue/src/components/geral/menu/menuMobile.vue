@@ -158,6 +158,7 @@ nav {
   position: relative;
   flex-wrap: wrap;
   z-index: 10;
+  border-bottom: 2px solid var(--background-gray);
 }
 
 .navbar-mobile {
@@ -225,7 +226,7 @@ li a {
   height: 40px;
   width: 138px;
   padding: 5px;
-  border: 2px solid var(--background-gray-700);
+  border: 2px solid var(--background-gray);
 }
 
 

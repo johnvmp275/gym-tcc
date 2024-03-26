@@ -15,7 +15,7 @@
         <button>Cadastrar</button>
       </div>
     </div>
-    <span>Ao se cadastrar você concorda com a nossa <a href="" target="blank">Política de privacidade</a></span>
+    <span>Ao se cadastrar você concorda com a nossa <a href="">Política de privacidade</a></span>
   </section>
 </template>
 

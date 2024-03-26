@@ -20,7 +20,16 @@
             </div>
             <span class="descricao-product">{{ item.descricao }}</span>
             <div class="price-amount">
-              <p>R${{ item.preco }}</p>
+              <span class="produto-preco">
+                <template v-if="item.preco.de > 0">
+                  <span class="preco-por-maior">R${{ item.preco.de }}</span>
+                  <strong class="produto-descricao-preco">R${{ item.preco.por }}</strong>
+                </template>
+                <template v-else>
+                  <strong class="produto-descricao-preco">R${{ item.preco.de }}</strong>
+                </template>
+                <!-- <span class="desconto-vista">{{descontoCalculado}}%</span> -->
+              </span>
               <div class="container-amount">
                 <button class="amount-button" @click="decrementAmount(index)">-</button>
                 <input
@@ -78,19 +87,17 @@ export default {
       localStorage.setItem('cartItems', JSON.stringify(this.cartItem))
     },
     decrementAmount(index) {
-
-      if( this.cartItem[index].qtdProduto > 1){
-        this.cartItem[index].qtdProduto --
+      if (this.cartItem[index].qtdProduto > 1) {
+        this.cartItem[index].qtdProduto--
         console.log(index, this.cartItem[index].qtdProduto)
-        this.updateLocalStorage();
+        this.updateLocalStorage()
       }
-
     },
     acressAmount(index) {
-      if( this.cartItem[index].qtdProduto < this.cartItem[index].qtdEstoque){
-        this.cartItem[index].qtdProduto ++
+      if (this.cartItem[index].qtdProduto < this.cartItem[index].qtdEstoque) {
+        this.cartItem[index].qtdProduto++
         console.log(index, this.cartItem[index].qtdProduto)
-        this.updateLocalStorage();
+        this.updateLocalStorage()
       }
     },
     updateLocalStorage() {
@@ -145,7 +152,7 @@ export default {
   min-width: 66px;
   max-width: 66px;
   height: 66px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .cart-was-empty {
@@ -255,5 +262,20 @@ h2 {
 
 ::-webkit-scrollbar-track {
   background-color: #f1f1f1;
+}
+
+.produto-preco{
+  display: flex;
+  flex-direction: column;
+  margin-right: 16px;
+}
+
+.preco-por-maior{
+  font-size: 12px;
+  text-decoration: line-through;
+}
+
+.produto-preco strong{
+  font-size: 18px;
 }
 </style>
