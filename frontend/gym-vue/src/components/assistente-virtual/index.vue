@@ -363,13 +363,13 @@ export default {
   border-radius: 50px;
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .chat-massage-bottom input {
   padding: 16px;
   height: 20px;
   width: 100%;
-  max-width: 307px;
   margin-left: 15px;
   border-radius: 8px;
 }
@@ -377,14 +377,11 @@ export default {
 .send-message {
   background: var(--background-gray-700);
   color: var(--background-white);
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(-9px, -50%);
   display: flex;
   justify-content: center;
   border-radius: 50%;
   padding: 8px;
+  margin-right: 10px;
 }
 
 ::-webkit-scrollbar {
@@ -493,10 +490,6 @@ select {
     height: 100%;
     border-radius: 0px;
     max-width: 100%;
-  }
-
-  #select-options{
-    max-width: 260px;
   }
 }
 </style>

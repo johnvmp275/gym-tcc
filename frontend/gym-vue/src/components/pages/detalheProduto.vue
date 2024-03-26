@@ -126,7 +126,8 @@ export default {
 
       //const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
       //const url = [`http://192.168.0.106:3000/produtos/${this.$route.params.id}`]
-      const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
+      //const url = [`http://192.168.87.24:3000/produtos/${this.$route.params.id}`]
+      const url = [`http://10.67.7.97:3000/produtos/${this.$route.params.id}`]
 
       try {
         const req = await fetch(url)
